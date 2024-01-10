@@ -1,0 +1,1168 @@
+version: "3.1"
+
+nlu:
+- lookup: wine_type
+  examples: |
+    - White
+    - Red
+    - Rose
+    - Orange
+    - Sparkling
+    - Champagne
+    - Petillant Naturel
+    - Cava
+    - Prosecco
+    - Lambrusco
+    - Cremant
+    - Fortified
+    - Port
+    - Sherry
+    - Vermouth
+    - Marsala
+    - Madeira
+    - Dessert
+    - Chocolate
+    - Ice Wine
+    - Sauternes
+
+- synonym: Rose
+  examples: |
+    - Rosé
+
+- lookup: dish_type
+  examples: |
+    - Curry
+    - Buffalo
+    - Dessert
+    - Chocolate
+    - Creamy Vanilla
+    - Fruit Pie
+    - Citrus Dessert
+    - Caramel Butterscotch
+    - Pastry
+    - Green Vegetables
+    - Fish
+    - White Fish
+    - Tuna
+    - Pesto
+    - Sushi
+    - Shellfish
+    - Salad
+    - Ceviche
+    - Pickles
+    - Olives
+    - Cured Meat
+    - Cheese
+    - Fresh Cheese
+    - Blue Cheese
+    - Soft Cheese
+    - Hard Cheese
+    - Chicken
+    - Duck
+    - Turkey
+    - Pork
+    - Beef
+    - Game Meat
+    - Grilled Meat
+    - Lamb
+    - Veal
+    - Tomato Sauce
+    - Pizza
+    - Red Sauce Pasta
+    - White Sauce Pasta
+    - Risotto
+    - Cheese Fondue
+    - Mushrooms
+    - Beets
+    - Liver
+
+
+- synonym: Argentina
+  examples: |
+    - Argentinian
+
+- synonym: Armenia
+  examples: |
+    - Armenian
+
+- synonym: Australia
+  examples: |
+    - Australian
+
+- synonym: Canada
+  examples: |
+    - Canadian
+
+- synonym: Chile
+  examples: |
+    - Chilean
+
+- synonym: Cyprus
+  examples: |
+    - Cyprian
+
+- synonym: Denmark
+  examples: |
+    - Danish
+
+- synonym: France
+  examples: |
+    - French
+
+- synonym: Germany
+  examples: |
+    - German
+
+- synonym: Greece
+  examples: |
+    - Greek
+
+- synonym: Hungary
+  examples: |
+    - Hungarian
+
+- synonym: Ireland
+  examples: |
+    - Irish
+
+- synonym: Israel
+  examples: |
+    - Israeli
+
+- synonym: Italy
+  examples: |
+    - Italian
+
+- synonym: Japan
+  examples: |
+    - Japanese
+
+- synonym: Lebanon
+  examples: |
+    - Lebanonese
+
+- synonym: Netherlands
+  examples: |
+    - Dutch
+
+- synonym: Romania
+  examples: |
+    - Romanian
+
+- synonym: Spain
+  examples: |
+    - Spanish
+
+- lookup: wine_country
+  examples: |
+    - Argentina
+    - Armenia
+    - Australia
+    - Canada
+    - Chile
+    - Cyprus
+    - Denmark
+    - France
+    - Germany
+    - Greece
+    - Hungary
+    - Ireland
+    - Israel
+    - Italy
+    - Japan
+    - Lebanon
+    - Netherlands
+    - New Zealand
+    - Portugal
+    - Republic of Macedonia
+    - Romania
+    - Slovakia
+    - South Africa
+    - Spain
+    - United Kingdom
+    - United States
+    - Uruguay
+    - Venezuela
+    - Austria
+
+- lookup: wine_region
+  examples: |
+    - Calchaqui Valley
+    - Mendoza
+    - Tupungato
+    - Uco Valley
+    - Patagonia
+    - New South Wales
+    - Adelaide Hills
+    - Barossa Valley
+    - Victoria
+    - Central Valley
+    - Curico Valley
+    - Bordeaux
+    - Cotes De Bordeaux
+    - Saint Emilion
+    - Bourgogne
+    - Cote De Beaune
+    - Cote De Nuits
+    - Chablis
+    - Maconnais
+    - Champagne
+    - Languedoc Roussillon
+    - Provence
+    - Cotes De Provence
+    - Rhône
+    - Cote Rotie
+    - Cotes Du Rhône
+    - Beaujolais
+    - Loire
+    - Anjou
+    - Muscadet
+    - Touraine
+    - Vouvray
+    - Sancerre
+    - Alsace
+    - Jura
+    - Savoie
+    - Burgenland
+    - Mosel
+    - Ruwer
+    - Saar
+    - Reinhessen
+    - Piedmont
+    - Langhe
+    - Lombardy
+    - Emilia Romagna
+    - Trentino Alto Adige
+    - Veneto
+    - Tuscany
+    - Chianti
+    - Abruzzo
+    - Marche
+    - Lazio
+    - Umbria
+    - Campania
+    - Sicily
+    - Puglia
+    - Calabria
+    - Sardinia
+    - Marlborough
+    - Douro
+    - Minho
+    - VinhoVerde
+    - Oporto
+    - Alentejo
+    - Bairrada
+    - Dao
+    - Lisboa
+    - Algarve
+    - Setubal
+    - Western Cape
+    - Breede River Valley
+    - Aragon
+    - Galicia
+    - Rias Baixas
+    - Rioja
+    - Castilla La Mancha
+    - Castilla Y Leon
+    - Bierzo
+    - Rueda
+    - Andalucia
+    - Valencia
+    - Murcia
+    - Jumilia
+    - Catalonia
+    - Monterey County
+    - San Luis Obispo County
+    - Santa Barbara County
+    - Arroyo Seco
+    - Paso Robles
+    - Modesto
+    - San Joaquin
+    - Yolo County
+    - Manteca
+    - Lodi
+    - Mendocino County
+    - Napa County
+    - Sonoma Coast
+    - Finger Lakes
+    - Canadaigua Lake
+    - Cayuga Lake
+    - Keuka Lake
+    - Seneca Lake
+    - Hudson River
+    - Clayton
+    - Oregon
+    - Willamette Valley
+    - Virginia
+    - Washington
+    - Columbia Valley
+    - Horse Heaven Hills
+    - Burgenland
+    - Niederosterreich
+
+
+- lookup: grape_type
+  examples: |
+    - Abrusco
+    - Aglianico
+    - Alrocheiro Preto
+    - Alicante Bouschet
+    - Aragonez
+    - Baco Noir
+    - Barbera
+    - Blaufrankisch
+    - Bonarda
+    - Cabernet Franc
+    - Canaiolo
+    - Cannonau
+    - Carignan
+    - Carmenere
+    - Castelao
+    - Cilegiolo
+    - Cinsault
+    - Colorino
+    - Corvina
+    - Corvinone
+    - Counoise
+    - Croatina
+    - Dolcetto
+    - Enantio
+    - Frappato
+    - Gaglioppo
+    - Gamay
+    - Graciano
+    - Grenache
+    - Hondarrabi Beltza
+    - Lambrusco
+    - Malbec
+    - Marselan
+    - Marzemino
+    - Mencia
+    - Merlot
+    - Molinara
+    - Montepulciano
+    - Mourvedre
+    - Nebbiolo
+    - Negroamaro
+    - Nero D'Avola
+    - Oseleta
+    - Pais
+    - Petit Verdot
+    - Petite Sirah
+    - Pinot Noir
+    - Pinotage
+    - Primitivo
+    - Rondinella
+    - Sagrantino
+    - Sangiovese
+    - Saperavi
+    - Syrah
+    - Tannat
+    - Tempranillo
+    - Teroldego
+    - Touriga Franca
+    - Touriga Nacional
+    - Trincadeira
+    - Xinomavro
+    - Zinfandel
+    - Zweigelt
+    - Cabernet Sauvignon
+    - Agiorgitiko
+    - Pinot Meunier
+    - Trousseau
+    - Poulsard
+    - Shiraz
+    - Albanello
+    - Albarino
+    - Albillo
+    - Aligote
+    - Alvarinho
+    - Antao Vaz
+    - Arinto
+    - Arneis
+    - Avesso
+    - Azal Blanco
+    - Bellone Bianco
+    - Bonvino
+    - Bourboulenc
+    - Bukettraube
+    - Chardonnay
+    - Chenin Blanc
+    - Clairette
+    - Colombard
+    - Cortese
+    - Falanghina
+    - Fernao Pires
+    - Fiano
+    - Friulano
+    - Furmint
+    - Garganega
+    - Gewurtztraminer
+    - Glera
+    - Godello
+    - Grecanico
+    - Grechetto
+    - Greco Bianco
+    - Grenache Blanc
+    - Grenache Gris
+    - Grillo
+    - Gros Manseng
+    - Gruner Vetliner
+    - Insolia
+    - Kerner
+    - Loureiro
+    - Macabeo
+    - Malvasia
+    - Marsanne
+    - Melon De Bourgogne
+    - Moschofilero
+    - Muller Thurgau
+    - Muscat
+    - Palomino
+    - Parellada
+    - Pecorino
+    - Pedro Ximenez
+    - Picpoul
+    - Pinot Blanc
+    - Pinot Gris
+    - Pinot Grigio
+    - Procanico
+    - Ribolla
+    - Riesling
+    - Rkatsiteli
+    - Roussanne
+    - Sauvignon Blanc
+    - Semillon
+    - Silvaner
+    - Torrontes
+    - Trajadura
+    - Trebbiano
+    - Ugni Blanc
+    - Verdejo
+    - Verdicchio
+    - Vermentino
+    - Viognier
+    - Viura
+    - XarelLo
+    - Albana
+    - Cataratto
+
+- lookup: wine_tasting_notes
+  examples: |
+    - Citrus
+    - Lemon
+    - Grapefruit
+    - Orange
+    - Lime
+    - Bergamot
+    - Marmalade
+    - Yuzu
+    - Quince
+    - Apple
+    - Pear
+    - Peach
+    - Apricot
+    - Persimmon
+    - Green Fig
+    - Nectarine
+    - Pineapple
+    - Mango
+    - Guava
+    - Kiwi
+    - Lychee
+    - Bubblegum
+    - Melon
+    - Cranberry
+    - Red Plum
+    - Pomegranate
+    - Cherry
+    - Strawberry
+    - Raspberry
+    - Red Currant
+    - Black Currant
+    - Black Cherry
+    - Blackberry
+    - Blueberry
+    - Olive
+    - Black Plum
+    - Raisin
+    - Fig
+    - Date
+    - Flower
+    - Acacia
+    - Elderflower
+    - Lilac
+    - Jasmine
+    - Honeysuckle
+    - Orange Blossom
+    - Lily
+    - Almond
+    - Lavender
+    - Rose
+    - Geranium
+    - Violet
+    - Hibiscus
+    - Potpourri
+    - Honey
+    - White Pepper
+    - Black Pepper
+    - Anise
+    - Fennel
+    - Ginger
+    - Baking Spices
+    - Cinnamon
+    - Nutmeg
+    - Clove
+    - Herbs
+    - Eucalyptus
+    - Mint
+    - Thyme
+    - Rosemary
+    - Camphor
+    - Black Tea
+    - Sundried Tomato
+    - Green Almond
+    - Jalapeno
+    - Bell Pepper
+    - Gooseberry
+    - Tomato Leaf
+    - Grass
+    - Coniferous
+    - Rhubarb
+    - Mushroom
+    - Truffle
+    - Sourdough
+    - Yogurt
+    - Cream
+    - Brioche
+    - Petroleum
+    - Red Beet
+    - Soil
+    - Clay Pot
+    - Oak
+    - Dill
+    - Smoke
+    - Cigar
+    - Coconut
+    - Vanilla
+    - Butter
+    - Toast
+    - Leather
+    - Cocoa
+    - Coffee
+    - Tobacco
+    - Roasted Nuts
+    - Caramel
+
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - certainly
+    - for sure
+    - yeah
+    - I can do that
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: sf_intent_customer_service
+  examples: |
+    - I'd like to cancel the order I just made 
+    - Are you able to assist me with an online order that I did not receive because it was sent to a wrong address
+    - I would like to cancel my order that I placed today and get a refund.
+    - I wanted to check the status of a return
+    - I'm trying to find my most recent order,  can you see where it is?
+    - I wanted to log into my account but it's not letting me. Do you know who can help me please?
+
+- intent: sf_intent_customer_service_shoes
+  examples: |
+    - I recently bought two pairs of loafers online and they are both too large. I would like to replace for a smaller size please.
+    - I'm trying to initiate a return for pair of shoes I ordered online.
+
+- intent: sf_general_purchase
+  examples: |
+    - What do you sell?
+    - I want to buy something
+    
+
+- intent: sf_wine_recommendation
+  examples: |
+    - For [lamb](dish_type) dishes, a [medium-bodied](wine_body) [red](wine_type) wine would be perfect to not overpower the flavors of the meat.
+    - A [Beaujolais](grape_type) from the [Burgundy](wine_region) region of [France](wine_country) would be a great choice, with a combination of [fruity and floral](wine_tasting_notes) notes to highlight the mildness of the [lamb](dish_type).
+    - Another region to look for would be the [Rioja](wine_region) region of [Spain](wine_country), which produces [medium-bodied](wine_body) [red](wine_type) wines with a balanced acidity and flavors of [red and dark fruits](wine_tasting_notes). 
+    - For a more complex option, a [Chianti Classico](grape_type) from [Tuscany](wine_region), [Italy](wine_country) would be a great alternative, with medium-high tannins and flavors of [black cherry](wine_tasting_notes) and [blackberry](wine_tasting_notes).
+    - A [red](wine_type) wine from the [Douro](wine_region) region of [Portugal](wine_country) would also be a good option, with a [full-bodied](wine_body) mouthfeel and [black fruit](wine_tasting_notes) notes.
+    - Sure, If you're looking for an organic [white](wine_type) wine from [Germany](wine_country) with citrus flavors to pair with [fish](dish_type), [Riesling](grape_type) would be a wonderful choice. 
+    - [Riesling](grape_type) wines from [Germany](wine_country) are known for their high acidity and zesty [citrus](wine_tasting_notes) aroma that pairs perfectly with [fish](dish_type) dishes. 
+    - Additionally, some [Rieslings](grape_type) may have subtle [floral](wine_tasting_notes) notes which add a delicate complexity to the wine. 
+    - Another excellent option to consider is [Sauvignon Blanc](grape_type). 
+    - This varietal typically has a bright, zippy acidity with flavors of [grapefruit, lemon, and lime]{"entity":"wine_tasting_notes","value":"citrus"}. 
+    - Its herbaceous and grassy notes add a refreshing layer to pair with a variety of [fish](dish_type) dishes. 
+    - Finally, you could also try a [Verdejo](grape_type), a Spanish [white](wine_type) wine that typically exhibits bright, zingy [citrus](wine_tasting_notes) notes that pair well with [seafood](dish_type) dishes. 
+    - Its crisp acidity and subtle [spice](wine_tasting_notes) make it particularly well-suited to pairing with lighter, more delicate [fish](dish_type) dishes.
+    - Sure, based on your preferences for a [white](wine_type) organic wine from [France](wine_country) that pairs well with [pasta](dish_type), I would recommend a [white](wine_type) [Burgundy](wine_region) made with [Chardonnay](grape_type) grapes. 
+    - Based on your preferences for a [red](wine_type) wine with [cherry](wine_tasting_notes) or [blueberry](wine_tasting_notes) flavors and aging [oak](wine_tasting_notes) notes, I would recommend looking for [red](wine_type) wines produced in regions such as [Napa Valley](wine_region), [California](wine_region) or [Bordeaux](wine_region), [France](wine_country).
+    - Based on the inventory, you might also consider exploring some of the other similar regions, such as [Sonoma](wine_region) or [Tuscany](wine_region), to find a red wine that best suits your palate.
+    - I would recommend looking for a [Chilean](wine_country) [Shiraz](grape_type) from the [Central Valley](wine_region) region, as this region produces some of the best wines in the country, with notes of [red cherry](wine_tasting_notes) and [oak](wine_tasting_notes).
+    - I recommend a [white](wine_type) wine featuring a distinguished [citrus](wine_tasting_notes) aroma, with refreshing [lemon](wine_tasting_notes) notes in prominence, as it will blend beautifully with your lemon mousse [dessert](dish_type) choice 
+    - I recommend a refreshing [rosé](wine_type) wine for your before-dinner enjoyment on a lovely summer day
+
+- lookup: sf_apparel__product_category
+  examples: |
+    - Dress
+    - Skirt
+
+- lookup: sf_apparel__clothes_colours
+  examples: |
+    - Black
+    - Blue
+    - Brown
+    - Gold
+    - Gray
+    - Green
+    - Ivory
+    - Navy
+    - Orange
+    - Pink
+    - Purple
+    - Red
+    - Silver
+    - Tan
+    - White
+    - Yellow
+
+- lookup: sf_apparel__dress_styles
+  examples: |
+    - Bohemian
+    - Chic
+    - Cocktail
+    - Elegant
+    - Exotic
+    - Formal
+    - Modern
+
+- synonym: Modern
+  examples: |
+    - Contemporary
+
+- synonym: Midi
+  examples: |
+    - Knee-length
+
+- lookup: sf_apparel__dress_length
+  examples: |
+    - Maxi
+    - Midi
+    - Mini
+
+- lookup: sf_apparel__clothes_fabric
+  examples: |
+    - Cotton
+    - Denim
+    - Faux Leather
+    - Lace
+    - Linen
+    - Nylon
+    - Polyester
+    - Rayon
+    - Spandex
+    - Viscose elastane
+    - Woven
+
+- lookup: sf_apparel__dress_sleeve_length
+  examples: |
+    - Three-quarter sleeves
+    - Elbow sleeves
+    - One sleeve
+    - Long sleeve
+    - Short sleeves
+    - Sleeveless
+    - Three-quarter roll-tab
+
+- synonym: Elbow sleeves
+  examples: |
+    - Elbow-length sleeves
+
+- synonym: Short sleeves
+  examples: |
+    - Cap
+    - Short-sleeved
+
+- lookup: sf_apparel__clothes_occasions
+  examples: |
+    - Casual
+    - Night clubs
+    - Party
+    - Prom
+    - Spring
+    - Summer
+    - Wedding
+    - Bridesmaid
+    - Mother of the bride
+    - Brides
+    - Work
+    - Cocktail party
+
+- lookup: sf_apparel__clothes_patterns
+  examples: |
+    - Animal
+    - Leopard
+    - Zebra
+    - Snake
+    - Dot
+    - Floral
+    - Geometric
+    - Gingham
+    - Houndstooth
+    - Jacquard
+    - Logo
+    - Paisley
+    - Plaid
+    - Stripes
+    - Tropical
+
+- synonym: Floral
+  examples: |
+    - Flowers
+    - Flower
+    - Foilage
+    - Leaves
+    - Leaf
+
+- lookup: sf_apparel__dress_neckline
+  examples: |
+    - Boatneck
+    - Collared
+    - Cowl neck
+    - Crew neck
+    - Halter
+    - Hooded
+    - Mock neck
+    - Off the shoulder
+    - One shoulder
+    - Scoop neck
+    - Square
+    - Sweetheart
+    - Turtleneck
+    - V-neckline
+
+- synonym: Boatneck
+  examples: |
+    - Boat neckline
+
+- synonym: V-neckline
+  examples: |
+    - V-neck
+
+- intent: sf_apparel__recommendation
+  examples: |
+    - For a modern and elegant look for the [wedding](sf_apparel__clothes_occasions) reception, I would suggest a [dress](sf_apparel__product_category) that is [knee-length](sf_apparel__dress_length) or slightly longer, with clean and simple lines, and a classic silhouette that flatters your figure.
+    - A shift [dress](sf_apparel__product_category) is a good option for an [elegant](sf_apparel__dress_styles) and [modern](sf_apparel__dress_styles) look. 
+    - Darker shades of [red](sf_apparel__clothes_colours), such as bordeaux, would complement the occasion and fit in perfectly with the festivities, without drawing too much attention away from the bride and groom. 
+    - For an [exotic](sf_apparel__dress_styles) party look, you can go for a [dress](sf_apparel__product_category) with a flowy, asymmetrical hemline that flatters your figure.
+    - Choose a vibrant color that complements your complexion; you mentioned you wanted a [red](sf_apparel__clothes_colours) color.
+    - Consider a [dress](sf_apparel__product_category) that incorporates a unique print, such as an [animal](sf_apparel__clothes_patterns) or [foliage](sf_apparel__clothes_patterns) motif, for added visual interest.
+    - I would recommend a [knee-length](sf_apparel__dress_length) [dress](sf_apparel__product_category) with a [collared](sf_apparel__dress_neckline) design and [three-quarter sleeves](sf_apparel__dress_sleeve_length). 
+    - The [skirt](sf_apparel__product_category) would look great in a deep merlot [red](sf_apparel__clothes_colours) color with a subtle pattern of small white [flowers](sf_apparel__clothes_patterns).
+    - The [skirt](sf_apparel__product_category) should be made of lightweight, breathable fabric, like [linen](sf_apparel__clothes_fabric) or [cotton](sf_apparel__clothes_fabric), to keep you cool and comfortable while working outside.
+    - For an [elegant](sf_apparel__dress_styles) style, a [black](sf_apparel__clothes_colours) [mini](sf_apparel__dress_length) [dress](sf_apparel__product_category) with a classic silhouette is a great choice for a first date.
+    - Based on your preference for a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category), I would recommend a [knee-length](sf_apparel__dress_length), fitted sheath [dress](sf_apparel__product_category) with [cap](sf_apparel__dress_sleeve_length) sleeves.
+    - To fit the [cocktail party](sf_apparel__clothes_occasions) ambiance, the [dress](sf_apparel__product_category) should ideally be in a bold [pink](sf_apparel__clothes_colours) color, with a little bit of shimmer, that will set you apart from the other guests.
+    - The style would accentuate your curves and give you a sophisticated and [chic](sf_apparel__dress_styles) look.
+    - I recommend a beautiful [formal](sf_apparel__dress_styles) [dress](sf_apparel__product_category) with [short sleeves](sf_apparel__dress_sleeve_length), [off the shoulder](sf_apparel__dress_neckline), perfect for a July [wedding](sf_apparel__clothes_occasions).
+    - The [dress](sf_apparel__product_category) is designed in a light [pink](sf_apparel__clothes_colours) color, adding elegance and a touch of warmth to complement the special occasion.
+    - The flattering [short sleeves](sf_apparel__dress_sleeve_length) will keep you comfortable in the summer heat while still maintaining a sophisticated look.
+    - The [dress](sf_apparel__product_category) is created with a mix of [modern](sf_apparel__dress_styles) and [chic](sf_apparel__dress_styles) styles, ensuring that as a [wedding](sf_apparel__clothes_occasions) guest, you will be dressed appropriately and impressively.
+    - This light [pink](sf_apparel__clothes_colours), [short-sleeved](sf_apparel__dress_sleeve_length) [formal](sf_apparel__dress_styles) [dress](sf_apparel__product_category) would be an excellent choice to wear with confidence and grace at your daughter's [wedding](sf_apparel__clothes_occasions).
+    - Opt for a [dress](sf_apparel__product_category) with [short sleeves](sf_apparel__dress_sleeve_length) or even a [sleeveless](sf_apparel__dress_sleeve_length) design to keep you cool in the summer months. 
+    - The [short sleeves](sf_apparel__dress_sleeve_length) provide a perfect balance of coverage and style, while the [mini](sf_apparel__dress_length) length adds an extra touch of glamour to your evening ensemble.
+    - I highly recommend an [elegant](sf_apparel__dress_styles) [mini](sf_apparel__dress_length) [ivory](sf_apparel__clothes_colours) [dress](sf_apparel__product_category) with [short sleeves](sf_apparel__dress_sleeve_length) and [square](sf_apparel__dress_neckline) neckline for your upcoming [cocktail party](sf_apparel__clothes_occasions).
+    - Now that we know you prefer a [black](sf_apparel__clothes_colours), [formal](sf_apparel__dress_styles) [midi](sf_apparel__dress_length) dress, we recommend a universally flattering A-line silhouette with a sophisticatedly dipping [V-neck](sf_apparel__dress_neckline) neckline.
+    - With a sophisticated [V-neckline](sf_apparel__dress_neckline) and flattering [elbow-length sleeves](sf_apparel__dress_sleeve_length) to heighten the effortless classic vibe of your chosen frock.
+    - The modest yet charming [boat neckline](sf_apparel__dress_neckline) would suitably accommodate the aquatic aspect. 
+    - With chic [long sleeves](sf_apparel__dress_sleeve_length) and flattering [V-neck]sf_apparel__dress_neckline), the [dress](sf_apparel__product_category) combines [contemporary](sf_apparel__dress_styles) style notes with classic sophistication.
+    - A flowy, [long sleeve](sf_apparel__dress_sleeve_length) or [three-quarter sleeve](sf_apparel__dress_sleeve_length) would create that [elegant](sf_apparel__dress_styles) feel you are seeking.
+    - It features a flattering [boat neckline](sf_apparel__dress_neckline) with [cap sleeves](sf_apparel__dress_sleeve_length) to create both comfort and [chicness](sf_apparel__dress_styles) suitable for your celebration.
+    - To enhance your look, consider picking a [V-neck](sf_apparel__dress_neckline) or [round neckline](sf_apparel__dress_neckline) that complements your style according to your preference. 
+
+- intent: sf_apparel__chat
+  examples: |
+    - I would like a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category)
+    - I want to get a [black](sf_apparel__clothes_colours) [dress](sf_apparel__product_category)
+    - I would like to buy a [red](sf_apparel__clothes_colours) [dress](sf_apparel__product_category)
+    - I want to buy a [pink](sf_apparel__clothes_colours) [dress](sf_apparel__product_category)
+    - Can you get me a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category)
+    - I would like a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category) with [V-neck](sf_apparel__dress_neckline) 
+    - [Black](sf_apparel__clothes_colours)
+    - [Casual](sf_apparel__dress_styles)
+    - [Maxi](sf_apparel__dress_length)
+    - [V-neck](sf_apparel__dress_neckline)
+    - [Short](sf_apparel__dress_sleeve_length)
+    - [Wedding](sf_apparel__clothes_occasions)
+    - [Animal](sf_apparel__clothes_patterns)
+    - [Rayon](sf_apparel__clothes_fabric)
+
+- lookup: sf_apperal_product_type
+  examples: |
+    - poncho
+    - sweatshirt
+    - hoodie
+
+- lookup: sf_apperal_hood
+  examples: |
+    - detachable
+    - oversized hood
+
+- lookup: sf_apperal_pattern
+  examples: |
+    - geometric
+    - stripes
+    - graphic
+    - logo
+    - text
+    - plaid
+    - abstract
+    - camouflage
+    - solid
+
+- lookup: sf_apperal_size_category
+  examples: |
+    - petite
+    - junior
+    - tall
+    - maternity
+    - plus size
+
+- lookup: sf_apperal_color
+  examples: |
+    - blue
+    - light blue
+    - navy
+    - turquoise
+    - purple
+    - lavender
+    - plum
+    - indigo
+    - grey
+    - charcoal
+    - slate
+    - black
+    - white
+    - pure white
+    - off-white
+    - brown
+    - khaki
+    - tan
+    - beige
+    - pink
+    - dusty rose
+    - red
+    - burgundy
+    - yellow
+    - mustard
+    - orange
+    - green
+    - olive
+    - gold
+    - silver
+    - multi
+
+- lookup: sf_apperal_sustainability
+  examples: |
+    - organic
+    - recycled materials
+    - vegan
+    - responsibly made
+
+- lookup: sf_apperal_distressing
+  examples: |
+    - frayed
+    - distressed
+    - patched
+    - bleached
+
+- lookup: sf_apperal_material
+  examples: |
+    - cotton
+    - fleece
+    - polyester
+    - elastane
+    - jersey
+
+- lookup: sf_apperal_material_composition
+  examples: |
+    - natural
+    - synthetic
+    - blend
+
+- lookup: sf_apperal_length
+  examples: |
+    - regular length
+    - cropped
+    - waist length
+    - knee length
+    - long
+    - fit
+
+- lookup: sf_apperal_fit
+  examples: |
+    - straight fit
+    - regular
+    - oversized
+    - slim
+
+- lookup: sf_apperal_closure
+  examples: |
+    - zipper
+    - full
+    - quarter
+    - button
+    - snap
+
+- lookup: sf_apperal_care_instructions
+  examples: |
+    - machine wash
+    - cold
+    - warm
+    - no dry clean
+    - dry flat
+    - hand wash
+    - dry clean only
+
+- lookup: sf_apperal_neckline
+  examples: |
+    - v-neck
+    - collared
+    - cowl neck
+    - roundneck
+    - scoop
+    - crew
+    - boat
+    - high neck
+    - turtle
+    - mock
+    - off the shoulder
+    - one shoulder
+    - henley
+    - hooded
+
+- lookup: sf_apperal_sleeve_length
+  examples: |
+    - long sleeves
+    - short sleeves
+    - mid sleeves
+    - elbow
+    - three-quarter
+    - sleeveless
+
+- lookup: sf_apperal_embellishments
+  examples: |
+    - embroidered
+    - appliquéd
+
+- lookup: sf_apperal_slit
+  examples: |
+    - side
+
+- lookup: sf_apperal_pockets
+  examples: |
+    - pockets
+    - patch
+    - zip
+    - chest pocket
+    - kangaroo
+
+- lookup: sf_apperal_material_weight
+  examples: |
+    - lightweight
+    - midweight
+    - heavyweight
+
+- lookup: sf_apperal_stretch
+  examples: |
+    - stretch
+
+- lookup: sf_apperal_hem
+  examples: |
+    - raw
+    - straight hem
+    - high-low
+    - scalloped
+    - ribbed
+
+- lookup: sf_apperal_cuff
+  examples: |
+    - turn-up
+    - rolled
+
+- lookup: sf_apperal_wash
+  examples: |
+    - light
+    - medium
+    - dark
+    - vintage
+    - faded
+
+- intent: sf_apparel__description_tags
+  examples: |
+    - Finished in a muted [tie-dye](sf_apperal_pattern); Mother's Drop Square sweatshirt features a charming graphic front. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Banded trim. Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - [Traditional zip](sf_apperal_closure) [hoodie](sf_apperal_product_type) with bold serape stripe and [embroidered](sf_apperal_embellishments) bolt at chest; crafted of single-stitch needlework for a one-of-a-kind piece. [Drawstring hood](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Banded cuffs. [Front-zip closure](sf_apperal_closure). Split-kangaroo pocket. [50% cotton](sf_apperal_material)/[37% polyester](sf_apperal_material)/13% rayon. [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - Crafted of [cotton](sf_apperal_material); ANINE BING's oversized Tyler sweatshirt showcases dropped shoulders and a classic rib-knit trim. This piece features an arch logo at the chest. [Crewneck](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). [Rib-knit trim](sf_apperal_hem). Pulls over. [100% organic cotton](sf_apperal_sustainability). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Splendid's Nori sweatshirt is crafted of a cotton blend and features elegant [scallop trim](sf_apperal_hem) for subtle detail. Crew neck. [Long sleeves](sf_apperal_sleeve_length). Pulls on. [55% cotton](sf_apperal_material)[/45% polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Jason Wu's [sweatshirt](sf_apperal_product_type) is crafted of [cotton](sf_apperal_material) terry and features a relaxed [cropped](sf_apperal_length) silhouette. Delicate floral embroidery decorates this pull-on style. [Crew neck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Dropped shoulders. Pulls on. [100% cotton](sf_apperal_material). Self-lined. [Dry clean](sf_apperal_care_instructions). Imported.
+    - Crafted of soft [cotton](sf_apperal_material); Frame's sweatshirt boasts [three-quarter-length sleeves](sf_apperal_sleeve_length) and a [mock turtleneck](sf_apperal_neckline). Mock turtleneck. Dropped shoulders. Three-quarter-length sleeves. Pulls on. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Khaite's Cruz hoodie is crafted of exceptionally soft cashmere. Designed in New York; this elevated basic is styled with a [V-neck](sf_apperal_neckline); dropped shoulders; and a large front pocket. V-neck. [Hooded](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). [Front pocket](sf_apperal_pockets). [Ribbed trim](sf_apperal_hem). Pulls on. 100% cashmere. [Dry clean](sf_apperal_care_instructions). Imported.
+    - Cut in a [cropped silhouette](sf_apperal_length); Lacoste's double-fleece hoodie is complete with an embroidered tonal logo at the chest. [Attached hood](sf_apperal_neckline) with drawstrings. Drop shoulders. [Long sleeves](sf_apperal_sleeve_length). Banded trim. Pullover style. [Lining: 100% polyester](sf_apperal_material). [77% cotton/18%](sf_apperal_material) [polyester/5% elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Plush in design; this hoodie is crafted with a classic terry cloth finish. [Attached hood](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). [Zip front closure](sf_apperal_closure). [Ribbed trim](sf_apperal_hem). Modal/spandex. [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - ANINE BING's [cotton](sf_apperal_material) Jaci [sweatshirt](sf_apperal_product_type) features varsity-style [logo](sf_apperal_pattern) lettering at the front. Trimmed with rib-knit; this relaxed style is designed with a [faded](sf_apperal_wash); worn-in look. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length); [rib-knit cuffs](sf_apperal_hem). Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - [Sweatshirt](sf_apperal_product_type) crafted of [fleece](sf_apperal_material) with flowy puff-sleeves. [Crewneck](sf_apperal_neckline). Drop shoulders. [Long sleeves](sf_apperal_sleeve_length). Elasticized hem. Pullover style. [95% polyester](sf_apperal_material)/[5% elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Lacoste's overshirt-fit crew sweatshirt flaunts a soft cotton design with an unbrushed fleece interior. An oversized stacked logo sits at the chest. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Rib-knit trim. Pulls over. 100% [cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Greyson's Halley quarter-zip pullover sweatshirt is cut from quick-drying and pill-resistant stretch fabric. This colorblocked style features a [funnel neck](sf_apperal_neckline) and [long sleeves](sf_apperal_sleeve_length). Funnel neck. Long sleeves. [Quarter zip-front](sf_apperal_closure) closure. 86% nylon/14% [spandex](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Slouchy sweatshirt with a generous neckline Scoopneck. [Long sleeves](sf_apperal_sleeve_length). Modal/spandex. [Hand wash](sf_apperal_care_instructions). Imported.
+    - Crafted with a touch of cashmere; Splendid's Elin sweater hoodie features a shaker-stitch design and relaxed dropped shoulders. [Drawstring hood](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Pulls on. 33% acrylic/23% nylon/20% wool/20% cotton/4% cashmere. [Dry clean](sf_apperal_care_instructions). Imported.
+    - Cut in an [oversized](sf_apperal_fit) silhouette; ANINE BING's [hooded](sf_apperal_neckline) Harvey sweatshirt is elevated by a large terry [logo](sf_apperal_pattern) patch at the front. Attached hood. Dropped shoulders. Long sleeves. Kangaroo pocket. [Banded ribbed](sf_apperal_hem) trim. Pulls over. [100%](sf_apperal_material) [cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Eberjey's cozy heathered sweatshirt is crafted of a cotton blend; featuring a [crewneck](sf_apperal_neckline) and [long sleeves](sf_apperal_sleeve_length). Crewneck. Long sleeves. Pullover style. [95% cotton](sf_apperal_material)/[5% spandex](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Cinq à Sept's Brandy sweatshirt is crafted of cotton. This style showcases a [crewneck](sf_apperal_neckline); [long sleeves](sf_apperal_sleeve_length); and crackled rhinestone embellished shoulders for a touch of sparkle. Crewneck. Long sleeves. Pulls over. [100% Cotton](sf_apperal_material). [Dry clean](sf_apperal_care_instructions). Imported.
+    - The Harvey [sweatshirt](sf_apperal_product_type) from Anine Bing is crafted of pure [cotton](sf_apperal_material) in a super-relaxed fit. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Crafted of [cotton](sf_apperal_material); the Jolie [striped](sf_apperal_pattern) [hoodie](sf_apperal_product_type) from Solid & Striped features long sleeves; a lace-up front; and a cropped hem. Hood. Long sleeves. Lace-up front. 100% cotton. Machine wash. Imported.
+    - Cut to an [oversized](sf_apperal_fit) vintage-style silhouette; Re/done’s [crewneck](sf_apperal_neckline) sweatshirt features soft cotton construction. Crewneck. Long drop sleeves. Pullover style. Ribbed trim. [Cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in Portugal.
+    - The Jaci sweatshirt from Anine Bing is crafted of French terry cotton and features a mirrored Paris printed at the chest. The label's store address across the back adds a personal touch to this [crewneck](sf_apperal_neckline) style. Crewneck. Drop shoulders. [Long sleeves](sf_apperal_sleeve_length). Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Decorated with a brushstroke print; Alexander McQueen's oversized knit sweatshirt features a [crewneck](sf_apperal_neckline); dropped shoulders; and [long sleeves](sf_apperal_sleeve_length). Crewneck. Long sleeves. Pullover style. 100% viscose knit. Dry [clean. Made](sf_apperal_care_instructions) in Italy.
+    - Soft [cotton-blend](sf_apperal_material_composition) sweatshirt in a monochrome [camouflage](sf_apperal_pattern) print. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pull-on style. [Ribbed trim](sf_apperal_hem). [74% cotton](sf_apperal_material)/26% rayon. [Hand wash](sf_apperal_care_instructions). Imported.
+    - This [hood](sf_apperal_neckline)ie by ANNE BING showcases a contrast logo and 'Sport' lettering across the front. Hood. [Long sleeves](sf_apperal_sleeve_length). [Kangaroo pocket](sf_apperal_pockets). Pulls over. 100% [cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - A vintage-style graphic adorns the front of Mother’s The Drop Square Sweatshirt; crafted of cotton and washed for a lived-in feel. [Crewneck](sf_apperal_neckline). Long drop sleeves. Pullover style. Ribbed trim. [Cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - Hand-dyed [hoodie](sf_apperal_product_type) with an eye-catching tie-dye print throughout. [Attached hood](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Raw-cut hem. [Cotton](sf_apperal_material)/[polyester](sf_apperal_material)/rayon. [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - Cut in a boxy silhouette; Mother's Boost [cotton](sf_apperal_material)-[fleece](sf_apperal_material) sweatshirt is complete with a large painterly beach print at the front. Banded [crewneck](sf_apperal_neckline). [Long](sf_apperal_sleeve_length) raglan [sleeves](sf_apperal_sleeve_length); banded [cuffs](sf_apperal_hem). [Raw](sf_apperal_hem) [hem](sf_apperal_hem). Pulls over. [98%](sf_apperal_material) [cotton](sf_apperal_material)/[2%](sf_apperal_material) [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - Crafted of [cotton](sf_apperal_material); Frame's [crewneck](sf_apperal_neckline) [sweatshirt](sf_apperal_product_type) features relaxed dropped shoulders; balloon sleeves; and banded trim. [Crewneck](sf_apperal_neckline). Dropped shoulders. Long balloon sleeves. Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Splendid's Highland speckled terry [sweatshirt](sf_apperal_product_type) features a drawstring hood and [long sleeves](sf_apperal_sleeve_length). Drawstring hood. Long sleeves. Pullover style. 49% modal/48% [polyester](sf_apperal_material) 3% [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Crafted of super soft plush Dreamcloth fabric; this comfortable lounge shirt features a [half-zip placket](sf_apperal_closure). Stand collar. [Long sleeves](sf_apperal_sleeve_length). [Zip front](sf_apperal_closure). Seamed details. Rayon/acrylic/spandex. [Machine wash](sf_apperal_care_instructions). Imported.
+    - Frame's sweatshirt is crafted of cotton and features an easy tuckable length. [Short rolled sleeves](sf_apperal_sleeve_length) complete this slouchy [style. Crew](sf_apperal_neckline) [neck. Short sleeves](sf_apperal_sleeve_length); rolled cuffs. Pulls on. [100% cotton.](sf_apperal_material) [Machine wash.](sf_apperal_care_instructions) Made in Portugal.
+    - This pullover sweatshirt by alexanderwang.t is made of heavyweight brushed cotton terry. This relaxed style features a [crewneck](sf_apperal_neckline); [long sleeves](sf_apperal_sleeve_length); and a stacked logo print on the chest. Crewneck. Dropped shoulders. Long sleeves. Pullover style. 79% [cotton](sf_apperal_material)/21%[polyester](sf_apperal_material). Combo: 98% [cotton](sf_apperal_material)/2% [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Crafted of a [cotton blend](sf_apperal_material_composition); the Tyler crewneck sweatshirt highlights a signature Anine Bing [logo](sf_apperal_pattern) on the chest. The style is finished with rib-knit trim for added structure. [Crewneck.](sf_apperal_neckline) [Long sleeves.](sf_apperal_sleeve_length) Rib-knit trim. Pulls over. [85% cotton](sf_apperal_material)[/ 15% polyester.](sf_apperal_material) [Machine wash.](sf_apperal_care_instructions) Imported.
+    - Cut in a [cropped silhouette](sf_apperal_length); rag & bone's terry crewneck sweatshirt offers a relaxed fit and banded ribbed trim. Crewneck. Dropped shoulders. Long sleeves. Banded ribbed trim. Pullover style. 100% cotton. Machine wash. Imported.
+    - ANINE BING's Jaci sweatshirt features an oversized silhouette in a gradient [faded](sf_apperal_wash) wash. Relaxed dropped shoulders and logo lettering complete the look. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pulls over. [100%](sf_apperal_material_composition) [cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Cut in an [oversized](sf_apperal_fit) silhouette; Favorite Daughter's collegiate [cotton](sf_apperal_material) sweatshirt is finished with a large contrast logo at the front. [Crewneck](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Banded ribbed trim. Pulls over. [100% cotton](sf_apperal_material). [Lining: 100%](sf_apperal_material) cotton. [Machine wash](sf_apperal_care_instructions). Imported.
+    - The Essential [sweatshirt](sf_apperal_product_type) from alexanderwang.t is crafted of a glittery cotton blend and features the label's signature stacked [logo](sf_apperal_pattern) detail at the chest. [Crew neck](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Pulls on. [68%](sf_apperal_material) [cotton](sf_apperal_material)/[31%](sf_apperal_material) [polyester](sf_apperal_material)/1% viscose. [Machine wash](sf_apperal_care_instructions). Imported.
+    - The Drop [sweatshirt](sf_apperal_product_type) from Mother flaunts a David Bowie [graphic print](sf_apperal_pattern) and dropped shoulders. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pulls over. [100%](sf_apperal_material) cotton. [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - A draped detail at the sleeves amp up Ulla Johnson's Pilar sweatshirt. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pulls over. 59% [cotton](sf_apperal_material)/41% viscose. Combo: 56% [cotton](sf_apperal_material)/39% viscose/5% [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - From the Lacoste x Bandier Collection. In collaboration with activewear label Bandier; Lacoste's sweatshirt is crafted of a piqué-knit cotton blend and cut in a relaxed silhouette. This [crew neck](sf_apperal_neckline) style is complete with [long raglan sleeves](sf_apperal_sleeve_length) and the label's logo patch at the chest. [Crew neck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pulls on. [52%](sf_apperal_material) [cotton](sf_apperal_material)/[41%](sf_apperal_material) [polyester](sf_apperal_material)/[7%](sf_apperal_material) [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - [Stretch](sf_apperal_stretch) corduroy cap-sleeve [hoodie](sf_apperal_product_type) with [logo](sf_apperal_pattern) elastic. Attached [hood](sf_apperal_neckline). [Short cap sleeves](sf_apperal_sleeve_length). Pullover style. [Logo band](sf_apperal_pattern). [Cotton](sf_apperal_material)/[polyester](sf_apperal_material)/[elastane](sf_apperal_material). [Dry clean](sf_apperal_care_instructions). Imported.
+    - Crafted of cotton; Frame's sweatshirt boasts a boxy cropped silhouette and split side detailing. [Round neck](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length); banded cuffs. Pulls on. [100% organic cotton](sf_apperal_sustainability). [Machine wash](sf_apperal_care_instructions). Imported.
+    - In collaboration with Netflix; Lacoste features its iconic motif in a style reminiscent of some of the streaming network's popular series. This Sex Education themed [crewneck](sf_apperal_neckline) sweatshirt boasts a large chest graphic with the brand's signature crocodile riding a bike. Crewneck. Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Banded ribbed trim. Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - With a whimsical banana motif; this classic [zip](sf_apperal_closure) hoodie is crafted of soft Italian terry. This style features a drawstring hood and banana charm at zip pull. Drawstring hood. Long sleeves. Front zip closure. 80% [cotton](sf_apperal_material)[/20% polyester](sf_apperal_material). [Dry clean](sf_apperal_care_instructions). Made in Italy.
+    - Heathered [zip-front hoodie](sf_apperal_product_type) that is an elevated staple. Attached hood. Long sleeves. [Zip](sf_apperal_closure) front closure. Modal/spandex. [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - Frame's sweatshirt is crafted of soft [cotton](sf_apperal_material) and cut in a [cropped](sf_apperal_length) silhouette. Dropped shoulders and a dip-dyed print complete this relaxed style. Crew neck. Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Banded trim. Pulls on. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in Portugal.
+    - A cozy pullover hoodie featuring a soft plush faux shearling fabrication. [Drawstring hood](sf_apperal_neckline). Long sleeves. Pouch pocket. Knit trim. Pullover style. Polyester. Fur type: Faux. [Machine wash](sf_apperal_care_instructions). Imported.
+    - Eberjey's cozy hoodie is crafted of boucle knit; featuring a drawstring neck and [long sleeves](sf_apperal_sleeve_length). [Hood](sf_apperal_neckline). Long sleeves. Pulls over. [100% polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Mother’s The Champ Pullover is crafted of two-tone [cotton](sf_apperal_material) with a printed graphic across the front. [Crewneck](sf_apperal_neckline). [Long drop sleeves](sf_apperal_sleeve_length) with elasticized cuffs. [Pullover style](sf_apperal_product_type). [Cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - This [heavy-weight](sf_apperal_material_weight) brushed-back terry [crewneck](sf_apperal_neckline) sweatshirt from alexanderwang.t features a rib-knit crewneck collar; cuffs; and hem. A puff-print stacked logo finishes this relaxed style. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pullover style. [78%](sf_apperal_material) [cotton](sf_apperal_material)/[22%](sf_apperal_material)[polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Cut with an [oversized](sf_apperal_fit) fit; AGOLDE's Ash sweatshirt is styled with a [crewneck](sf_apperal_neckline) and [short sleeves](sf_apperal_sleeve_length). Crewneck. Short sleeves. Pulls over. 97% [cotton](sf_apperal_material)/3% [polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in USA.
+    - Moschino's Core crop sweatshirt is crafted of stretch cotton. This relaxed style features a [crewneck](sf_apperal_neckline); [long sleeves](sf_apperal_sleeve_length); and the label's classic logo trim. Crewneck. Long sleeves. Pullover style. 92% [cotton](sf_apperal_material)/8% [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Amiri's hoodie is crafted of soft [cotton](sf_apperal_material) and cut in a relaxed [cropped](sf_apperal_length) silhouette. Dropped shoulders and a logo tiger graphic define the look. [Hooded](sf_apperal_neckline). Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Pulls on. [100% cotton](sf_apperal_material). [Dry clean](sf_apperal_care_instructions). Made in USA.
+    - LoveShackFancy's Lisle [hoodie](sf_apperal_product_type) flaunts a comfortable raglan sleeve style and [rib-knit finish](sf_apperal_hem). Crafted of [stretch](sf_apperal_stretch) [cotton](sf_apperal_material); this piece features a drawstring hood and banded cuffs. Drawstring hood. Long raglan sleeves; banded cuffs. Side slits. Pulls over. [98% cotton](sf_apperal_material)/[2% spandex](sf_apperal_material). [Hand wash](sf_apperal_care_instructions). Imported.
+    - Frame's Easy crop sweatshirt is crafted of [cotton](sf_apperal_material). This relaxed style features a [crewneck](sf_apperal_neckline); dropped shoulders; and voluminous bishop sleeves. Crewneck. Dropped shoulders. Bishop sleeves. Pulls over. [100% cotton](sf_apperal_material_composition). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Johnny Was' Golden Rose [crewneck sweatshirt](sf_apperal_product_type) features a relaxed silhouette in a bold floral print. Long raglan sleeves complete the look. [Crewneck. Long](sf_apperal_neckline) [sleeves. Pulls](sf_apperal_sleeve_length) over. 96% [cotton](sf_apperal_material)/4% spandex. [Machine wash.](sf_apperal_care_instructions) Imported.
+    - Amiri's hoodie is crafted in Italy of soft [cotton](sf_apperal_material) and cut in a relaxed cropped silhouette. Dropped shoulders and a scenic motif define the look. Hooded. Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Pulls on. [100% cotton](sf_apperal_material_composition). [Dry clean](sf_apperal_care_instructions). Made in Italy.
+    - The California lifestyle brand; UGG; teams up with the inclusive; unisex label Telfar for the second collaboration of winter bags; outerwear and accessories. This cozy sherpa-lined sweatshirt features a [text](sf_apperal_pattern)ural logo across the front and playful pom-poms at the drawstring [hood](sf_apperal_neckline). Attached drawstring hood. [Long sleeves](sf_apperal_sleeve_length). Pullover style. [Kangaroo pocket](sf_apperal_pockets). Exposed sherpa seaming. [Ribbed cuffs and hem](sf_apperal_hem). Lined. [Cotton](sf_apperal_material)/[elastane](sf_apperal_material). Lining: [Polyester](sf_apperal_material). Fur type: Faux shearling. [Hand wash](sf_apperal_care_instructions). Imported.
+    - This Theory [hoodie](sf_apperal_product_type) features a slim silhouette crafted of a soft wool-cashmere blend. Rib-knit trim and a classic kangaroo pocket complete the look. [Drawstring hood](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Kangaroo pockets. Pulls over. 70% wool/30% cashmere. [Dry clean](sf_apperal_care_instructions). Imported.
+    - Crafted of a soft [cotton blend](sf_apperal_material_composition); Frame’s Block Letter sweatshirt is defined by a [crewneck](sf_apperal_neckline) and a rib-knit trim. Crewneck. [Long sleeves](sf_apperal_sleeve_length). [Rib-knit trim](sf_apperal_hem). Pulls over. [85% cotton](sf_apperal_material)/[15% polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Crafted of [cotton-blend](sf_apperal_material_composition) fleece; the [oversized](sf_apperal_fit) hoodie from alexanderwang.t offers a lustrous glittery outer and a complementary [logo](sf_apperal_pattern) at the chest. [Attached hood](sf_apperal_neckline); adjustable drawstrings. Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length). Banded trim. Pulls over. [68%](sf_apperal_material) [cotton](sf_apperal_material)/[31%](sf_apperal_material) [polyester](sf_apperal_material)/1% viscose. Combination: [94%](sf_apperal_material) [cotton](sf_apperal_material)/4% viscose/[2%](sf_apperal_material) [elastane](sf_apperal_material). [Hand wash](sf_apperal_care_instructions). Imported.
+    - This [oversized](sf_apperal_fit) hoodie takes on a minimalist approach. Attached drawstring hood. Long drop shoulder sleeves. [Rib-knit cuffs](sf_apperal_hem) and hem. Pullover style. [Front kangaroo](sf_apperal_pockets) pouch. [Cotton](sf_apperal_material)/modal/[elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Crafted of super soft plush Dreamcloth fabric; this comfortable lounge shirt features a [half-zip](sf_apperal_closure) placket. Stand [collar. Long](sf_apperal_sleeve_length) [sleeves. Zip](sf_apperal_closure) [front.](sf_apperal_closure) Seamed details. Rayon/acrylic/spandex. [Machine wash.](sf_apperal_care_instructions) Imported.
+    - Crafted of soft [cotton](sf_apperal_material); the Brandy sweatshirt from Cinq à Sept is adorned with 'Paris New York' text across the chest. [Round neck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pulls over. [100% cotton](sf_apperal_material). [Dry clean](sf_apperal_care_instructions). Made in USA.
+    - Greyson's Nash half-zip hoodie is cut from quick-drying; stretch fabric. This lightweight style features a kangaroo pocket; [long sleeves](sf_apperal_sleeve_length); and tonal topstitching. [Hooded](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). [Zip-front closure](sf_apperal_closure). [90% polyester](sf_apperal_material)/[10% elastane](sf_apperal_material). [Machine cold](sf_apperal_care_instructions). Imported.
+    - Alexander Wang's bi-color crop hoodie is crafted of [cotton](sf_apperal_material) knit. This pullover style flaunts long sleeves; a spacious [kangaroo pocket](sf_apperal_pockets); and a glittered puff logo at the front. Hood. Long sleeves. Kangaroo front pocket. Pulls over. [100% cotton](sf_apperal_material). Trim: [99% cotton; 1% elastane](sf_apperal_material_composition). [Dry clean only](sf_apperal_care_instructions). Made in Portugal.
+    - A draped detail at the sleeves amp up Ulla Johnson's Philo sweatshirt. Crewneck. [Long sleeves](sf_apperal_sleeve_length). Pulls over. 59% [cotton](sf_apperal_material)/41% viscose. Combo: 56% [cotton](sf_apperal_material)/39% viscose/5% [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Cut from [heavyweight](sf_apperal_material_weight) [fleece](sf_apperal_material); NIC+ZOE’s pullover has a relaxed fit with a half-zip placket for a sporty look. Stand collar. [Long sleeves](sf_apperal_sleeve_length). Half-zip placket. Front kangaroo pocket. [Polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - A varsity-style logo adorns the front of Veronica Beard’s Beaumont Logo Sweatshirt; designed with a shrunken fit. [Crewneck](sf_apperal_neckline). [Long raglan sleeves](sf_apperal_sleeve_length). Pullover style. Ribbed collar; cuffs and hem. [Cotton](sf_apperal_material)/[polyester](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Finished with an intarsia-[logo](sf_apperal_pattern) hem; Moschino's cotton-blend sweatshirt features a [crewneck](sf_apperal_neckline) and [long sleeves](sf_apperal_sleeve_length). Crewneck. Long sleeves. Pullover style. 95% [cotton](sf_apperal_material)/5% [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Detailed with zipped sleeves; NAADAM's Fisherman [hood](sf_apperal_neckline)ie is rib-knit of ultra-soft wool and cashmere. Attached hood with drawstring. [Long sleeves](sf_apperal_sleeve_length) with zippers. Pullover style. 70% wool/30% cashmere. [Dry clean](sf_apperal_care_instructions). Imported.
+    - Cut in an [oversized silhouette](sf_apperal_fit); rag & bone's cotton-blend hoodie features a banded ribbed trim and dimensional seaming at the back. Attached hood; adjustable drawstrings. Dropped shoulders. Long balloon sleeves. Front kangaroo pocket. Banded trim. Pulls over. 78% cotton/22% polyester. Machine wash. Imported.
+    - [Crafted](sf_apperal_material) of cotton; the Mon Amour Brandy sweatshirt from Cinq à Sept is embellished with crystals and features an embroidered text motif. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Rib-knit trim. Pulls over. [100% cotton](sf_apperal_material). [Dry clean](sf_apperal_care_instructions). Imported.
+    - The Lucy [hoodie](sf_apperal_product_type) from Anine Bing is crafted of [midweight](sf_apperal_material_weight) [cotton](sf_apperal_material) [fleece](sf_apperal_material) and features a arched screen-printed logo at the corner chest. This [oversized](sf_apperal_fit) style is finished with an interior drawstring hem for an adjustable fit. [Hood](sf_apperal_neckline). Drop shoulders. [Long sleeves](sf_apperal_sleeve_length). Pulls over. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - This Lacoste hoodie is crafted of a two-ply [cotton](sf_apperal_material) piqué blend in a relaxed fit. Tonal rib-knit trim and the brand's signature [embroidered crocodile](sf_apperal_embellishments) [logo](sf_apperal_pattern) finish this classic style. Drawstring hood. [Long sleeves](sf_apperal_sleeve_length). Pullover style. Kangaroo pocket. [93%](sf_apperal_material) [cotton](sf_apperal_material)/[7%](sf_apperal_material) [elastane](sf_apperal_material). Combo: [52%](sf_apperal_material) [cotton](sf_apperal_material)/[41%](sf_apperal_material) [polyester](sf_apperal_material)/[7%](sf_apperal_material) [elastane](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Made in Italy.
+    - This classic crewneck sweatshirt features rib trim and collegiate lettering. [Crewneck](sf_apperal_neckline). [Long sleeves](sf_apperal_sleeve_length). Pullover style. [100% cotton](sf_apperal_material). [Machine wash](sf_apperal_care_instructions). Imported.
+    - Crafted of a [lightweight](sf_apperal_material_weight) [cotton](sf_apperal_material)-blend; Lacoste's half-zip sweatshirt features a stand collar; dropped shoulders; and a rib-knit trim. Embossed with a signature crocodile logo at the chest; this piece flaunts a roomy fit. Stand collar. Dropped shoulders. [Long sleeves](sf_apperal_sleeve_length); banded cuffs. Rib-knit trim. Half-zip closure. 60% [polyester](sf_apperal_material)/40% [organic cotton](sf_apperal_sustainability). [Machine wash](sf_apperal_care_instructions). Imported.
+    - A contrast cuff accents this Greyson [hoodie](sf_apperal_product_type) crafted of wool and cashmere. Hood. [Long sleeves](sf_apperal_sleeve_length); rib-knit cuffs. Pulls over. 70% wool/30% cashmere. Knit. [Dry clean](sf_apperal_care_instructions). Imported.

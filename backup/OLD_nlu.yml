@@ -1,0 +1,886 @@
+version: "3.1"
+
+nlu:
+- lookup: wine_type
+  examples: |
+    - White
+    - Red
+    - Rose
+    - Orange
+    - Sparkling
+    - Champagne
+    - Petillant Naturel
+    - Cava
+    - Prosecco
+    - Lambrusco
+    - Cremant
+    - Fortified
+    - Port
+    - Sherry
+    - Vermouth
+    - Marsala
+    - Madeira
+    - Dessert
+    - Chocolate
+    - Ice Wine
+    - Sauternes
+
+- synonym: Rose
+  examples: |
+    - Rosé
+
+- lookup: dish_type
+  examples: |
+    - Curry
+    - Buffalo
+    - Dessert
+    - Chocolate
+    - Creamy Vanilla
+    - Fruit Pie
+    - Citrus Dessert
+    - Caramel Butterscotch
+    - Pastry
+    - Green Vegetables
+    - Fish
+    - White Fish
+    - Tuna
+    - Pesto
+    - Sushi
+    - Shellfish
+    - Salad
+    - Ceviche
+    - Pickles
+    - Olives
+    - Cured Meat
+    - Cheese
+    - Fresh Cheese
+    - Blue Cheese
+    - Soft Cheese
+    - Hard Cheese
+    - Chicken
+    - Duck
+    - Turkey
+    - Pork
+    - Beef
+    - Game Meat
+    - Grilled Meat
+    - Lamb
+    - Veal
+    - Tomato Sauce
+    - Pizza
+    - Red Sauce Pasta
+    - White Sauce Pasta
+    - Risotto
+    - Cheese Fondue
+    - Mushrooms
+    - Beets
+    - Liver
+
+
+- synonym: Argentina
+  examples: |
+    - Argentinian
+
+- synonym: Armenia
+  examples: |
+    - Armenian
+
+- synonym: Australia
+  examples: |
+    - Australian
+
+- synonym: Canada
+  examples: |
+    - Canadian
+
+- synonym: Chile
+  examples: |
+    - Chilean
+
+- synonym: Cyprus
+  examples: |
+    - Cyprian
+
+- synonym: Denmark
+  examples: |
+    - Danish
+
+- synonym: France
+  examples: |
+    - French
+
+- synonym: Germany
+  examples: |
+    - German
+
+- synonym: Greece
+  examples: |
+    - Greek
+
+- synonym: Hungary
+  examples: |
+    - Hungarian
+
+- synonym: Ireland
+  examples: |
+    - Irish
+
+- synonym: Israel
+  examples: |
+    - Israeli
+
+- synonym: Italy
+  examples: |
+    - Italian
+
+- synonym: Japan
+  examples: |
+    - Japanese
+
+- synonym: Lebanon
+  examples: |
+    - Lebanonese
+
+- synonym: Netherlands
+  examples: |
+    - Dutch
+
+- synonym: Romania
+  examples: |
+    - Romanian
+
+- synonym: Spain
+  examples: |
+    - Spanish
+
+- lookup: wine_country
+  examples: |
+    - Argentina
+    - Armenia
+    - Australia
+    - Canada
+    - Chile
+    - Cyprus
+    - Denmark
+    - France
+    - Germany
+    - Greece
+    - Hungary
+    - Ireland
+    - Israel
+    - Italy
+    - Japan
+    - Lebanon
+    - Netherlands
+    - New Zealand
+    - Portugal
+    - Republic of Macedonia
+    - Romania
+    - Slovakia
+    - South Africa
+    - Spain
+    - United Kingdom
+    - United States
+    - Uruguay
+    - Venezuela
+    - Austria
+
+- lookup: wine_region
+  examples: |
+    - Calchaqui Valley
+    - Mendoza
+    - Tupungato
+    - Uco Valley
+    - Patagonia
+    - New South Wales
+    - Adelaide Hills
+    - Barossa Valley
+    - Victoria
+    - Central Valley
+    - Curico Valley
+    - Bordeaux
+    - Cotes De Bordeaux
+    - Saint Emilion
+    - Bourgogne
+    - Cote De Beaune
+    - Cote De Nuits
+    - Chablis
+    - Maconnais
+    - Champagne
+    - Languedoc Roussillon
+    - Provence
+    - Cotes De Provence
+    - Rhône
+    - Cote Rotie
+    - Cotes Du Rhône
+    - Beaujolais
+    - Loire
+    - Anjou
+    - Muscadet
+    - Touraine
+    - Vouvray
+    - Sancerre
+    - Alsace
+    - Jura
+    - Savoie
+    - Burgenland
+    - Mosel
+    - Ruwer
+    - Saar
+    - Reinhessen
+    - Piedmont
+    - Langhe
+    - Lombardy
+    - Emilia Romagna
+    - Trentino Alto Adige
+    - Veneto
+    - Tuscany
+    - Chianti
+    - Abruzzo
+    - Marche
+    - Lazio
+    - Umbria
+    - Campania
+    - Sicily
+    - Puglia
+    - Calabria
+    - Sardinia
+    - Marlborough
+    - Douro
+    - Minho
+    - VinhoVerde
+    - Oporto
+    - Alentejo
+    - Bairrada
+    - Dao
+    - Lisboa
+    - Algarve
+    - Setubal
+    - Western Cape
+    - Breede River Valley
+    - Aragon
+    - Galicia
+    - Rias Baixas
+    - Rioja
+    - Castilla La Mancha
+    - Castilla Y Leon
+    - Bierzo
+    - Rueda
+    - Andalucia
+    - Valencia
+    - Murcia
+    - Jumilia
+    - Catalonia
+    - Monterey County
+    - San Luis Obispo County
+    - Santa Barbara County
+    - Arroyo Seco
+    - Paso Robles
+    - Modesto
+    - San Joaquin
+    - Yolo County
+    - Manteca
+    - Lodi
+    - Mendocino County
+    - Napa County
+    - Sonoma Coast
+    - Finger Lakes
+    - Canadaigua Lake
+    - Cayuga Lake
+    - Keuka Lake
+    - Seneca Lake
+    - Hudson River
+    - Clayton
+    - Oregon
+    - Willamette Valley
+    - Virginia
+    - Washington
+    - Columbia Valley
+    - Horse Heaven Hills
+    - Burgenland
+    - Niederosterreich
+
+
+- lookup: grape_type
+  examples: |
+    - Abrusco
+    - Aglianico
+    - Alrocheiro Preto
+    - Alicante Bouschet
+    - Aragonez
+    - Baco Noir
+    - Barbera
+    - Blaufrankisch
+    - Bonarda
+    - Cabernet Franc
+    - Canaiolo
+    - Cannonau
+    - Carignan
+    - Carmenere
+    - Castelao
+    - Cilegiolo
+    - Cinsault
+    - Colorino
+    - Corvina
+    - Corvinone
+    - Counoise
+    - Croatina
+    - Dolcetto
+    - Enantio
+    - Frappato
+    - Gaglioppo
+    - Gamay
+    - Graciano
+    - Grenache
+    - Hondarrabi Beltza
+    - Lambrusco
+    - Malbec
+    - Marselan
+    - Marzemino
+    - Mencia
+    - Merlot
+    - Molinara
+    - Montepulciano
+    - Mourvedre
+    - Nebbiolo
+    - Negroamaro
+    - Nero D'Avola
+    - Oseleta
+    - Pais
+    - Petit Verdot
+    - Petite Sirah
+    - Pinot Noir
+    - Pinotage
+    - Primitivo
+    - Rondinella
+    - Sagrantino
+    - Sangiovese
+    - Saperavi
+    - Syrah
+    - Tannat
+    - Tempranillo
+    - Teroldego
+    - Touriga Franca
+    - Touriga Nacional
+    - Trincadeira
+    - Xinomavro
+    - Zinfandel
+    - Zweigelt
+    - Cabernet Sauvignon
+    - Agiorgitiko
+    - Pinot Meunier
+    - Trousseau
+    - Poulsard
+    - Shiraz
+    - Albanello
+    - Albarino
+    - Albillo
+    - Aligote
+    - Alvarinho
+    - Antao Vaz
+    - Arinto
+    - Arneis
+    - Avesso
+    - Azal Blanco
+    - Bellone Bianco
+    - Bonvino
+    - Bourboulenc
+    - Bukettraube
+    - Chardonnay
+    - Chenin Blanc
+    - Clairette
+    - Colombard
+    - Cortese
+    - Falanghina
+    - Fernao Pires
+    - Fiano
+    - Friulano
+    - Furmint
+    - Garganega
+    - Gewurtztraminer
+    - Glera
+    - Godello
+    - Grecanico
+    - Grechetto
+    - Greco Bianco
+    - Grenache Blanc
+    - Grenache Gris
+    - Grillo
+    - Gros Manseng
+    - Gruner Vetliner
+    - Insolia
+    - Kerner
+    - Loureiro
+    - Macabeo
+    - Malvasia
+    - Marsanne
+    - Melon De Bourgogne
+    - Moschofilero
+    - Muller Thurgau
+    - Muscat
+    - Palomino
+    - Parellada
+    - Pecorino
+    - Pedro Ximenez
+    - Picpoul
+    - Pinot Blanc
+    - Pinot Gris
+    - Pinot Grigio
+    - Procanico
+    - Ribolla
+    - Riesling
+    - Rkatsiteli
+    - Roussanne
+    - Sauvignon Blanc
+    - Semillon
+    - Silvaner
+    - Torrontes
+    - Trajadura
+    - Trebbiano
+    - Ugni Blanc
+    - Verdejo
+    - Verdicchio
+    - Vermentino
+    - Viognier
+    - Viura
+    - XarelLo
+    - Albana
+    - Cataratto
+
+- lookup: wine_tasting_notes
+  examples: |
+    - Citrus
+    - Lemon
+    - Grapefruit
+    - Orange
+    - Lime
+    - Bergamot
+    - Marmalade
+    - Yuzu
+    - Quince
+    - Apple
+    - Pear
+    - Peach
+    - Apricot
+    - Persimmon
+    - Green Fig
+    - Nectarine
+    - Pineapple
+    - Mango
+    - Guava
+    - Kiwi
+    - Lychee
+    - Bubblegum
+    - Melon
+    - Cranberry
+    - Red Plum
+    - Pomegranate
+    - Cherry
+    - Strawberry
+    - Raspberry
+    - Red Currant
+    - Black Currant
+    - Black Cherry
+    - Blackberry
+    - Blueberry
+    - Olive
+    - Black Plum
+    - Raisin
+    - Fig
+    - Date
+    - Flower
+    - Acacia
+    - Elderflower
+    - Lilac
+    - Jasmine
+    - Honeysuckle
+    - Orange Blossom
+    - Lily
+    - Almond
+    - Lavender
+    - Rose
+    - Geranium
+    - Violet
+    - Hibiscus
+    - Potpourri
+    - Honey
+    - White Pepper
+    - Black Pepper
+    - Anise
+    - Fennel
+    - Ginger
+    - Baking Spices
+    - Cinnamon
+    - Nutmeg
+    - Clove
+    - Herbs
+    - Eucalyptus
+    - Mint
+    - Thyme
+    - Rosemary
+    - Camphor
+    - Black Tea
+    - Sundried Tomato
+    - Green Almond
+    - Jalapeno
+    - Bell Pepper
+    - Gooseberry
+    - Tomato Leaf
+    - Grass
+    - Coniferous
+    - Rhubarb
+    - Mushroom
+    - Truffle
+    - Sourdough
+    - Yogurt
+    - Cream
+    - Brioche
+    - Petroleum
+    - Red Beet
+    - Soil
+    - Clay Pot
+    - Oak
+    - Dill
+    - Smoke
+    - Cigar
+    - Coconut
+    - Vanilla
+    - Butter
+    - Toast
+    - Leather
+    - Cocoa
+    - Coffee
+    - Tobacco
+    - Roasted Nuts
+    - Caramel
+
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - certainly
+    - for sure
+    - yeah
+    - I can do that
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: sf_intent_customer_service
+  examples: |
+    - I'd like to cancel the order I just made 
+    - Are you able to assist me with an online order that I did not receive because it was sent to a wrong address
+    - I would like to cancel my order that I placed today and get a refund.
+    - I wanted to check the status of a return
+    - I'm trying to find my most recent order,  can you see where it is?
+    - I wanted to log into my account but it's not letting me. Do you know who can help me please?
+
+- intent: sf_intent_customer_service_shoes
+  examples: |
+    - I recently bought two pairs of loafers online and they are both too large. I would like to replace for a smaller size please.
+    - I'm trying to initiate a return for pair of shoes I ordered online.
+
+- intent: sf_general_purchase
+  examples: |
+    - What do you sell?
+    - I want to buy something
+    
+
+- intent: sf_wine_recommendation
+  examples: |
+    - For [lamb](dish_type) dishes, a [medium-bodied](wine_body) [red](wine_type) wine would be perfect to not overpower the flavors of the meat.
+    - A [Beaujolais](grape_type) from the [Burgundy](wine_region) region of [France](wine_country) would be a great choice, with a combination of [fruity and floral](wine_tasting_notes) notes to highlight the mildness of the [lamb](dish_type).
+    - Another region to look for would be the [Rioja](wine_region) region of [Spain](wine_country), which produces [medium-bodied](wine_body) [red](wine_type) wines with a balanced acidity and flavors of [red and dark fruits](wine_tasting_notes). 
+    - For a more complex option, a [Chianti Classico](grape_type) from [Tuscany](wine_region), [Italy](wine_country) would be a great alternative, with medium-high tannins and flavors of [black cherry](wine_tasting_notes) and [blackberry](wine_tasting_notes).
+    - A [red](wine_type) wine from the [Douro](wine_region) region of [Portugal](wine_country) would also be a good option, with a [full-bodied](wine_body) mouthfeel and [black fruit](wine_tasting_notes) notes.
+    - Sure, If you're looking for an organic [white](wine_type) wine from [Germany](wine_country) with citrus flavors to pair with [fish](dish_type), [Riesling](grape_type) would be a wonderful choice. 
+    - [Riesling](grape_type) wines from [Germany](wine_country) are known for their high acidity and zesty [citrus](wine_tasting_notes) aroma that pairs perfectly with [fish](dish_type) dishes. 
+    - Additionally, some [Rieslings](grape_type) may have subtle [floral](wine_tasting_notes) notes which add a delicate complexity to the wine. 
+    - Another excellent option to consider is [Sauvignon Blanc](grape_type). 
+    - This varietal typically has a bright, zippy acidity with flavors of [grapefruit, lemon, and lime]{"entity":"wine_tasting_notes","value":"citrus"}. 
+    - Its herbaceous and grassy notes add a refreshing layer to pair with a variety of [fish](dish_type) dishes. 
+    - Finally, you could also try a [Verdejo](grape_type), a Spanish [white](wine_type) wine that typically exhibits bright, zingy [citrus](wine_tasting_notes) notes that pair well with [seafood](dish_type) dishes. 
+    - Its crisp acidity and subtle [spice](wine_tasting_notes) make it particularly well-suited to pairing with lighter, more delicate [fish](dish_type) dishes.
+    - Sure, based on your preferences for a [white](wine_type) organic wine from [France](wine_country) that pairs well with [pasta](dish_type), I would recommend a [white](wine_type) [Burgundy](wine_region) made with [Chardonnay](grape_type) grapes. 
+    - Based on your preferences for a [red](wine_type) wine with [cherry](wine_tasting_notes) or [blueberry](wine_tasting_notes) flavors and aging [oak](wine_tasting_notes) notes, I would recommend looking for [red](wine_type) wines produced in regions such as [Napa Valley](wine_region), [California](wine_region) or [Bordeaux](wine_region), [France](wine_country).
+    - Based on the inventory, you might also consider exploring some of the other similar regions, such as [Sonoma](wine_region) or [Tuscany](wine_region), to find a red wine that best suits your palate.
+    - I would recommend looking for a [Chilean](wine_country) [Shiraz](grape_type) from the [Central Valley](wine_region) region, as this region produces some of the best wines in the country, with notes of [red cherry](wine_tasting_notes) and [oak](wine_tasting_notes).
+    - I recommend a [white](wine_type) wine featuring a distinguished [citrus](wine_tasting_notes) aroma, with refreshing [lemon](wine_tasting_notes) notes in prominence, as it will blend beautifully with your lemon mousse [dessert](dish_type) choice 
+    - I recommend a refreshing [rosé](wine_type) wine for your before-dinner enjoyment on a lovely summer day
+
+- lookup: sf_apparel__product_category
+  examples: |
+    - Dress
+    - Skirt
+
+- lookup: sf_apparel__clothes_colours
+  examples: |
+    - Black
+    - Blue
+    - Brown
+    - Gold
+    - Gray
+    - Green
+    - Ivory
+    - Navy
+    - Orange
+    - Pink
+    - Purple
+    - Red
+    - Silver
+    - Tan
+    - White
+    - Yellow
+
+- lookup: sf_apparel__dress_styles
+  examples: |
+    - Bohemian
+    - Chic
+    - Cocktail
+    - Elegant
+    - Exotic
+    - Formal
+    - Modern
+
+- synonym: Modern
+  examples: |
+    - Contemporary
+
+- synonym: Midi
+  examples: |
+    - Knee-length
+
+- lookup: sf_apparel__dress_length
+  examples: |
+    - Maxi
+    - Midi
+    - Mini
+
+- lookup: sf_apparel__clothes_fabric
+  examples: |
+    - Cotton
+    - Denim
+    - Faux Leather
+    - Lace
+    - Linen
+    - Nylon
+    - Polyester
+    - Rayon
+    - Spandex
+    - Viscose elastane
+    - Woven
+
+- lookup: sf_apparel__dress_sleeve_length
+  examples: |
+    - Three-quarter sleeves
+    - Elbow sleeves
+    - One sleeve
+    - Long sleeve
+    - Short sleeves
+    - Sleeveless
+    - Three-quarter roll-tab
+
+- synonym: Elbow sleeves
+  examples: |
+    - Elbow-length sleeves
+
+- synonym: Short sleeves
+  examples: |
+    - Cap
+    - Short-sleeved
+
+- lookup: sf_apparel__clothes_occasions
+  examples: |
+    - Casual
+    - Night clubs
+    - Party
+    - Prom
+    - Spring
+    - Summer
+    - Wedding
+    - Bridesmaid
+    - Mother of the bride
+    - Brides
+    - Work
+    - Cocktail party
+
+- lookup: sf_apparel__clothes_patterns
+  examples: |
+    - Animal
+    - Leopard
+    - Zebra
+    - Snake
+    - Dot
+    - Floral
+    - Geometric
+    - Gingham
+    - Houndstooth
+    - Jacquard
+    - Logo
+    - Paisley
+    - Plaid
+    - Stripes
+    - Tropical
+
+- synonym: Floral
+  examples: |
+    - Flowers
+    - Flower
+    - Foilage
+    - Leaves
+    - Leaf
+
+- lookup: sf_apparel__dress_neckline
+  examples: |
+    - Boatneck
+    - Collared
+    - Cowl neck
+    - Crew neck
+    - Halter
+    - Hooded
+    - Mock neck
+    - Off the shoulder
+    - One shoulder
+    - Scoop neck
+    - Square
+    - Sweetheart
+    - Turtleneck
+    - V-neckline
+
+- synonym: Boatneck
+  examples: |
+    - Boat neckline
+
+- synonym: V-neckline
+  examples: |
+    - V-neck
+
+- intent: sf_apparel__recommendation
+  examples: |
+    - For a modern and elegant look for the [wedding](sf_apparel__clothes_occasions) reception, I would suggest a [dress](sf_apparel__product_category) that is [knee-length](sf_apparel__dress_length) or slightly longer, with clean and simple lines, and a classic silhouette that flatters your figure.
+    - A shift [dress](sf_apparel__product_category) is a good option for an [elegant](sf_apparel__dress_styles) and [modern](sf_apparel__dress_styles) look. 
+    - Darker shades of [red](sf_apparel__clothes_colours), such as bordeaux, would complement the occasion and fit in perfectly with the festivities, without drawing too much attention away from the bride and groom. 
+    - For an [exotic](sf_apparel__dress_styles) party look, you can go for a [dress](sf_apparel__product_category) with a flowy, asymmetrical hemline that flatters your figure.
+    - Choose a vibrant color that complements your complexion; you mentioned you wanted a [red](sf_apparel__clothes_colours) color.
+    - Consider a [dress](sf_apparel__product_category) that incorporates a unique print, such as an [animal](sf_apparel__clothes_patterns) or [foliage](sf_apparel__clothes_patterns) motif, for added visual interest.
+    - I would recommend a [knee-length](sf_apparel__dress_length) [dress](sf_apparel__product_category) with a [collared](sf_apparel__dress_neckline) design and [three-quarter sleeves](sf_apparel__dress_sleeve_length). 
+    - The [skirt](sf_apparel__product_category) would look great in a deep merlot [red](sf_apparel__clothes_colours) color with a subtle pattern of small white [flowers](sf_apparel__clothes_patterns).
+    - The [skirt](sf_apparel__product_category) should be made of lightweight, breathable fabric, like [linen](sf_apparel__clothes_fabric) or [cotton](sf_apparel__clothes_fabric), to keep you cool and comfortable while working outside.
+    - For an [elegant](sf_apparel__dress_styles) style, a [black](sf_apparel__clothes_colours) [mini](sf_apparel__dress_length) [dress](sf_apparel__product_category) with a classic silhouette is a great choice for a first date.
+    - Based on your preference for a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category), I would recommend a [knee-length](sf_apparel__dress_length), fitted sheath [dress](sf_apparel__product_category) with [cap](sf_apparel__dress_sleeve_length) sleeves.
+    - To fit the [cocktail party](sf_apparel__clothes_occasions) ambiance, the [dress](sf_apparel__product_category) should ideally be in a bold [pink](sf_apparel__clothes_colours) color, with a little bit of shimmer, that will set you apart from the other guests.
+    - The style would accentuate your curves and give you a sophisticated and [chic](sf_apparel__dress_styles) look.
+    - I recommend a beautiful [formal](sf_apparel__dress_styles) [dress](sf_apparel__product_category) with [short sleeves](sf_apparel__dress_sleeve_length), [off the shoulder](sf_apparel__dress_neckline), perfect for a July [wedding](sf_apparel__clothes_occasions).
+    - The [dress](sf_apparel__product_category) is designed in a light [pink](sf_apparel__clothes_colours) color, adding elegance and a touch of warmth to complement the special occasion.
+    - The flattering [short sleeves](sf_apparel__dress_sleeve_length) will keep you comfortable in the summer heat while still maintaining a sophisticated look.
+    - The [dress](sf_apparel__product_category) is created with a mix of [modern](sf_apparel__dress_styles) and [chic](sf_apparel__dress_styles) styles, ensuring that as a [wedding](sf_apparel__clothes_occasions) guest, you will be dressed appropriately and impressively.
+    - This light [pink](sf_apparel__clothes_colours), [short-sleeved](sf_apparel__dress_sleeve_length) [formal](sf_apparel__dress_styles) [dress](sf_apparel__product_category) would be an excellent choice to wear with confidence and grace at your daughter's [wedding](sf_apparel__clothes_occasions).
+    - Opt for a [dress](sf_apparel__product_category) with [short sleeves](sf_apparel__dress_sleeve_length) or even a [sleeveless](sf_apparel__dress_sleeve_length) design to keep you cool in the summer months. 
+    - The [short sleeves](sf_apparel__dress_sleeve_length) provide a perfect balance of coverage and style, while the [mini](sf_apparel__dress_length) length adds an extra touch of glamour to your evening ensemble.
+    - I highly recommend an [elegant](sf_apparel__dress_styles) [mini](sf_apparel__dress_length) [ivory](sf_apparel__clothes_colours) [dress](sf_apparel__product_category) with [short sleeves](sf_apparel__dress_sleeve_length) and [square](sf_apparel__dress_neckline) neckline for your upcoming [cocktail party](sf_apparel__clothes_occasions).
+    - Now that we know you prefer a [black](sf_apparel__clothes_colours), [formal](sf_apparel__dress_styles) [midi](sf_apparel__dress_length) dress, we recommend a universally flattering A-line silhouette with a sophisticatedly dipping [V-neck](sf_apparel__dress_neckline) neckline.
+    - With a sophisticated [V-neckline](sf_apparel__dress_neckline) and flattering [elbow-length sleeves](sf_apparel__dress_sleeve_length) to heighten the effortless classic vibe of your chosen frock.
+    - The modest yet charming [boat neckline](sf_apparel__dress_neckline) would suitably accommodate the aquatic aspect. 
+    - With chic [long sleeves](sf_apparel__dress_sleeve_length) and flattering [V-neck]sf_apparel__dress_neckline), the [dress](sf_apparel__product_category) combines [contemporary](sf_apparel__dress_styles) style notes with classic sophistication.
+    - A flowy, [long sleeve](sf_apparel__dress_sleeve_length) or [three-quarter sleeve](sf_apparel__dress_sleeve_length) would create that [elegant](sf_apparel__dress_styles) feel you are seeking.
+    - It features a flattering [boat neckline](sf_apparel__dress_neckline) with [cap sleeves](sf_apparel__dress_sleeve_length) to create both comfort and [chicness](sf_apparel__dress_styles) suitable for your celebration.
+    - To enhance your look, consider picking a [V-neck](sf_apparel__dress_neckline) or [round neckline](sf_apparel__dress_neckline) that complements your style according to your preference. 
+
+- intent: sf_apparel__chat
+  examples: |
+    - I would like a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category)
+    - I want to get a [black](sf_apparel__clothes_colours) [dress](sf_apparel__product_category)
+    - I would like to buy a [red](sf_apparel__clothes_colours) [dress](sf_apparel__product_category)
+    - I want to buy a [pink](sf_apparel__clothes_colours) [dress](sf_apparel__product_category)
+    - Can you get me a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category)
+    - I would like a [modern](sf_apparel__dress_styles) [dress](sf_apparel__product_category) with [V-neck](sf_apparel__dress_neckline) 
+    - [Black](sf_apparel__clothes_colours)
+    - [Casual](sf_apparel__dress_styles)
+    - [Maxi](sf_apparel__dress_length)
+    - [V-neck](sf_apparel__dress_neckline)
+    - [Short](sf_apparel__dress_sleeve_length)
+    - [Wedding](sf_apparel__clothes_occasions)
+    - [Animal](sf_apparel__clothes_patterns)
+    - [Rayon](sf_apparel__clothes_fabric)
+    

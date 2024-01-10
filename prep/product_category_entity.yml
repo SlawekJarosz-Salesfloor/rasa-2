@@ -1,0 +1,16 @@
+- lookup: sf_apparel_product_category
+  examples: |
+    - coat
+    - jacket
+    - dress
+    - jeans
+    - jumpsuit
+    - pants
+    - shorts
+    - skirt
+    - sleepwear
+    - pijamas
+    - sweater
+    - sweatshirt
+    - hoodie
+    - top

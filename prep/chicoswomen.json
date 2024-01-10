@@ -1,0 +1,2323 @@
+{
+  "ontology": {
+    "user": [
+      {
+        "label": "http://automat.ai/ChicosWomen/Style",
+        "displayName": {
+          "en": "Style"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Style"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Cocktail",
+            "displayName": {
+              "en": "Cocktail"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Cocktail"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Modern",
+            "displayName": {
+              "en": "Modern"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Modern"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Elegant",
+            "displayName": {
+              "en": "Elegant"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Elegant"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Chic",
+            "displayName": {
+              "en": "Chic"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Chic"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Exotic",
+            "displayName": {
+              "en": "Exotic"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Exotic"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Bohemian",
+            "displayName": {
+              "en": "Bohemian"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Bohemian"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Formal",
+            "displayName": {
+              "en": "Formal"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Formal"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Occasion",
+        "displayName": {
+          "en": "Occasion"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Occasion"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Work",
+            "displayName": {
+              "en": "Work"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Work"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Casual",
+            "displayName": {
+              "en": "Casual"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Casual"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Party",
+            "displayName": {
+              "en": "Party"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Party"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Beach",
+            "displayName": {
+              "en": "Spring "
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Beach"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Prom",
+            "displayName": {
+              "en": "Prom"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Prom"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Summer",
+            "displayName": {
+              "en": "Summer"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Summer"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/NightClubs",
+            "displayName": {
+              "en": "Night clubs"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Night clubs"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Wedding",
+            "displayName": {
+              "en": "Wedding"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Wedding"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            },
+            "children": [
+              {
+                "label": "http://automat.ai/ChicosWomen/Bridesmaid",
+                "displayName": {
+                  "en": "Bridesmaid"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Bridesmaid"
+                    },
+                    "scoringType": {
+                      "type": "Rank"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/MotherOfTheBride",
+                "displayName": {
+                  "en": "Mother of the bride"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Mother of the bride"
+                    },
+                    "scoringType": {
+                      "type": "Rank"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Brides",
+                "displayName": {
+                  "en": "Brides"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Brides"
+                    },
+                    "scoringType": {
+                      "type": "Rank"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Size",
+        "displayName": {
+          "en": "Size"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Size"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/PlusSize",
+            "displayName": {
+              "en": "Plus size"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Plus size"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Petite",
+            "displayName": {
+              "en": "Petite"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Petite"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Tall",
+            "displayName": {
+              "en": "Tall"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Tall"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "product": [
+      {
+        "label": "http://automat.ai/base/ProductCategory",
+        "displayName": {
+          "en": "Product Category"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Product Category"
+            },
+            "scoringType": {
+              "type": "Filter"
+            }
+          }
+        },
+        "uiType": "SingleSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Skirt",
+            "displayName": {
+              "en": "Skirt"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Skirt"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Dress",
+            "displayName": {
+              "en": "Dress"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Dress"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            },
+            "children": [
+              {
+                "label": "http://automat.ai/ChicosWomen/Kimono",
+                "displayName": {
+                  "en": "Kimono"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Kimono"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Jacket",
+                "displayName": {
+                  "en": "Jacket dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Jacket"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Asymetrical",
+                "displayName": {
+                  "en": "Asymetrical dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Asymetrical"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Cutout",
+                "displayName": {
+                  "en": "Cutout dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Cutout"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Lace-1",
+                "displayName": {
+                  "en": "Lace dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Lace"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/ALine",
+                "displayName": {
+                  "en": "A Line dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "A Line"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Ruffle",
+                "displayName": {
+                  "en": "Ruffle dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Ruffle"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Sequined",
+                "displayName": {
+                  "en": "Sequined dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Sequined"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Sheat",
+                "displayName": {
+                  "en": "Sheat dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Sheat"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Shift",
+                "displayName": {
+                  "en": "Shift dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Shift"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Smock",
+                "displayName": {
+                  "en": "Smock dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Smock"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Sweater",
+                "displayName": {
+                  "en": "Sweater dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Sweater"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/SunDress",
+                "displayName": {
+                  "en": "Sun dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Sun dress"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/SlipDress",
+                "displayName": {
+                  "en": "Slip dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Slip dress"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Mermaid",
+                "displayName": {
+                  "en": "Mermaid"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Mermaid"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/WrapDress",
+                "displayName": {
+                  "en": "Wrap dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Wrap dress"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/ShirtDress",
+                "displayName": {
+                  "en": "Shirt dress"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Shirt dress"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Gown",
+                "displayName": {
+                  "en": "Gown"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Gown"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Jumpsuit",
+            "displayName": {
+              "en": "Jumpsuit"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Jumpsuit"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Length",
+        "displayName": {
+          "en": "Length"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Lenght"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Maxi",
+            "displayName": {
+              "en": "Maxi"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Maxi"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Midi",
+            "displayName": {
+              "en": "Midi"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Midi"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Mini",
+            "displayName": {
+              "en": "Mini"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Mini"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Material-1",
+        "displayName": {
+          "en": "Material"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Material"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Polyester",
+            "displayName": {
+              "en": "Polyester"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Polyester"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Rayon",
+            "displayName": {
+              "en": "Rayon"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Rayon"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Nylon",
+            "displayName": {
+              "en": "Nylon"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Nylon"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Lace",
+            "displayName": {
+              "en": "Lace"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Lace"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Spandex",
+            "displayName": {
+              "en": "Spandex"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Spandex"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/FauxLeather",
+            "displayName": {
+              "en": "Faux Leather"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Faux Leather"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Denim",
+            "displayName": {
+              "en": "Denim"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Denim"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Woven",
+            "displayName": {
+              "en": "Woven"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Woven"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/ViscoseElsatane",
+            "displayName": {
+              "en": "Viscose elsatane"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Viscose elsatane"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Fastener-1",
+        "displayName": {
+          "en": "Fastener"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Fastener"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Zipper",
+            "displayName": {
+              "en": "Zipper"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Zipper"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            },
+            "children": [
+              {
+                "label": "http://automat.ai/ChicosWomen/Back",
+                "displayName": {
+                  "en": "Back"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Back"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Front",
+                "displayName": {
+                  "en": "Front"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Front"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Button",
+            "displayName": {
+              "en": "Button"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Button"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Pattern-1",
+        "displayName": {
+          "en": "Pattern"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Pattern"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Animal",
+            "displayName": {
+              "en": "Animal"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Animal"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            },
+            "children": [
+              {
+                "label": "http://automat.ai/ChicosWomen/Leopard",
+                "displayName": {
+                  "en": "Leopard"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Leopard"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Zebra",
+                "displayName": {
+                  "en": "Zebra"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Zebra"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "http://automat.ai/ChicosWomen/Snakes",
+                "displayName": {
+                  "en": "Snake"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Snakes"
+                    },
+                    "scoringType": {
+                      "type": "Filter"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Geometric",
+            "displayName": {
+              "en": "Geometric"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Geometric"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Stripes",
+            "displayName": {
+              "en": "Stripes"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Stripes"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Dot",
+            "displayName": {
+              "en": "Dot"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Dot"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Floral",
+            "displayName": {
+              "en": "Floral"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Floral"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Jacquard",
+            "displayName": {
+              "en": "Jacquard"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Jacquard"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Logo",
+            "displayName": {
+              "en": "Logo"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Logo"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Paisley",
+            "displayName": {
+              "en": "Paisley"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Paisley"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Plaid",
+            "displayName": {
+              "en": "Plaid"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Plaid"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Tropical",
+            "displayName": {
+              "en": "Tropical"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Tropical"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Houndstooth",
+            "displayName": {
+              "en": "Houndstooth"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Houndstooth"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Gingham",
+            "displayName": {
+              "en": "Gingham"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Gingham"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/CleaningInstructions-1",
+        "displayName": {
+          "en": "Cleaning instructions"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Cleaning instructions"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/MachineWash",
+            "displayName": {
+              "en": "Machine wash"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Machine wash"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/DryClean",
+            "displayName": {
+              "en": "Dry clean"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Dry clean"
+                },
+                "scoringType": {
+                  "type": "Filter"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/ColdWash",
+            "displayName": {
+              "en": "Cold wash"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Cold wash"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Neckline",
+        "displayName": {
+          "en": "Neckline"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Neckline"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Boatneck",
+            "displayName": {
+              "en": "Boatneck"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "boatneck"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/VNeckline",
+            "displayName": {
+              "en": "V-neckline"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "V-neckline"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Collared",
+            "displayName": {
+              "en": "Collared"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Collared"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/CowlNeck",
+            "displayName": {
+              "en": "Cowl neck"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Cowl neck"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/CrewNeck",
+            "displayName": {
+              "en": "Crew neck"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Crew neck"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Halter",
+            "displayName": {
+              "en": "Halter"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Halter"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Hooded",
+            "displayName": {
+              "en": "Hooded"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Hooded"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/MockNeck",
+            "displayName": {
+              "en": "Mock neck"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Mock neck"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/OffTheShoulder",
+            "displayName": {
+              "en": "Off the shoulder"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Off the shoulder"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/OneShoulder",
+            "displayName": {
+              "en": "One shoulder"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "One shoulder"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/ScoopNeck",
+            "displayName": {
+              "en": "Scoop neck"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Scoop neck"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Turtleneck",
+            "displayName": {
+              "en": "Turtleneck"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Turtleneck"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Sweetheart",
+            "displayName": {
+              "en": "Sweetheart"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Sweetheart"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Square",
+            "displayName": {
+              "en": "Square"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Square"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Color",
+        "displayName": {
+          "en": "Color"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Color"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/Pink",
+            "displayName": {
+              "en": "Pink"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "pink"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Blue",
+            "displayName": {
+              "en": "Blue"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Blue"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            },
+            "children": [
+              {
+                "label": "http://automat.ai/ChicosWomen/Navy",
+                "displayName": {
+                  "en": "Navy"
+                },
+                "conceptRenderings": {
+                  "default": {
+                    "isEnabled": true,
+                    "displayName": {
+                      "en": "Navy"
+                    },
+                    "scoringType": {
+                      "type": "Rank"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Black",
+            "displayName": {
+              "en": "Black"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Black"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/White",
+            "displayName": {
+              "en": "White"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "White"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Yellow",
+            "displayName": {
+              "en": "Yellow"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Yellow"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Red",
+            "displayName": {
+              "en": "Red"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Red"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Green",
+            "displayName": {
+              "en": "Green"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Green"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Orange",
+            "displayName": {
+              "en": "Orange"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Orange"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Purple",
+            "displayName": {
+              "en": "Purple"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Purple"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Brown",
+            "displayName": {
+              "en": "Brown"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Brown"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Gold",
+            "displayName": {
+              "en": "Gold"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Gold"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Gray",
+            "displayName": {
+              "en": "Gray"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Gray"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Ivory",
+            "displayName": {
+              "en": "Ivory"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Ivory"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Silver",
+            "displayName": {
+              "en": "Silver"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Silver"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Tan",
+            "displayName": {
+              "en": "Tan"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Tan"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Sleeve",
+        "displayName": {
+          "en": "Sleeve"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Sleeve"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/34Sleeves",
+            "displayName": {
+              "en": "3/4 sleeves"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "3/4 sleeves"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/ShortSleeves",
+            "displayName": {
+              "en": "short sleeves"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "short sleeves"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/ElbowSleeves",
+            "displayName": {
+              "en": "Elbow sleeves"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Elbow sleeves"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/34RollTabSleeves",
+            "displayName": {
+              "en": " 3/4 roll-tab sleeves"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": " 3/4 roll-tab sleeves"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Sleeveless",
+            "displayName": {
+              "en": "Sleeveless"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Sleeveless"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/LongSleeve",
+            "displayName": {
+              "en": "Long sleeve"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Long sleeve"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/OtherCharacteristic",
+        "displayName": {
+          "en": "Other Characteristic"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Other Characteristic"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/LightweightFabric",
+            "displayName": {
+              "en": "Lightweight fabric"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Lightweight fabric"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Embroidered",
+            "displayName": {
+              "en": "Embroidered"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Embroidered"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/TwoPiece",
+            "displayName": {
+              "en": "Two piece"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Two piece"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/Pocket",
+            "displayName": {
+              "en": "Pocket"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Pocket"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "label": "http://automat.ai/ChicosWomen/Fit",
+        "displayName": {
+          "en": "Fit"
+        },
+        "conceptRenderings": {
+          "default": {
+            "isEnabled": true,
+            "displayName": {
+              "en": "Fit"
+            },
+            "scoringType": {
+              "type": "Rank"
+            }
+          }
+        },
+        "uiType": "MultiSelect",
+        "children": [
+          {
+            "label": "http://automat.ai/ChicosWomen/StraightFit",
+            "displayName": {
+              "en": "Straight fit"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Straight fit"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/LooseFit",
+            "displayName": {
+              "en": "Loose fit"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Loose fit"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          },
+          {
+            "label": "http://automat.ai/ChicosWomen/SlimFit",
+            "displayName": {
+              "en": "Slim fit"
+            },
+            "conceptRenderings": {
+              "default": {
+                "isEnabled": true,
+                "displayName": {
+                  "en": "Slim fit"
+                },
+                "scoringType": {
+                  "type": "Rank"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "variant": []
+  },
+  "revision": "35d068d06cdced08b6b472a316cd50d46bfbc483"
+}

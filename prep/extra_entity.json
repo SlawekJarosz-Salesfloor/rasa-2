@@ -1,0 +1,6 @@
+{
+    "sf_apparel_closure__zipper" : ["zip-up"],
+    "sf_apparel_length__midi" : ["knee length"],
+    "sf_apparel_length__maxi" : ["ankle length", "full length", "floor length"],
+    "sf_apparel_pockets__pockets__zip" : ["zipup pockets"]
+}

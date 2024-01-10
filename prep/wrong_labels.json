@@ -1,0 +1,147 @@
+{
+    "*": [
+        "silhouette",
+        "sleeves",
+        "neck",
+        "cut",
+        "short",
+        "legs"
+    ],
+    "belt": [
+        "waist"
+    ],   
+    "bow": [
+        "self-tie belt"
+    ],
+    "cotton": [
+        "lining",
+        "crafted"
+    ],
+    "denim": [
+        "jean",
+        "jeans"
+    ],
+    "collarless": [
+        "round neck"
+    ],
+    "cropped": [
+        "ankle-crop silhouette",
+        "ankle-crop"
+    ],
+    "embroidered": [
+        "floral"
+    ],
+    "fauxfur": [
+        "fur",
+        "fur type",
+        "type",
+        "shearling",
+        "faux"
+    ],
+    "fauxleather": [
+        "leather jacket",
+        "leather varsity",
+        "suede",
+        "leather",
+        "faux"
+    ],
+    "flare": [
+        "jeans"
+    ],
+    "fur": [
+        "shearling"
+    ],
+    "handwash": [
+        "dry clean"
+    ],
+    "high": [
+        "mid-rise fit",
+        "mid-rise"
+    ],
+    "highrise": [
+        "mid-rise"
+    ],
+    "material": [
+        "wool",
+        "wool-cashmere",
+        "faux",
+        "nylon",
+        "faux shearling",
+        "rayon",
+        "shearling",
+        "cashmere",
+        "wool-cashmere",
+        "polyester"
+    ],
+    "lapel": [
+        "collar"
+    ],
+    "lined": [
+        "nylon"
+    ],
+    "longsleeves": [
+        "sleeves",
+        "long"
+    ],
+    "midsleeves": [
+        "three-quarter-length sleeves"
+    ],
+    "nylon": [
+        "lined",
+        "lining"
+    ],
+    "oversized": [
+        "boyfriend"
+    ],
+    "pockets": [
+        "kangaroo pocket"
+    ],
+    "polyester": [
+        "lining"
+    ],
+    "relaxed": [
+        "regularfit"
+    ],
+    "regularfit": [
+        "relaxed"
+    ],
+    "roundneck": [
+        "crewneck",
+        "crew neck"
+    ],
+    "skinny": [
+        "jeans"
+    ],
+    "sleevelength": [
+        "long sleeves"
+    ],
+    "stand": [
+        "collar"
+    ],
+    "straight": [
+        "jeans"
+    ],
+    "sweater": [
+        "t-shirt"
+    ],
+    "threequarter": [
+        "sleeves"
+    ],
+    "tied": [
+        "belted"
+    ],
+    "tweed": [
+        "bouclé",
+        "fabric"
+    ],
+    "viscose": [
+        "lining"
+    ],
+    "wide": [
+        "jeans",
+        "leg"
+    ],
+    "wool": [
+        "construction"
+    ]
+}

@@ -1,0 +1,17 @@
+- intent: sf_apparel__NO_MATCH
+  examples: |
+    - Shall we focus on a specific silhouette or detail that interests you?
+    - Complete the ensemble with a pair of strappy sandals and delicate accessories to complement the cheerful and celebratory atmosphere of the wedding.
+    - Enjoy your new dress at the party!
+
+- intent: sf_apparel__customer_input
+  examples: |
+    - I want a [geometric]{"entity": "sf_apparel_pattern"} and [slim]{"entity": "sf_apparel_fit__slim"} fit [dress]{"entity": "sf_apparel_product_category"}. size tall. with [beads]{"entity": "sf_apparel_embellishments__beaded"}
+    - [skinny]{"entity": "sf_apparel_product_type"} [jeans]{"entity": "sf_apparel_product_category"}. personal style. chic
+    - i wanna buy a [sweater]{"entity": "sf_apparel_product_category"}. classy. date
+    - do you any [dresses]{"entity": "sf_apparel_product_category"}?. i dunno. something casual. sporty i guess with [sleeves]{"entity": "sf_apparel_NO_MATCH__sleeves"}
+    - I wanna buy a [top]{"entity": "sf_apparel_product_category"}. classic. date night
+    - I'm looking for a [blue]{"entity": "sf_apparel_color"} [dress]{"entity": "sf_apparel_product_category"}. for a casual outing. something more modern but comfortable
+    - i want to buy a [pink]{"entity": "sf_apparel_color__pink"} [dress]{"entity": "sf_apparel_product_category"}. casual. for a cocktail party
+    - I want to buy a [green]{"entity": "sf_apparel_color__green"} [dress]{"entity": "sf_apparel_product_category"}. A cocktail party. Classic
+    - I want to buy a [red]{"entity": "sf_apparel_color__red"} [dress]{"entity": "sf_apparel_product_category"}. Elegant and Chic. Spring event

@@ -1,0 +1,3 @@
+- lookup: sf_apparel_NO_MATCH__sleeves
+  examples: |
+    - sleeves

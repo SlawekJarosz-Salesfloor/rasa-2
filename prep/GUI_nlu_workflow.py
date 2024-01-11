@@ -129,14 +129,6 @@ def get_product_categories():
 
     return product_categories
 
-def indicate_current_state():
-    current_product_state = json.load(open('./prep/_tagging_state.json', 'r'))
-    balloons = {}
-    for category in current_product_state:
-        balloons[category] = Pmw.Balloon(window)
-        balloons[category].bind(label_db_names[category], 'Command to start/stop')
-
-
 def run_tagging_workflow():
     product_categories = get_product_categories()
     if len(product_categories) == 0:
@@ -161,8 +153,9 @@ def run_tagging_workflow():
                         from tkinter import simpledialog
                         answer = ''
                         while answer == '':
-                            answer = simpledialog.askstring("Source Database", "What is the source db name?",
-                                        parent=window)
+                            answer = simpledialog.askstring(
+                                "Source Database", "What is the source db name?",
+                                initialvalue=f"Saks-{category}", parent=window)
                             if answer == None:
                                 messagebox.showwarning(title='Source Database', message='Have to specify db name to migrate data from.')
                                 return
@@ -171,8 +164,8 @@ def run_tagging_workflow():
                         eval(f'tagging_workflow.{tagging_steps[step]}()')
                     else:
                         eval(f'tagging_workflow.{tagging_steps[step]}("{parameter}")')
-                except Exception:
-                    # printWarning(str(exc))
+                except Exception as exc:
+                    print(exc)
                     select_step_labels[step].error()
                     return
                 select_step_labels[step].stop()
@@ -227,7 +220,11 @@ current_row = 0
 main_frame = DoubleScrolledFrame(window, width=930, height=520)    
 main_frame.grid(row=0, column=0, sticky=NSEW, padx=5, pady=5)
 
-ttk.Label(main_frame, width=20, text='PRODUCT CATEGORIES', font='Helvetica 18 bold').grid(column=0, row=current_row)
+product_title_label = ttk.Label(main_frame, width=20, text='PRODUCT CATEGORIES', font='Helvetica 18 bold')
+product_title_label.grid(column=0, row=current_row)
+balloon = Pmw.Balloon(window)
+balloon.bind(product_title_label, 'Status Legend:\nyellow = Ready for LLM tagging\npurple = LLM tagged + fixed\nblue = NLU output validated\ngreen = Rasa tagged + fixed')
+
 title_steps_label = FlashingLabel(main_frame, width=20, text='TAGGING STEPS', font='Helvetica 18 bold')
 title_steps_label.grid(column=1, row=current_row)
 ttk.Label(main_frame, width=10, text='CLEAN UP', font='Helvetica 18 bold').grid(column=2, row=current_row)
@@ -243,7 +240,7 @@ ready_state = json.load(open('./prep/_ready_state.json'))
 for idx, category in enumerate(product_categories):
     background_state = window.cget("background")
     if category in ready_state:
-        background_state = 'green'
+        background_state = ready_state[category]
     label_db_names[category] = FlashingLabel(db_name_frame, width=20, text=category, background=background_state)
     label_db_names[category].grid(column=0, row=idx)
     select_db_states[category] = tk.IntVar()
@@ -261,7 +258,6 @@ tagging_steps = {
     'Fix Description'                : 'fix_description',
     'ViSenze Mapping'                : 'map_visual_tags', 
     'Clone Products to LLM Db'       : 'clone_products_to_llm_db', 
-    # 'Get Existing Tags'         : 'get_existing_tags', done as part of tag_llm
     'Tag Using LLM'                  : 'tag_llm', 
     'Clone LLM to Fix Db'            : 'clone_llm_to_fix_db', 
     'Fix LLM Tags'                   : 'fix_llm_tags', 
@@ -296,7 +292,7 @@ for prod_step in range(Production_Step.PRODUCTS.value, Production_Step.FINAL.val
     action_buttons[prod_step] = ttk.Button(action_frame, width=20, 
                                            text='Delete ' + str(Production_Step(prod_step)).split('.')[1] + ' db', 
                                            command=lambda prod_step=prod_step: clean_up(Production_Step(prod_step)))
-    action_buttons[prod_step].grid(column=1, row=prod_step) 
+    action_buttons[prod_step].grid(column=1, row=prod_step, padx=10) 
 
 current_row += 1
 
@@ -333,8 +329,6 @@ for idx, step in enumerate(nlu_steps):
 current_row += idx + 2
 
 ttk.Button(nlu_frame, text= "Generate NLU", command=run_nlu_workflow).grid(column=0, row=current_row, columnspan=2)
-
-indicate_current_state()
 
 window.grid_columnconfigure(0,weight=1) # the text and entry frames column
 window.grid_rowconfigure(0, weight=1) # all frames row

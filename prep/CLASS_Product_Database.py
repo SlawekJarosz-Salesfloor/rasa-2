@@ -16,7 +16,7 @@ sys.path.append('../ontology-lib')
 # pyright: reportMissingImports=false
 from ontology_tools import get_name_url_mapping 
 
-LIMIT_DOCS_PER_QUERY = 100
+LIMIT_DOCS_PER_QUERY = 50
 
 # Red
 def throwError(message):
@@ -61,10 +61,18 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
             time_remaining = timedelta(seconds=int((time.perf_counter() - startTime)*(total-iteration-startOffset)/(iteration - startOffset)))
         suffix = f'ETA: {time_remaining}'
 
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    print(f'\r{prefix} |{bar}| {percent}% [{iteration}/{total}] {suffix}', end = printEnd)
     # Print New Line on Complete
     if iteration == total: 
         print()
+
+# From https://stackoverflow.com/questions/60978672/python-string-to-camelcase
+def to_camel_case(text):
+    s = text.replace("-", " ").replace("_", " ")
+    s = s.split()
+    if len(text) == 0:
+        return text
+    return s[0] + ''.join(i.capitalize() for i in s[1:])
 
 # class syntax
 class Production_Step(Enum):
@@ -221,13 +229,6 @@ class Product_Database():
 
 
     def update_ontology(self):
-        # From https://stackoverflow.com/questions/60978672/python-string-to-camelcase
-        def to_camel_case(text):
-            s = text.replace("-", " ").replace("_", " ")
-            s = s.split()
-            if len(text) == 0:
-                return text
-            return s[0] + ''.join(i.capitalize() for i in s[1:])
         # updated_ontology = ''.join(self.base_ontology)
         response = requests.get(f'{self.dyson_url}/productDatabases/{self.db_name}/ontology')
         if response.status_code == 200:
@@ -289,7 +290,16 @@ class Product_Database():
         if len(diff) == 0:
             printInfo(f'No diffrences in the ontology detected between {self.db_name} and {other_db_name}.')
         else:
-            printWarning(f'Ontologies do not match: ' + str(diff))
+            throwError(f'Ontologies do not match: ' + str(diff))
+
+        # Make sure all URI use the ontology db 
+        matches = re.findall('http://automat.ai/(\w+)/', self.ontology)
+        current_db_name = self.db_name
+        self.set_db_name(Production_Step.ONTOLOGY)
+        uri_diff = set(matches) - set(['base', to_camel_case(self.db_name)])
+        self.db_name = current_db_name
+        if len(uri_diff) > 0:
+            throwError(f'Unexpected URI(s) [{uri_diff}] found in {self.db_name}.')
 
     def migrate_data(self, source_db):
         # 1. Get source data in text -> convert to JSON
@@ -362,13 +372,14 @@ class Product_Database():
                         self.save_record(db_record)
                     except:
                         # Reset the counter and read
-                        local_count -= 1
+                        local_count -= record_count
                         nb_docs_skip -= LIMIT_DOCS_PER_QUERY
                         break
             nb_docs_skip += LIMIT_DOCS_PER_QUERY
             if record_count == 0:
                 break
 
+        print()
         printInfo('ViSenze mapping latency: ' +  str(round(time.perf_counter() - time_start, 3)) + ' seconds.')
 
     def fix_description(self):
@@ -416,7 +427,7 @@ class Product_Database():
         printInfo('Description fix latency: ' +  str(round(time.perf_counter() - time_start, 3)) + ' seconds.')
 
 
-    def collect_existing_tags(self, is_force_update = False):        
+    def collect_existing_tags(self, is_force_update = True):        
         if not is_force_update and self.is_use_cache and os.path.isfile(self.PRODUCTS_CACHE_FILE_NAME):
             self.tagged_products = json.load(open(self.PRODUCTS_CACHE_FILE_NAME, 'r'))
             count_tagged = len(self.tagged_products)
@@ -429,6 +440,7 @@ class Product_Database():
             time_start = time.perf_counter()
             printProgressBar(local_count, self.nb_records, startTime=time_start)
             # progress_bar = tqdm.tqdm(total=self.nb_records)
+            self.tagged_products = {}
             while True:
                 docs = self.get_db_records(nb_docs_skip)
                 record_count = 0
@@ -558,6 +570,7 @@ class Product_Database():
                         throwError(f'Couchdb [{self.db_name}] write failed')
 
                 if count_tagged == tag_target:
+                    print()
                     printInfo(f'LLM tagging [{count_tagged} items tagged] latency: ' +  str(round(time.perf_counter() - time_start, 3)) + ' seconds.')
                     return
             nb_docs_skip += LIMIT_DOCS_PER_QUERY
@@ -614,7 +627,7 @@ class Product_Database():
                             self.save_record(db_record)
                         except:
                             # Reset the counter and read
-                            local_count -= 1
+                            local_count -= record_count
                             count_tagged_products -= 1
                             nb_docs_skip -= LIMIT_DOCS_PER_QUERY
                             break

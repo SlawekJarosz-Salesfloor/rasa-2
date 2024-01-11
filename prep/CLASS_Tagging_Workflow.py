@@ -50,7 +50,7 @@ class Production_Workflow():
                     break
             except:
                 pass
-            printInfo(f'Waiting for all records to be copied to {self.product_db.db_name}')
+            printInfo(f'Waiting for all records [{nb_records_before - self.product_db.nb_records} more] to be moved over to {self.product_db.db_name}')
             time.sleep(30)
 
     def map_visual_tags(self):
@@ -60,8 +60,7 @@ class Production_Workflow():
 
     def fix_description(self):
         self.product_db.set_db_name(Production_Step.PRODUCTS)
-
-        # Map ViSenze tags to Salesfloor ontology
+        # Removed unwanted characters from description
         self.product_db.fix_description()
 
     def clone_helper(self, source_step, target_step):
@@ -82,9 +81,8 @@ class Production_Workflow():
                                     text = True # Python >= 3.7 only
                                     )
             if result.returncode == 0:
-                if source_step == Production_Step.ONTOLOGY:
-                    time.sleep(5)
-                else:
+                time.sleep(5)
+                if not source_step == Production_Step.ONTOLOGY:                    
                     self.product_db.nb_records = 0
                     while not self.product_db.nb_records == nb_records_before:
                         try:
@@ -93,7 +91,7 @@ class Production_Workflow():
                                 break
                         except:
                             pass
-                        printInfo(f'Waiting for all records [{nb_records_before - self.product_db.nb_records} more] to be copied to {self.product_db.db_name}')
+                        printInfo(f'Waiting for all records [{nb_records_before - self.product_db.nb_records} more] to be cloned to {self.product_db.db_name}')
                         time.sleep(30)
                 printInfo(f'{command[-2]} to {command[-1]} cloned successfully.')
                 is_clone = False
@@ -109,10 +107,6 @@ class Production_Workflow():
     def clone_products_to_llm_db(self):
         # From products db to llm db
         self.clone_helper(Production_Step.PRODUCTS, Production_Step.LLM)
-
-    def get_existing_tags(self):
-        self.product_db.set_db_name(Production_Step.LLM)
-        self.product_db.collect_existing_tags()
 
     def tag_llm(self):
         # Tag db using LLM
@@ -132,14 +126,16 @@ class Production_Workflow():
     def fix_llm_tags(self):
         # Correct LLM tags
         self.product_db.set_db_name(Production_Step.FIX)
+        self.product_db.collect_existing_tags()
+
         wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
         count = 1
         while True:
             print(f'Fixing LLM tags: pass #{count}')
+            count += 1
             nb_fixed_products = self.product_db.correct_tags(wrong_tag_mapping)
             if nb_fixed_products == 0 or count == 10:
                 break
-        self.product_db.collect_existing_tags(is_force_update=True)
 
     def clone_fix_to_rasa_db(self):
         # From fix db to rasa db
@@ -156,11 +152,10 @@ class Production_Workflow():
         except:
             throwError(f'Could not finish Rasa tagging of {self.product_db.get_db_name()}')
 
-        self.product_db.collect_existing_tags(is_force_update=True)
-
     def validate_clu(self):
         # Tag db using Rasa
         self.product_db.set_db_name(Production_Step.RASA)
+        self.product_db.collect_existing_tags()
         self.product_db.validate_clu()
 
     def delete_db(self, db_type):

@@ -9,12 +9,6 @@ class Production_Workflow():
     def __init__(self, category) -> None:
         self.product_db = Product_Database(category)
 
-    def TEST_FUNCTION(self):
-        time_start = time.perf_counter()
-        for idx in range(0, 10):
-            printProgressBar(idx, 10, startTime=time_start)
-            time.sleep(1)
-
     def prep_dbs(self):
         # Get ontology
         self.product_db.set_db_name(Production_Step.ONTOLOGY)
@@ -40,9 +34,8 @@ class Production_Workflow():
         self.product_db.connect_db()
         self.product_db.count_number_of_records()
 
-    def migrate_data(self, source_db_name):
-        self.product_db.set_db_name(Production_Step.PRODUCTS)
-        nb_records_before = self.product_db.migrate_data(source_db_name)
+
+    def wait_for_product_count(self, nb_records_before):
         while not self.product_db.nb_records == nb_records_before:
             try:
                 self.product_db.count_number_of_records()
@@ -50,18 +43,29 @@ class Production_Workflow():
                     break
             except:
                 pass
-            printInfo(f'Waiting for all records [{nb_records_before - self.product_db.nb_records} more] to be moved over to {self.product_db.db_name}')
-            time.sleep(30)
+            printInfo(f'Waiting for all records [{nb_records_before - self.product_db.nb_records} more]...')
+            time.sleep(RECONNECTION_SLEEP*3)
+
+    def migrate_data(self, source_db_name):
+        self.product_db.set_db_name(Production_Step.PRODUCTS)
+        nb_records_before = self.product_db.migrate_data(source_db_name)
+        self.wait_for_product_count(nb_records_before)
 
     def map_visual_tags(self):
         self.product_db.set_db_name(Production_Step.PRODUCTS)
         # Map ViSenze tags to Salesfloor ontology
-        self.product_db.map_products_to_visenze()
+        nb_records_before = self.product_db.count_number_of_records()
+        self.product_db.db_content = None
+        self.product_db.map_to_visense()
+        self.wait_for_product_count(nb_records_before)
 
     def fix_description(self):
         self.product_db.set_db_name(Production_Step.PRODUCTS)
         # Removed unwanted characters from description
-        self.product_db.fix_description()
+        nb_records_before = self.product_db.count_number_of_records()
+        self.product_db.db_content = None
+        self.product_db.fix_descriptions()
+        self.wait_for_product_count(nb_records_before)
 
     def clone_helper(self, source_step, target_step):
         # Command template
@@ -81,7 +85,7 @@ class Production_Workflow():
                                     text = True # Python >= 3.7 only
                                     )
             if result.returncode == 0:
-                time.sleep(5)
+                time.sleep(RECONNECTION_SLEEP)
                 if not source_step == Production_Step.ONTOLOGY:                    
                     self.product_db.nb_records = 0
                     while not self.product_db.nb_records == nb_records_before:
@@ -92,14 +96,14 @@ class Production_Workflow():
                         except:
                             pass
                         printInfo(f'Waiting for all records [{nb_records_before - self.product_db.nb_records} more] to be cloned to {self.product_db.db_name}')
-                        time.sleep(30)
+                        time.sleep(RECONNECTION_SLEEP*3)
                 printInfo(f'{command[-2]} to {command[-1]} cloned successfully.')
                 is_clone = False
             else:
                 printWarning(f'Could not clone [{command[-2]}]. {result.stderr[7:].strip()}.')
                 if '500:Internal Server Error' in result.stderr:
                     printWarning('Trying again in 30 seconds.')
-                    time.sleep(30)
+                    time.sleep(RECONNECTION_SLEEP)
                 else:
                     throwError(f'Failed to clone [{command[-2]}]. {result.stderr[7:].strip()}.')
         self.product_db.compare_ontology()
@@ -111,31 +115,39 @@ class Production_Workflow():
     def tag_llm(self):
         # Tag db using LLM
         self.product_db.set_db_name(Production_Step.LLM)
+        nb_records = self.product_db.count_number_of_records()
         self.product_db.collect_existing_tags()
+        # self.wait_for_product_count(nb_records_before)
 
-        tag_target = int(self.product_db.nb_records * 0.1)
+        tag_target = int(nb_records * 0.1)
+        printInfo(f'Tagging {tag_target} products using an LLM.')
         try:
             self.product_db.tag_products(tag_target)                
         except:
             throwError(f'Could not finish LLM tagging of {self.product_db.get_db_name()}')
+        printInfo(f'{self.product_db.nb_tagged_products} products tagged in {self.product_db.db_name}.')
 
     def clone_llm_to_fix_db(self):
         # From llm db to fix db
         self.clone_helper(Production_Step.LLM, Production_Step.FIX)    
 
+    def fix_tags(self, is_verbose=True):
+        # Correct LLM tags
+        nb_records_before = self.product_db.count_number_of_records()
+        self.product_db.collect_existing_tags()
+        self.wait_for_product_count(nb_records_before)
+        self.product_db.is_verbose = is_verbose
+
+        for idx in range(0,3):
+            printInfo(f'Fixing LLM tags: pass #{idx + 1}')
+            nb_fixed_products = self.product_db.correct_tags()
+            if nb_fixed_products == 0:
+                break
+
     def fix_llm_tags(self):
         # Correct LLM tags
         self.product_db.set_db_name(Production_Step.FIX)
-        self.product_db.collect_existing_tags()
-
-        wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
-        count = 1
-        while True:
-            print(f'Fixing LLM tags: pass #{count}')
-            count += 1
-            nb_fixed_products = self.product_db.correct_tags(wrong_tag_mapping)
-            if nb_fixed_products == 0 or count == 10:
-                break
+        self.fix_tags()
 
     def clone_fix_to_rasa_db(self):
         # From fix db to rasa db
@@ -144,8 +156,11 @@ class Production_Workflow():
     def tag_rasa(self):
         # Tag db using Rasa
         self.product_db.set_db_name(Production_Step.RASA)
+        nb_records_before = self.product_db.count_number_of_records()        
         self.product_db.collect_existing_tags()
+        self.wait_for_product_count(nb_records_before)
 
+        printInfo(f'Tagging remaining products using an Rasa.')
         tag_target = self.product_db.nb_records
         try:
             self.product_db.tag_products(tag_target, llm_type='Rasa')                
@@ -155,12 +170,36 @@ class Production_Workflow():
     def validate_clu(self):
         # Tag db using Rasa
         self.product_db.set_db_name(Production_Step.RASA)
-        self.product_db.collect_existing_tags()
         self.product_db.validate_clu()
 
     def delete_db(self, db_type):
         self.product_db.destroy()
 
+    def fix_uris(self):
+        # Tag db using LLM
+        self.product_db.set_db_name(Production_Step.LLM)
+        self.product_db.count_number_of_records()
+        self.product_db.collect_existing_tags()
+
+        self.product_db.update_all_uris()           
+
+    def approve_products(self):
+        # Tag db using LLM
+        self.product_db.set_db_name(Production_Step.FIX)
+        self.product_db.count_number_of_records()
+        self.product_db.collect_existing_tags()
+
+        self.product_db.approve_tagged_products()
+
+    def fix_rasa_tags(self):
+        # Correct Rasa tags
+        self.product_db.set_db_name(Production_Step.RASA)
+        self.fix_tags(is_verbose=False)
+
+    def check_consistency(self):
+        self.product_db.set_db_name(Production_Step.RASA)
+        self.product_db.check_for_contradictions()
+        
 
 # main driver function
 if __name__ == '__main__':

@@ -5,28 +5,51 @@
         "neck",
         "cut",
         "short",
-        "legs"
+        "legs",
+        "print",
+        "double-breasted",
+        "single-breasted",
+        "dress",
+        "dresses",
+        "sleeve",
+        "waist",
+        "neckline"
+    ],
+    "animal": [
+        "croc-embossed"
     ],
     "belt": [
         "waist"
-    ],   
+    ],
     "bow": [
         "self-tie belt"
     ],
-    "cotton": [
-        "lining",
-        "crafted"
+    "button": [
+        "double-breasted blazer",
+        "single-breasted silhouette"
     ],
-    "denim": [
-        "jean",
-        "jeans"
+    "cableknit": [
+        "knit"
     ],
     "collarless": [
         "round neck"
     ],
+    "cotton": [
+        "lining",
+        "crafted",
+        "cotton blend",
+        "cotton-blend"
+    ],
+    "crocodile": [
+        "embossing"
+    ],
     "cropped": [
         "ankle-crop silhouette",
         "ankle-crop"
+    ],
+    "denim": [
+        "jean",
+        "jeans"
     ],
     "embroidered": [
         "floral"
@@ -36,7 +59,8 @@
         "fur type",
         "type",
         "shearling",
-        "faux"
+        "faux",
+        "teddy coat"
     ],
     "fauxleather": [
         "leather jacket",
@@ -50,6 +74,9 @@
     ],
     "fur": [
         "shearling"
+    ],
+    "graphic": [
+        "logo"
     ],
     "handwash": [
         "dry clean"
@@ -77,7 +104,8 @@
         "collar"
     ],
     "lined": [
-        "nylon"
+        "nylon",
+        "polyester"
     ],
     "longsleeves": [
         "sleeves",
@@ -85,6 +113,10 @@
     ],
     "midsleeves": [
         "three-quarter-length sleeves"
+    ],
+    "nopockets": [
+        "five-pocket style",
+        "five-pocket styling"
     ],
     "nylon": [
         "lined",
@@ -103,7 +135,8 @@
         "regularfit"
     ],
     "regularfit": [
-        "relaxed"
+        "relaxed",
+        "relax-fit"
     ],
     "roundneck": [
         "crewneck",
@@ -124,6 +157,9 @@
     "sweater": [
         "t-shirt"
     ],
+    "text": [
+        "made in italy"
+    ],
     "threequarter": [
         "sleeves"
     ],
@@ -142,6 +178,8 @@
         "leg"
     ],
     "wool": [
-        "construction"
+        "construction",
+        "wool-blend",
+        "wool blend"
     ]
 }

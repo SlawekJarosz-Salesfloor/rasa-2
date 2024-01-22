@@ -1,6 +1,9 @@
 {
     "sf_apparel_closure__zipper" : ["zip-up"],
     "sf_apparel_length__midi" : ["knee length"],
-    "sf_apparel_length__maxi" : ["ankle length", "full length", "floor length"],
-    "sf_apparel_pockets__pockets__zip" : ["zipup pockets"]
+    "sf_apparel_length__maxi" : ["floor length"],
+    "sf_apparel_pockets__pockets__zip" : ["zipup pockets"],
+    "sf_apparel_pocket_type__kangaroo" : ["kangaroo pockets"],
+    "sf_apparel_pattern__camouflage": ["camo"],
+    "sf_apparel_sleeve_length__mid_sleeves": ["half sleeves"]
 }

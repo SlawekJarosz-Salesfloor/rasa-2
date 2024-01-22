@@ -20,14 +20,12 @@ def check_for_duplicates(representations):
                         print(f'Duplicate attribute value [{outer_value}]: {outer_label} and {inner_label}')
 
 class Nlu_Workflow():
-    def __init__(self, product_categories, is_use_cache = False) -> None:
-        self.is_use_cache = is_use_cache
+    def __init__(self, product_categories) -> None:
         self.product_dbs = {}
         self.product_categories = product_categories
         for category in self.product_categories:
             self.product_dbs[category] = Product_Database(category)
             self.product_dbs[category].set_db_name(Production_Step.FIX)
-            self.product_dbs[category].is_use_cache = self.is_use_cache
             self.product_dbs[category].connect_db()
             self.product_dbs[category].get_ontology()
             self.product_dbs[category].count_number_of_records()
@@ -56,7 +54,20 @@ class Nlu_Workflow():
         nlu = Rasa_Nlu(self.product_dbs)
         nlu.create_nlu()
 
+    def search_dbs(self, search_text):
+        all_products_found = []
+        for category in self.product_categories:
+            products_found = self.product_dbs[category].search_for_text(search_text)
+            printInfo(f'Products found containing "{search_text}" in {category}:')
+            for product_name in products_found:
+                all_products_found.append(f'{category}: {product_name}')
 
+        if len(all_products_found) > 100:
+            subset_found = all_products_found[:99]
+            subset_found.append('... more found ...')
+            return subset_found
+        return all_products_found
+    
 # main driver function
 if __name__ == '__main__':
     product_categories = ['CoatsJackets']

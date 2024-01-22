@@ -23,21 +23,20 @@ class Rasa_Nlu():
 
     def get_tags(self, products, tagging_item, entities):
         all_tagged_descriptions = set()
-        for product_name in products:
-            product = products[product_name]
-            tags = product[tagging_item]['tags']
+        for product in products:
+            tags = product['labeling']['annotations'][tagging_item]['tags']
             if len(tags) > 0:
-                description = product[tagging_item]['text']
+                item_text = product['labeling']['annotations'][tagging_item]['text']
                 extra_chars = 0
                 prev_end  = -1
                 sorted_tags = sorted(tags, key=lambda x: x['start'])
                 for tag in sorted_tags:
-                    text_tagged = description[tag['start'] + extra_chars:tag['end'] + extra_chars]
-                    # Don't accept percentages or pure numbers
-                    if text_tagged.endswith('%'):
-                        continue
-                    if text_tagged.isnumeric():
-                        continue
+                    # text_tagged = item_text[tag['start'] + extra_chars:tag['end'] + extra_chars]
+                    # # Don't accept percentages or pure numbers
+                    # if text_tagged.endswith('%'):
+                    #     continue
+                    # if text_tagged.isnumeric():
+                    #     continue
 
                     try:
                         entity = self.get_entity_using_uri(tag['label'], entities)
@@ -45,44 +44,45 @@ class Rasa_Nlu():
                         print(exc)
                         continue
                     if entity == None:
-                        print(f'[{product["name"]}] URI ' + tag['label'] + ' found in the tagging data but not the ontology.')
+                        print(f'[{product["name"]}] URI ' + tag['label'] + ' found in the tagging data but not the ontology.  Skipping tag.')
                         continue
 
                     if tag['start'] >= prev_end:
-                        description = description[0:tag['start'] + extra_chars] + '[' + description[tag['start'] + extra_chars:tag['end'] + extra_chars] + ']{"entity": "' + f'{entity}' + '"}' + description[tag['end'] + extra_chars:]
+                        item_text = item_text[0:tag['start'] + extra_chars] + '[' + item_text[tag['start'] + extra_chars:tag['end'] + extra_chars] + ']{"entity": "' + f'{entity}' + '"}' + item_text[tag['end'] + extra_chars:]
                         extra_chars += len(entity)
                         entities[entity]['count'] += 1
                     else:
-                        print(f'Embedded tag in {product_name}... skipping.')
+                        print(f'Embedded tag in {product["name"]}... skipping.')
                         continue
 
-                    description = description.replace('-', ' ')
+                    item_text = item_text.replace('-', ' ')
 
                     prev_end = tag['end']            
                     extra_chars += len('[]{"entity": ""}')
 
-                if '[__' in description:
+                if '[__' in item_text:
                     print('Malformed tagging... skipping.')
                     continue
 
-                all_tagged_descriptions.add(description)
+                all_tagged_descriptions.add(item_text)
 
         return all_tagged_descriptions
 
     def write_entities_section(self, entities, extra_entities, nlu_file_out):
         for entity in entities:
+            if entities[entity]['count'] == 0:
+                continue
             nlu_file_out.write(f'- lookup: {entity}\n')
             nlu_file_out.write( '  examples: |\n')
             parts = entity.split('__')
-            if entity.startswith('sf_apparel_neckline__roundneck__') or entity.startswith('sf_apparel_neckline__high_neck__'):
-                nlu_file_out.write('    - ' + parts[-1].replace('_', ' ') + 'neck' + '\n')
-            elif entity.startswith('sf_apparel_closure__zipper__'):
-                nlu_file_out.write('    - ' + parts[-1].replace('_', ' ') + ' zipper' + '\n')
-            else:    
-                nlu_file_out.write('    - ' + parts[-1].replace('_', ' ') + '\n')
+            
+            nlu_file_out.write('    - ' + parts[-1].replace('_', ' ') + '\n')
             
             for extras in extra_entities:
                 if extras == entity:
+                    nlu_file_out.write('\n')
+                    nlu_file_out.write(f'- synonym: {entity}\n')
+                    nlu_file_out.write( '  examples: |\n')
                     for item in extra_entities[extras]:
                         nlu_file_out.write(f'    - {item}\n')
                     
@@ -91,7 +91,8 @@ class Rasa_Nlu():
     def calculate_db_stats(self, entities, db_name):
         import tabulate
         entity_stats = []
-        for item in entities:
+        sorted_keys = sorted(list(entities.keys()))
+        for item in sorted_keys:
             colour_start = ''
             colour_end   = ''
             if entities[item]['count'] < 2:
@@ -131,9 +132,13 @@ class Rasa_Nlu():
         superset_entities     = {}
         superset_descriptions = set()
         superset_names        = set()
+        
+        extra_entities   = json.load(open('./prep/extra_entity.json', 'r'))
+        omitted_entities = json.load(open('./prep/remove_entity.json', 'r'))
+        print(f'Following entities will be omitted: {omitted_entities}')
 
         for category in self.product_dbs:
-            product_db = self.product_dbs[category].all_products
+            product_db = self.product_dbs[category].db_content['products']
             ontology = json.loads(self.product_dbs[category].ontology)
 
             # uri_prefix = '/'.join(ontology['product'][0]['label'].split('/')[0:-1])
@@ -142,7 +147,10 @@ class Rasa_Nlu():
             for key in name_url_mapping:
                 if '|' in key:
                     concept_name = key.replace(' ', '_').replace('-', '_').replace('|', '__')
-                    entities['sf_apparel_' + concept_name] = {'sf_apparel_' + concept_name: name_url_mapping[key], 'count': 0}
+                    entity_name = 'sf_apparel_' + concept_name
+                    if entity_name in omitted_entities:
+                        continue
+                    entities[entity_name] = {entity_name: name_url_mapping[key], 'count': 0}
 
             nlu_file_out = open('./prep/backup/' + category + '_entities.yml', 'w')
             for name in entities:
@@ -151,33 +159,35 @@ class Rasa_Nlu():
 
             nlu_file_out = open('./prep/backup/' + category + '_nlu.yml', 'w')
 
-            extra_entities = json.load(open('./prep/extra_entity.json', 'r'))
-
             nlu_file_out.write('version: "3.1"\n')
             nlu_file_out.write(f'# {category} @ {datetime.now()}\n\n')
             nlu_file_out.write('nlu:\n')
 
-            self.write_entities_section(entities, extra_entities, nlu_file_out)
-            for entity in entities:
-                if entity in superset_entities:
-                    superset_entities[entity]['count'] += entities[entity]['count']
-                    continue
-                superset_entities[entity] = entities[entity]
+            tagged_titles = self.get_tags(product_db, 'name', entities)        
+            tagged_descriptions = self.get_tags(product_db, 'description', entities)
 
+            self.write_entities_section(entities, extra_entities, nlu_file_out)
 
             nlu_file_out.write('- intent: sf_apparel__title_tags\n  examples: |\n')
-            tagged_text = self.get_tags(product_db, 'name', entities)        
-            for nlu_text in tagged_text:
+            for nlu_text in tagged_titles:
                 superset_names.add(nlu_text)
                 nlu_file_out.write('    - ' + nlu_text + '\n')
 
             nlu_file_out.write('\n- intent: sf_apparel__description_tags\n  examples: |\n')
-            tagged_text = self.get_tags(product_db, 'description', entities)
-            for nlu_text in tagged_text:
+            for nlu_text in tagged_descriptions:
                 superset_descriptions.add(nlu_text)
                 nlu_file_out.write('    - ' + nlu_text + '\n')
 
             nlu_file_out.close()
+
+            # update the count for all entities
+            for entity in entities:
+                if entity == 'sf_apparel_distressing__distressed':
+                    pass
+                if entity in superset_entities:
+                    superset_entities[entity]['count'] += entities[entity]['count']
+                    continue
+                superset_entities[entity] = entities[entity]
 
             self.calculate_db_stats(entities, category)
 
@@ -188,7 +198,8 @@ class Rasa_Nlu():
             nlu_file_out.write('  - ' + name + '\n')
         nlu_file_out.close()
 
-        os.rename('./data/nlu.yml', './data/nlu_' + str(datetime.now()) + '.yml_BAK')
+        if os.path.isfile('./data/nlu.yml'):
+            os.rename('./data/nlu.yml', './data/nlu_' + str(datetime.now()) + '.yml_BAK')
 
         nlu_file_out = open('./data/nlu.yml', 'w')
         nlu_file_out.write('version: "3.1"\n')

@@ -1,4 +1,5 @@
 import Pmw
+import traceback
 
 from tkinter import *
 import tkinter as tk
@@ -6,8 +7,6 @@ from tkinter import ttk, messagebox
 
 from CLASS_Tagging_Workflow import *
 from CLASS_Nlu_Workflow import *
-
-from enum import IntEnum
 
 # from optimized_nlu_server import getRegExMatch, get_mapping_and_prefix
 class DoubleScrolledFrame:
@@ -139,8 +138,7 @@ def run_tagging_workflow():
     for category in product_categories:
         category_state[category] = ''
         label_db_names[category].flash()
-        tagging_workflow = Production_Workflow(category)
-        tagging_workflow.product_db.is_use_cache = use_cache_var.get() == 1
+        tagging_workflow = Production_Workflow(category) # pyright: ignore[reportUnusedVariable] 
         for step in select_step_states:
             if select_step_states[step].get() == 1:
                 print()
@@ -164,8 +162,8 @@ def run_tagging_workflow():
                         eval(f'tagging_workflow.{tagging_steps[step]}()')
                     else:
                         eval(f'tagging_workflow.{tagging_steps[step]}("{parameter}")')
-                except Exception as exc:
-                    print(exc)
+                except:
+                    traceback.print_exc()
                     select_step_labels[step].error()
                     return
                 select_step_labels[step].stop()
@@ -174,12 +172,15 @@ def run_tagging_workflow():
 
     json.dump(category_state, open('./prep/_tagging_state.json', 'w'), indent=4)
 
+    printInfo('Finished tagging workflow')
+    messagebox.showinfo(message='NLU workflow completed successfully')
+
 def run_nlu_workflow():
     product_categories = get_product_categories()
     if len(product_categories) == 0:
         messagebox.showwarning(title='No Category', message='Have to select at least 1 category.')
         return
-    nlu_workflow = Nlu_Workflow(product_categories, use_cache_var.get() == 1) # pyright: ignore[reportUnusedVariable] 
+    nlu_workflow = Nlu_Workflow(product_categories) # pyright: ignore[reportUnusedVariable] 
     for step in nlu_step_states:
         if nlu_step_states[step].get() == 1:
             print()
@@ -189,11 +190,14 @@ def run_nlu_workflow():
             window.update()
             try:
                 eval(f'nlu_workflow.{nlu_steps[step]}()')
-            except Exception as exc:
-                printWarning(exc)
+            except:
+                traceback.print_exc()
                 nlu_step_labels[step].error()
                 return
             nlu_step_labels[step].stop()
+
+    printInfo('Finished NLU workflow')
+    messagebox.showinfo(message='NLU workflow completed successfully')
 
 def clean_up(db_type=None):
     product_categories = get_product_categories()
@@ -208,22 +212,46 @@ def clean_up(db_type=None):
         if answer:
             tagging_workflow.delete_db(db_type)
 
+def search_db(__=None):
+    def show_wide_display(results):
+        top_level = Toplevel(height=400, width=500)
+        result_frame = DoubleScrolledFrame(top_level,height=400, width=600)
+        result_frame.pack(fill='both', expand=True)
+        result_text = Text(result_frame)
+        result_text.pack(fill='both', expand=True)
+        # Insert the results
+        result_text.insert(tk.END, results)
+        top_level.update()
+
+    product_categories = get_product_categories()
+    if len(product_categories) == 0:
+        messagebox.showwarning(title='No Category', message='Have to select at least 1 category.')
+        return
+    
+    if len(search_word.get()) == 0:
+        return
+    
+    nlu_workflow = Nlu_Workflow(product_categories) # pyright: ignore[reportUnusedVariable]
+    products_found = nlu_workflow.search_dbs(search_word.get())
+    show_wide_display('\n'.join(products_found))
 
 product_categories = ['CoatsJackets', 'Dresses', 'Jeans',
                       'Jumpsuits', 'Pants', 'Shorts', 'Skirts', 'Sleepwear',
                       'Sweaters', 'SweatshirtsHoodies', 'Tops']    
 window = Tk()
+window.bind('<Return>', search_db)
 window.title("Tagging and NLU creation")
 Pmw.initialise(window)
 # Add content to the left frame
 current_row = 0
-main_frame = DoubleScrolledFrame(window, width=930, height=520)    
+main_frame = DoubleScrolledFrame(window, width=930, height=690)    
 main_frame.grid(row=0, column=0, sticky=NSEW, padx=5, pady=5)
 
 product_title_label = ttk.Label(main_frame, width=20, text='PRODUCT CATEGORIES', font='Helvetica 18 bold')
 product_title_label.grid(column=0, row=current_row)
 balloon = Pmw.Balloon(window)
-balloon.bind(product_title_label, 'Status Legend:\nyellow = Ready for LLM tagging\npurple = LLM tagged + fixed\nblue = NLU output validated\ngreen = Rasa tagged + fixed')
+status_colours = {'orange':'Ready for LLM tagging','purple':'LLM tagged','blue':'NLU output validated','green':'Rasa tagged + fixed'}
+balloon.bind(product_title_label, 'Status Legend:\nyellow = Ready for LLM tagging\npurple = LLM tagged\nblue = NLU output validated\ngreen = Rasa tagged + fixed')
 
 title_steps_label = FlashingLabel(main_frame, width=20, text='TAGGING STEPS', font='Helvetica 18 bold')
 title_steps_label.grid(column=1, row=current_row)
@@ -231,8 +259,17 @@ ttk.Label(main_frame, width=10, text='CLEAN UP', font='Helvetica 18 bold').grid(
 
 current_row += 1
 
-db_name_frame = Frame(main_frame, width=400, relief=RAISED, borderwidth=1)
-db_name_frame.grid(row=current_row, column=0, sticky=E, padx=5, pady=5)
+status_frame = Frame(main_frame, width=400, relief=RAISED, borderwidth=1)
+status_frame.grid(row=current_row, column=0, sticky=E, padx=5, pady=5)
+
+legend_frame = Frame(status_frame, width=400, relief=RAISED, borderwidth=1)
+legend_frame.grid(row=0, column=0, sticky=EW, padx=5, pady=5)
+ttk.Label(legend_frame, width=20, text='Legend', font='Helvetica 16 bold').grid(column=0, row=0)
+for idx, colour in enumerate(status_colours):
+    FlashingLabel(legend_frame, width=25, text=status_colours[colour], background=colour).grid(column=0, row=idx + 1, sticky=W, padx=5, pady=2)
+
+db_name_frame = Frame(status_frame, width=400, relief=RAISED, borderwidth=1)
+db_name_frame.grid(row=1, column=0, sticky=EW, padx=5, pady=5)
 label_db_names = {}
 select_db_names = {}
 select_db_states = {}
@@ -242,10 +279,10 @@ for idx, category in enumerate(product_categories):
     if category in ready_state:
         background_state = ready_state[category]
     label_db_names[category] = FlashingLabel(db_name_frame, width=20, text=category, background=background_state)
-    label_db_names[category].grid(column=0, row=idx)
+    label_db_names[category].grid(column=0, row=idx, padx=5, pady=2)
     select_db_states[category] = tk.IntVar()
     select_db_names[category] = ttk.Checkbutton(db_name_frame, width=5, variable=select_db_states[category])
-    select_db_names[category].grid(column=1, row=idx, sticky=EW) 
+    select_db_names[category].grid(column=1, row=idx, sticky=EW, padx=5, pady=2) 
 
 step_name_frame = Frame(main_frame, width=250, relief=RAISED, borderwidth=1)
 step_name_frame.grid(row=current_row, column=1, sticky=NS, padx=5, pady=5)
@@ -261,11 +298,16 @@ tagging_steps = {
     'Tag Using LLM'                  : 'tag_llm', 
     'Clone LLM to Fix Db'            : 'clone_llm_to_fix_db', 
     'Fix LLM Tags'                   : 'fix_llm_tags', 
-    # 'Update Tags'               : 'update_existing_tags', done at the end of 
+    'Approve Tagged Products'        : 'approve_products', 
+    '--- AFTER NLU CREATED ---'      : '',
     'Clone Fix to Rasa Db'           : 'clone_fix_to_rasa_db', 
-    'Tags Using Rasa'                : 'tag_rasa',
+    'Tag Using Rasa'                 : 'tag_rasa',
+    'Fix Rasa Tags'                  : 'fix_rasa_tags', 
     'Validate CLU'                   : 'validate_clu',
+    'Check consistency'              : 'check_consistency',
+
     #  "TEST ONLY": 'TEST_FUNCTION'
+    # 'Fix URIs'                       : 'fix_uris',
     }
 
 select_step_labels = {}
@@ -273,10 +315,14 @@ select_step_names  = {}
 select_step_states = {}
 for idx, step in enumerate(tagging_steps):
     select_step_labels[step] = FlashingLabel(step_name_frame, width=25, text=step)
-    select_step_labels[step].grid(column=0, row=idx)
+    select_step_labels[step].grid(column=0, row=idx, padx=5, pady=2)
     select_step_states[step] = tk.IntVar()
+    if tagging_steps[step] == '':
+        continue
     select_step_names[step] = ttk.Checkbutton(step_name_frame, width=5, variable=select_step_states[step])
-    select_step_names[step].grid(column=1, row=idx, sticky=EW) 
+    select_step_names[step].grid(column=1, row=idx, sticky=EW, padx=5, pady=2)
+
+ttk.Button(step_name_frame, text= "Start Tagging Workflow", command=run_tagging_workflow).grid(column=0, row=idx+1, columnspan=2, pady=10)
 
 
 select_step_names['Prep'].config(state=DISABLED)
@@ -296,13 +342,9 @@ for prod_step in range(Production_Step.PRODUCTS.value, Production_Step.FINAL.val
 
 current_row += 1
 
-use_cache_var = tk.IntVar()
-Label(main_frame, width=20, text="Use Cache").grid(column=0, row=current_row)
-ttk.Checkbutton(main_frame, width=10, variable=use_cache_var).grid(column=1, row=current_row) 
-
-current_row += 1
-
-ttk.Button(main_frame, text= "Start Tagging Workflow", command=run_tagging_workflow).grid(column=0, row=current_row, columnspan=2)
+# use_cache_var = tk.IntVar()
+# Label(main_frame, width=20, text="Use Cache").grid(column=0, row=current_row)
+# ttk.Checkbutton(main_frame, width=10, variable=use_cache_var).grid(column=1, row=current_row) 
 
 current_row += 1
 
@@ -316,6 +358,10 @@ current_row += 1
 
 nlu_frame = Frame(main_frame, width=400, relief=RAISED, borderwidth=1)
 nlu_frame.grid(row=current_row, column=0, sticky=NSEW, padx=5, pady=10, columnspan=2)
+
+search_frame = Frame(main_frame, width=200, relief=RAISED, borderwidth=1)
+search_frame.grid(row=current_row, column=2, sticky=NSEW, padx=5, pady=10)
+
 nlu_step_labels = {}
 nlu_step_names  = {}
 nlu_step_states = {}
@@ -329,6 +375,11 @@ for idx, step in enumerate(nlu_steps):
 current_row += idx + 2
 
 ttk.Button(nlu_frame, text= "Generate NLU", command=run_nlu_workflow).grid(column=0, row=current_row, columnspan=2)
+
+search_word   = ttk.Entry(search_frame)
+search_word.grid(column=0, row=0, padx=5, pady=5)
+search_button = ttk.Button(search_frame, width=20, text='Search', command=search_db)
+search_button.grid(column=0, row=1, padx=5, pady=5)
 
 window.grid_columnconfigure(0,weight=1) # the text and entry frames column
 window.grid_rowconfigure(0, weight=1) # all frames row

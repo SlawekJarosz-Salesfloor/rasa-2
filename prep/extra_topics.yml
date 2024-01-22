@@ -4,14 +4,15 @@
     - Complete the ensemble with a pair of strappy sandals and delicate accessories to complement the cheerful and celebratory atmosphere of the wedding.
     - Enjoy your new dress at the party!
 
-- intent: sf_apparel__customer_input
-  examples: |
-    - I want a [geometric]{"entity": "sf_apparel_pattern"} and [slim]{"entity": "sf_apparel_fit__slim"} fit [dress]{"entity": "sf_apparel_product_category"}. size tall. with [beads]{"entity": "sf_apparel_embellishments__beaded"}
-    - [skinny]{"entity": "sf_apparel_product_type"} [jeans]{"entity": "sf_apparel_product_category"}. personal style. chic
-    - i wanna buy a [sweater]{"entity": "sf_apparel_product_category"}. classy. date
-    - do you any [dresses]{"entity": "sf_apparel_product_category"}?. i dunno. something casual. sporty i guess with [sleeves]{"entity": "sf_apparel_NO_MATCH__sleeves"}
-    - I wanna buy a [top]{"entity": "sf_apparel_product_category"}. classic. date night
-    - I'm looking for a [blue]{"entity": "sf_apparel_color"} [dress]{"entity": "sf_apparel_product_category"}. for a casual outing. something more modern but comfortable
-    - i want to buy a [pink]{"entity": "sf_apparel_color__pink"} [dress]{"entity": "sf_apparel_product_category"}. casual. for a cocktail party
-    - I want to buy a [green]{"entity": "sf_apparel_color__green"} [dress]{"entity": "sf_apparel_product_category"}. A cocktail party. Classic
-    - I want to buy a [red]{"entity": "sf_apparel_color__red"} [dress]{"entity": "sf_apparel_product_category"}. Elegant and Chic. Spring event
+# - intent: sf_apparel__customer_input
+#   examples: |
+#     - I want a [geometric]{"entity": "sf_apparel_pattern__geometric"} and [slim]{"entity": "sf_apparel_fit__slim"} fit [dress]{"entity": "sf_apparel_product_category"}. size tall. with [beads]{"entity": "sf_apparel_embellishments__beaded"}
+#     - [skinny]{"entity": "sf_apparel_product_type__skinny"} [jeans]{"entity": "sf_apparel_product_category"}. personal style. chic
+#     - i wanna buy a [sweater]{"entity": "sf_apparel_product_category"}. classy. date
+#     - do you any [dresses]{"entity": "sf_apparel_product_category"}?. i dunno. something casual and [black]{"entity": "sf_apparel_color__black"}. sporty i guess with [sleeves]{"entity": "sf_apparel_NO_MATCH__sleeves"}
+#     - I wanna buy a [red]{"entity": "sf_apparel_color__red"} [top]{"entity": "sf_apparel_product_category"}. classic. date night
+#     - I'm looking for a [blue]{"entity": "sf_apparel_color__blue"} [dress]{"entity": "sf_apparel_product_category"}. for a casual outing. something more modern but comfortable
+#     - i want to buy a [pink]{"entity": "sf_apparel_color__pink"} [dress]{"entity": "sf_apparel_product_category"}. casual. for a cocktail party
+#     - I want to buy a [green]{"entity": "sf_apparel_color__green"} [dress]{"entity": "sf_apparel_product_category"}. A cocktail party. Classic
+#     - I want to buy a [red]{"entity": "sf_apparel_color__red"} [dress]{"entity": "sf_apparel_product_category"}. Elegant and Chic. Spring event
+#     - Hello! I'm searching for a [dress]{"entity": "sf_apparel_product_category"} for a high-profile business cocktail party. It needs to exude elegance and professionalism, but with a modern twist. I'm thinking of a [midi-length]{"entity": "sf_apparel_length__midi"} sheath [dress]{"entity": "sf_apparel_product_category"}, preferably in a [solid]{"entity": "sf_apparel_pattern__solid"}, muted color like [navy]{"entity": "sf_apparel_color__navy"} or [charcoal]{"entity": "sf_apparel_color__grey__charcoal"}. Can you recommend something that fits this description?

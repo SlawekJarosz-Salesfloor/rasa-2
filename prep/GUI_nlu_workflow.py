@@ -162,9 +162,10 @@ def run_tagging_workflow():
                         eval(f'tagging_workflow.{tagging_steps[step]}()')
                     else:
                         eval(f'tagging_workflow.{tagging_steps[step]}("{parameter}")')
-                except:
+                except Exception as exc:
                     traceback.print_exc()
                     select_step_labels[step].error()
+                    messagebox.showerror(message=str(exc))
                     return
                 select_step_labels[step].stop()
                 category_state[category] = step
@@ -190,9 +191,10 @@ def run_nlu_workflow():
             window.update()
             try:
                 eval(f'nlu_workflow.{nlu_steps[step]}()')
-            except:
+            except Exception as exc:
                 traceback.print_exc()
                 nlu_step_labels[step].error()
+                messagebox.showerror(message=str(exc))
                 return
             nlu_step_labels[step].stop()
 
@@ -210,7 +212,46 @@ def clean_up(db_type=None):
         tagging_workflow.product_db.set_db_name(db_type)
         answer = messagebox.askokcancel('Delete Database', f'Do you really want to delete {tagging_workflow.product_db.db_name}?')
         if answer:
-            tagging_workflow.delete_db(db_type)
+            tagging_workflow.delete_db()
+
+def change_ontology():
+    product_categories = get_product_categories()
+    if len(product_categories) == 0:
+        messagebox.showwarning(title='No Category', message='Have to select at least 1 category.')
+        return
+    
+    for category in product_categories:
+        tagging_workflow = Production_Workflow(category)
+        try:
+            tagging_workflow.change_all_ontologies()            
+        except Exception as exc:
+            messagebox.showerror(message=str(exc))
+
+def upload_db():
+    product_categories = get_product_categories()
+    if not len(product_categories) == 1:
+        messagebox.showwarning(title='No Category', message='Have to select 1 category.')
+        return
+    
+    from tkinter import filedialog
+    filename = filedialog.askopenfilename()
+    if filename == '':
+        messagebox.showwarning(title='No File selected', message='Have to select a file.')
+        return
+    
+    if not filename.endswith('.json'):
+        messagebox.showwarning(title='Invalid File selected', message='Have to select a db file.')
+        return
+
+    db_name_label.config(text = 'Saks-' + product_categories[0] + '-' + str(Production_Step[db_choice.get()].value) + '-' + db_choice.get().lower())
+    window.update()
+
+    answer = messagebox.askokcancel(title='Confirm choice', message=f'Do you want to replace {db_name_label["text"]} with {filename}.')
+    if not answer:
+        return
+
+    tagging_workflow = Production_Workflow(product_categories[0])
+    tagging_workflow.upload_db(db_choice.get(), filename)
 
 def search_db(__=None):
     def show_wide_display(results):
@@ -244,14 +285,14 @@ window.title("Tagging and NLU creation")
 Pmw.initialise(window)
 # Add content to the left frame
 current_row = 0
-main_frame = DoubleScrolledFrame(window, width=930, height=690)    
+main_frame = DoubleScrolledFrame(window, width=930, height=720)    
 main_frame.grid(row=0, column=0, sticky=NSEW, padx=5, pady=5)
 
 product_title_label = ttk.Label(main_frame, width=20, text='PRODUCT CATEGORIES', font='Helvetica 18 bold')
 product_title_label.grid(column=0, row=current_row)
 balloon = Pmw.Balloon(window)
-status_colours = {'orange':'Ready for LLM tagging','purple':'LLM tagged','blue':'NLU output validated','green':'Rasa tagged + fixed'}
-balloon.bind(product_title_label, 'Status Legend:\nyellow = Ready for LLM tagging\npurple = LLM tagged\nblue = NLU output validated\ngreen = Rasa tagged + fixed')
+status_colours = {'orange':'Ready for LLM tagging','purple':'LLM tagged','blue':'NLU output validated','green':'Rasa tagged'}
+balloon.bind(product_title_label, 'Status Legend:\nyellow = Ready for LLM tagging\npurple = LLM tagged\nblue = NLU output validated\ngreen = Rasa tagged')
 
 title_steps_label = FlashingLabel(main_frame, width=20, text='TAGGING STEPS', font='Helvetica 18 bold')
 title_steps_label.grid(column=1, row=current_row)
@@ -297,6 +338,7 @@ tagging_steps = {
     'Clone Products to LLM Db'       : 'clone_products_to_llm_db', 
     'Tag Using LLM'                  : 'tag_llm', 
     'Clone LLM to Fix Db'            : 'clone_llm_to_fix_db', 
+    'Add Explicit Tags'              : 'tag_explicit', 
     'Fix LLM Tags'                   : 'fix_llm_tags', 
     'Approve Tagged Products'        : 'approve_products', 
     '--- AFTER NLU CREATED ---'      : '',
@@ -338,7 +380,31 @@ for prod_step in range(Production_Step.PRODUCTS.value, Production_Step.FINAL.val
     action_buttons[prod_step] = ttk.Button(action_frame, width=20, 
                                            text='Delete ' + str(Production_Step(prod_step)).split('.')[1] + ' db', 
                                            command=lambda prod_step=prod_step: clean_up(Production_Step(prod_step)))
-    action_buttons[prod_step].grid(column=1, row=prod_step, padx=10) 
+    action_buttons[prod_step].grid(column=0, row=prod_step, padx=10) 
+
+prod_step += 1
+action_buttons[prod_step] = ttk.Button(action_frame, width=20, text='Rebase Ontology', command=change_ontology)
+action_buttons[prod_step].grid(column=0, row=prod_step, padx=10, pady=50)
+
+prod_step += 1
+ttk.Label(action_frame, width=10, text='Db Type: ').grid(column=0, row=prod_step, padx=10)
+
+prod_step += 1
+db_list = []
+for idx, step in enumerate(Production_Step):
+    db_list.append(step.name)
+db_choice = StringVar()
+db_choice.set(db_list[0]) # default value
+db_choice_menu = ttk.OptionMenu(action_frame, db_choice, db_list[0], *db_list) 
+db_choice_menu.grid(column=0, row=prod_step, padx=10)
+
+prod_step += 1
+db_name_label = Label(action_frame, width=40, font='Helvetica 10 bold')
+db_name_label.grid(column=0, row=prod_step)
+
+prod_step += 1
+upload_button = ttk.Button(action_frame, width=20, text='Upload Db', command=upload_db)
+upload_button.grid(column=0, row=prod_step, padx=10)
 
 current_row += 1
 
@@ -367,7 +433,7 @@ nlu_step_names  = {}
 nlu_step_states = {}
 for idx, step in enumerate(nlu_steps):
     nlu_step_labels[step] = FlashingLabel(nlu_frame, width=50, text=step)
-    nlu_step_labels[step].grid(column=0, row=idx + 1)
+    nlu_step_labels[step].grid(column=0, row=idx + 1, padx=5, pady=2)
     nlu_step_states[step] = tk.IntVar()
     nlu_step_names[step] = ttk.Checkbutton(nlu_frame, width=20, variable=nlu_step_states[step])
     nlu_step_names[step].grid(column=1, row=idx + 1, sticky=W) 

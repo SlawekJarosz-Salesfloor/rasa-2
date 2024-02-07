@@ -9,21 +9,36 @@ def strip_accents(input_string):
 def get_label_suffix(uri):
     return uri.split('/')[-1].lower()
 
-def extract_substring(string_match, input_string):
 
-    # Define a regular expression pattern for the desired substring
-    pattern = re.compile(r'(^|\s)([\w\-]*' + string_match + '[\w\-]*?)(\s|\;+|\.+|$)')
+def get_tokens_positions(content):
 
-    # Use the findall function to extract all matching substrings
-    matches = re.search(pattern, input_string)
+    # Define a regex pattern to identify tokens
+    token_pattern = r"\b(?:\w+['%]?\w*%?\w*)\b"
 
-    if matches == None:
-        return None, -1
-    
-    # Get the start of the match
-    start = input_string.index(matches.group(2))
+    # Find all matches with start and end positions
+    matches = list(re.finditer(token_pattern, content.lower()))
 
-    return matches.group(2), start
+    # Extract tokens and their positions
+    tokens_with_positions = [(match.group(), match.start(), match.end()) for match in matches]
+
+    return tokens_with_positions
+
+
+def extract_substring(target_word, sentence):
+    tokens_with_positions = get_tokens_positions(sentence)
+
+    word_found = None
+    response = None, []
+    if len(tokens_with_positions) > 0:
+        start_positions = []
+        for occurrence in tokens_with_positions:
+            if occurrence[0] == target_word:
+                word_found = target_word
+                start_positions.append(occurrence[1])
+
+        response = word_found, start_positions
+
+    return response
 
 def remove_duplicate_tags(content, tags, is_verbose = True):
     if len(tags) == 0:
@@ -73,8 +88,10 @@ def get_embedded_tag_ids(tags):
         for j, inner_tag in enumerate(tags):
             if i == j:
                 continue
-            if inner_tag['start'] >= outer_tag['start'] and inner_tag['end'] <= outer_tag['end']:
-                embedded_tag_indicies.append(sorted([i, j]))
+            if inner_tag['start'] == outer_tag['start'] and inner_tag['end'] == outer_tag['end'] and inner_tag['label'] == outer_tag['label']:
+                embedded_tag_indicies.append((sorted([i, j]), True))
+            elif inner_tag['start'] >= outer_tag['start'] and inner_tag['end'] <= outer_tag['end']:
+                embedded_tag_indicies.append((sorted([i, j]), False))
     embedded_tag_indicies.sort()
     embedded_tag_indicies = list(embedded_tag_indicies for embedded_tag_indicies,_ in itertools.groupby(embedded_tag_indicies))
     return embedded_tag_indicies
@@ -87,19 +104,28 @@ def fix_embedded_tags(content, tags, is_verbose = True):
     if len(embedded_tag_indicies) == 0:
         return is_changed, tags
 
-    # Try to detangle the tags
-    for clash_ids in embedded_tag_indicies:
+    # Try to correct tags start and end values
+    for clash_ids, __ in embedded_tag_indicies:
         for idx in clash_ids:
             tag_text    = content[tags[idx]['start']:tags[idx]['end']].lower()
             label_match = tags[idx]['label'].split('/')[-1].lower()
             if label_match in tag_text:
-                word_match, word_start = extract_substring(label_match, tag_text)
-                if is_verbose:
-                    print(content[tags[idx]['start']:tags[idx]['end']].lower())
-                tags[idx]['start'] = tags[idx]['start'] + word_start
-                tags[idx]['end']   = tags[idx]['start'] + len(word_match)
-                if is_verbose:
-                    print('\t\t--> '+ content[tags[idx]['start']:tags[idx]['end']].lower())
+                word_match, word_starts = extract_substring(label_match, tag_text)
+                if word_match == None:
+                    continue
+                for start in word_starts:
+                    new_start = tags[idx]['start'] + start
+                    new_end   = tags[idx]['start'] + len(word_match)
+                    if tags[idx]['start'] == new_start and tags[idx]['end'] == new_end:
+                        continue
+                    if is_verbose:
+                        print(content[tags[idx]['start']:tags[idx]['end']].lower())
+                    if is_verbose:
+                        print(f'\t\t--> {content[tags[idx]["start"]:tags[idx]["end"]].lower()} ({tags[idx]["start"]}:{tags[idx]["end"]}) >> ', end='')
+                    tags[idx]['start'] = new_start
+                    tags[idx]['end']   = new_end
+                    if is_verbose:
+                        print(f'({tags[idx]["start"]}:{tags[idx]["end"]})')
                 is_changed = True
 
     # Check again
@@ -108,9 +134,12 @@ def fix_embedded_tags(content, tags, is_verbose = True):
     # Remove any remaining overlaping tags
     while len(embedded_tag_indicies) > 0:
         is_changed = True
-        ids = embedded_tag_indicies[0]
+        ids, is_duplicate = embedded_tag_indicies[0]
         if is_verbose:
-            print(content[tags[ids[1]]['start']:tags[ids[1]]['end']].lower() + '\n\t\t--> REMOVED (embedded)')
+            if is_duplicate:
+                print(content[tags[ids[1]]['start']:tags[ids[1]]['end']].lower() + '\n\t\t--> REMOVED (duplicate)')
+            else:
+                print(content[tags[ids[1]]['start']:tags[ids[1]]['end']].lower() + '\n\t\t--> REMOVED (embedded)')
         del tags[ids[1]]
         embedded_tag_indicies = get_embedded_tag_ids(tags)
 
@@ -126,12 +155,6 @@ def fix_punctuation(content, tags, is_verbose = True):
             print(tag_text)
         label_match = get_label_suffix(tag['label'])
 
-        if tag_text.startswith('lining:'):
-            tag['end'] = tag['start'] + len('lining')
-            is_changed = True
-            if is_verbose:
-                print('\t\t--> ' + content[tag['start']:tag['end']])
-        
         tag_text = content[tag['start']:tag['end']].lower()
         if tag_text.endswith('%'):            
             # Very common for % to be included in material types
@@ -235,12 +258,15 @@ def remove_wrong_tags(content, tags, wrong_tag_map, is_verbose = True):
             is_changed = True
     return is_changed, tags
 
-def remove_uri_entity_mismatches(content, tags, name_url_mapping, is_verbose = True):
+def remove_product_category(content, tags, name_url_mapping, is_verbose = True):
+    product_category_uri_suffix = None
     for name_path in name_url_mapping:
         if name_path.startswith('product category|'):
             product_category_uri_suffix = name_url_mapping[name_path]
             break
-
+    if product_category_uri_suffix == None:
+        return False, tags
+    
     is_changed = False
     remove_count = 0
     for idx, tag in enumerate(tags[:]):
@@ -251,54 +277,39 @@ def remove_uri_entity_mismatches(content, tags, name_url_mapping, is_verbose = T
             del tags[idx - remove_count]
             remove_count += 1
             is_changed = True
-            
-    remove_count = 0
-    for idx, tag in enumerate(tags[:]):
-        if tag['entity'] == 'Color':
-            tag_text = content[tags[idx - remove_count]['start']:tags[idx - remove_count]['end']].lower()
-            if is_verbose:
-                print(tag_text + '\n\t\t--> REMOVED (color)')
-            del tags[idx - remove_count]
-            remove_count += 1
-            is_changed = True
 
+    return is_changed, tags
+
+def remove_uri_entity_mismatches(content, tags, name_url_mapping, is_verbose = True):
+    is_changed = False
     label_paths = list(name_url_mapping.keys())
     for idx, name_path in enumerate(label_paths):
         parts = name_path.split('|')
         if len(parts) > 1:
-            label_paths[idx] = parts[0].replace(' ', '').replace('-', '') + '|' + parts[-1].replace(' ', '').replace('-', '')
+            label_paths[idx] = parts[0].replace('-', '') + '|' + parts[-1].replace('-', '')
         else:
-            label_paths[idx] = parts[0].replace(' ', '').replace('-', '')
+            label_paths[idx] = parts[0].replace('-', '')
         label_paths[idx] = strip_accents(label_paths[idx])
 
+    correction_prefix = 'Corrected Entity: '
     for idx, tag in enumerate(tags[:]):
-        if tag['entity'].startswith('Corrected: '):
+        if tag['entity'].startswith(correction_prefix):
             continue
-        label_suffix = get_label_suffix(tag['label'])
-        name_from_tag = tag['entity'].replace('-', '').replace(' ', '').lower() + '|' + label_suffix.lower()
-        name_from_tag = strip_accents(name_from_tag)
-        if not name_from_tag in label_paths:
-            for name_path in name_url_mapping:
-                if name_url_mapping[name_path].lower() == label_suffix:
-                    tag_text = content[tags[idx]['start']:tags[idx]['end']].lower()
-                    if is_verbose:
-                        print(tag_text + '\n\t\t--> UPDATED (entity to URI mismatch)')
-                    tag['entity'] = 'Corrected: ' + name_path.split('|')[0].title()
-                    is_changed = True
+        label_suffix = tag['label'].split('/')[-1].lower()
+        for name_path in name_url_mapping:
+            if name_path.lower().endswith('|' + label_suffix):
+                tag_text = content[tags[idx]['start']:tags[idx]['end']].lower()
+                if is_verbose:
+                    print(tag_text + '\n\t\t--> UPDATED (entity to URI mismatch)')
+                tag['entity'] = correction_prefix + name_path.split('|')[0].title() + '.' + label_suffix.title()
+                is_changed = True
 
     return is_changed, tags
 
 def fix_boundries(content, tags, is_verbose = True):
     is_changed = False
-
-    # Define a regex pattern to identify tokens
-    token_pattern = r"\b(?:\w+[-'%]?\w*%?\w*)\b"
-
-    # Find all matches with start and end positions
-    matches = list(re.finditer(token_pattern, content.lower()))
-
-    # Extract tokens and their positions
-    tokens_with_positions = [(match.group(), match.start(), match.end()) for match in matches]
+    
+    tokens_with_positions = get_tokens_positions(content)
 
     # Display the result
     for idx, token_tuple in enumerate(tokens_with_positions):

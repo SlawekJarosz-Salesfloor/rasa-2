@@ -35,11 +35,20 @@ class Nlu_Workflow():
         
         entity_representations = {}
         entity_representations['TOTAL'] = {}
+        
         for category in self.product_dbs:
             self.product_dbs[category].set_tag_usage()
             entity_representations[category] = self.product_dbs[category].representations
             pp.pprint(self.product_dbs[category].description_tag_density)
-            entity_representations['TOTAL'].update(entity_representations[category])
+            
+            for attribute in self.product_dbs[category].representations:
+                if attribute in entity_representations['TOTAL']:
+                    entity_representations['TOTAL'][attribute].update(self.product_dbs[category].representations[attribute])
+                else:
+                    entity_representations['TOTAL'][attribute] = self.product_dbs[category].representations[attribute]
+
+
+
         print('\n\n\n === FINAL REPRESENTATIONS ===')
         pp.pprint(entity_representations)
 

@@ -182,8 +182,6 @@ class Rasa_Nlu():
 
             # update the count for all entities
             for entity in entities:
-                if entity == 'sf_apparel_distressing__distressed':
-                    pass
                 if entity in superset_entities:
                     superset_entities[entity]['count'] += entities[entity]['count']
                     continue

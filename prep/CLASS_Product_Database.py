@@ -69,8 +69,8 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
         else:
             if (iteration/total) > 0.2:
                 time_remaining = timedelta(seconds=int((time.perf_counter() - startTime)*(total-iteration)/iteration))
-            if len(iterationTimes) > 20:
-                average_time_left = timedelta(seconds=int(numpy.average(iterationTimes[-20:])*(total-iteration)))
+            if len(iterationTimes) > 10:
+                average_time_left = timedelta(seconds=int(numpy.average(iterationTimes[-10:])*(total-iteration)))
         suffix = f'ETA: {time_remaining}|{average_time_left}'
 
     print(f'\r{prefix} |{bar}| {percent}% [{iteration}/{total}] {suffix}', end = printEnd)
@@ -79,12 +79,17 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
         print()
 
 # From https://stackoverflow.com/questions/60978672/python-string-to-camelcase
-def to_camel_case(text):
-    s = text.replace("-", " ").replace("_", " ")
-    s = s.split()
-    if len(text) == 0:
-        return text
-    return s[0] + ''.join(i.capitalize() for i in s[1:])
+def to_db_uri(db_name, category):
+    if len(db_name) == 0:
+        return db_name
+    db_name = db_name.replace("-", " ").replace("_", " ")
+    parts = db_name.split()
+    for idx, part in enumerate(parts):
+        if part == category:
+            continue
+        parts[idx] = part.title()
+    
+    return ''.join(parts)
 
 def get_complex_name(name, description_text):
     description_crc = binascii.crc32(description_text.encode('utf8'))
@@ -122,6 +127,7 @@ class Product_Database():
         self.db_name     = None
         self.is_db_fresh = False
         self.db_content  = None
+        self.db_step     = None
         
         self.category = category
 
@@ -134,6 +140,12 @@ class Product_Database():
         self.nb_tagged_products = 0
 
         self.is_verbose = True
+
+        self.wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
+        self.debug_products = []
+        if os.path.isfile('./prep/_debug_product_names.json'):
+            self.debug_products = json.load(open('./prep/_debug_product_names.json', 'r'))
+
 
     def destroy(self):
         printInfo(f'Deleting {self.db_name} database.')
@@ -168,6 +180,7 @@ class Product_Database():
             throwError(f'Cannot connect to {self.db_name}')
 
     def set_db_name(self, step_enum):
+        self.db_step = step_enum
         self.db_name = 'Saks-!CATEGORY!-!#!-!STEP_NAME!'.replace('!CATEGORY!', self.category).replace('!#!', str(step_enum.value)).replace('!STEP_NAME!', STEP_SUFFIX_MAPPING[step_enum])
 
     def get_db_name(self):
@@ -202,14 +215,20 @@ class Product_Database():
                 time.sleep(RECONNECTION_SLEEP)
 
 
-    def helper_requests(self, request_type, request_url, json_post_data=None, expected_nb_records=0, process_description=''):
+    def helper_requests(self, request_type, request_url, json_post_data=None, expected_nb_records=None, process_description=''):
         count_negative_response = 1
+        is_db_exist = True
         while True: 
             try:
                 if request_type == 'get':
                     response = requests.get(request_url)
                     if response.status_code == 200:
                         return response
+                    elif response.status_code == 404:
+                        if response.reason == 'Not Found':
+                            is_db_exist = False
+                            break
+                    printWarning(f'Process failed.  Trying again in {RECONNECTION_SLEEP} seconds [attempt #{count_negative_response}]...')
                 else:
                     response = requests.post(request_url, json=json_post_data)
                     if response.status_code == 200:
@@ -217,50 +236,75 @@ class Product_Database():
                         response_content = json.loads(process_response.content)
                         if response_content['completed']:
                             actual_nb_records = self.count_number_of_records()
+                            if expected_nb_records == None:
+                                return response
                             if actual_nb_records == expected_nb_records:
                                 return response
                             else:
                                 printWarning(f'Expected {expected_nb_records} in db but found {actual_nb_records}.  Retrying.')
+                    elif response.status_code == 404:
+                        if response.reason == 'Not Found':
+                            is_db_exist = False
+                            break
+
             except:
                 printWarning(f'Process failed.  Trying again in {RECONNECTION_SLEEP} seconds [attempt #{count_negative_response}]...')
 
             count_negative_response += 1
 
             if count_negative_response == NB_RETRY_ATTEMPTS:
-                throwError(f'Connect connect to server')
+                throwError(f'Cannot connect to server')
             
             time.sleep(RECONNECTION_SLEEP)
 
+        if not is_db_exist:
+            throwError(f'Database {self.db_name} does not exist.')
+
     def count_number_of_records(self):
-        response = self.helper_requests('get', f'{self.couchdb_db_url}/product-recommendation/_design/dyson/_view/dbStats?reduce=true&group=true&keys=%5B%22{self.db_name}%22%5D')
-        try:
-            db_stats = json.loads(response.text)
-            self.nb_records = db_stats['rows'][0]['value']['total']
-        except:
-            printWarning(f'Still updating record count for {self.db_name}.')
+        self.nb_records = None
+        count_negative_response = 0
+        while True: 
+            response = self.helper_requests('get', f'{self.couchdb_db_url}/product-recommendation/_design/dyson/_view/dbStats?reduce=true&group=true&keys=%5B%22{self.db_name}%22%5D')
+            try:
+                db_stats = json.loads(response.text)
+                self.nb_records = db_stats['rows'][0]['value']['total']
+                break
+            except:
+                printWarning(f'Still updating record count for {self.db_name}.')
+
+            count_negative_response += 1
+
+            if count_negative_response == 2:
+                throwError(f'Cannot get number of records for {self.db_name}.')
+
+            time.sleep(RECONNECTION_SLEEP)
+
         printInfo(f'{self.nb_records} items in {self.db_name}')
 
         return self.nb_records
 
     def get_ontology(self):
         # while true ; do kubectl --context playground -n maestro-v2-dev port-forward services/dyson 9005 ; done
+        self.ontology = None
         response = self.helper_requests('get', f'{self.dyson_url}/productDatabases/{self.db_name}/ontology')
         self.ontology = response.text
         matches = re.search(': "(.*)-1"\,', self.ontology)
         if bool(matches):
             printWarning(f"Duplicate leaf name found: {matches.group(1)}")
 
-    def update_ontology(self):
-        # updated_ontology = ''.join(self.base_ontology)
+    def update_ontology(self, is_rebase = False):
         response = self.helper_requests('get', f'{self.dyson_url}/productDatabases/{self.db_name}/ontology')
         if response.status_code == 200:
-            updated_ontology = response.text
-            original_revison = json.loads(updated_ontology)['revision']
-            uri_db_name = to_camel_case(self.db_name)
-            updated_ontology, nb_changes = re.subn('http://automat.ai/\w+/', f'http://automat.ai/{uri_db_name}/', updated_ontology)
-            updated_ontology, base_count = re.subn('http://automat.ai/\w+/ProductCategory', f'http://automat.ai/base/ProductCategory', updated_ontology)
-            if not base_count == 1:
-                throwError(f'ProductCategory URI not found in {self.db_name}.  It is mandatory.')
+            db_ontology = response.text
+            original_revison = json.loads(db_ontology)['revision']
+            if is_rebase:
+                db_ontology = ''.join(self.base_ontology)
+            else:                
+                uri_db_name = to_db_uri(self.db_name, self.category)
+                db_ontology, nb_changes = re.subn('http://automat.ai/\w+/', f'http://automat.ai/{uri_db_name}/', db_ontology)
+                db_ontology, base_count = re.subn('http://automat.ai/\w+/ProductCategory', f'http://automat.ai/base/ProductCategory', db_ontology)
+                if not base_count == 1:
+                    throwError(f'ProductCategory URI not found in {self.db_name}.  It is mandatory.')
         else:
             throwError(f'Cannot get the ontology for {self.db_name}.')
         # {
@@ -269,14 +313,19 @@ class Product_Database():
         #     "userInfo": "Copied from blablabla",
         #     "migration": null
         # }
-        bare_ontology = json.loads(updated_ontology)['ontology']
+        bare_ontology = json.loads(db_ontology)['ontology']
         post_json = {"rev": original_revison, "ontologyContent": bare_ontology, "userInfo": "URI Alignment", "migration": None}
+
         response = requests.post(f'{self.dyson_url}/productDatabases/{self.db_name}/ontology', json=post_json)
         if response.status_code == 200:
-            printInfo(f'Ontology for {self.db_name} updated [{nb_changes} changes].')
+            if is_rebase:
+                printInfo(f'Ontology for {self.db_name} rebased.')
+            else:
+                printInfo(f'Ontology for {self.db_name} updated [{nb_changes} changes].')
+            self.get_ontology()
         else:
             throwError(f'Cannot update the ontology for {self.db_name}.')
-
+    
     def check_ontology(self):
         matches = re.findall(r'([\w/\.:]*)-1', self.ontology)
         if matches == None or len(matches) == 0:
@@ -287,9 +336,9 @@ class Product_Database():
 
     def set_base_ontology(self):
         self.base_ontology = self.ontology
-        self.base_uri      = to_camel_case(self.db_name)
+        self.base_uri      = to_db_uri(self.db_name, self.category)
 
-    def compare_ontology(self, other_ontology = None):
+    def compare_ontology(self, is_rebase = False):
 
         def simplify_uri(ontology):
             for key in ontology:
@@ -299,25 +348,24 @@ class Product_Database():
         self.current_mapping = get_name_url_mapping(json.loads(self.ontology), {})
         self.current_mapping = simplify_uri(self.current_mapping)
 
-        if other_ontology == None:
-            other_mapping = get_name_url_mapping(json.loads(self.base_ontology), {})
-            other_mapping = simplify_uri(other_mapping)
-            diff = DeepDiff(self.current_mapping, other_mapping)
-            other_db_name = 'BASE ONTOLOGY'
-        else:
-            other_mapping = get_name_url_mapping(json.loads(other_ontology), {})
-            other_mapping = simplify_uri(other_mapping)
-            diff = DeepDiff(self.current_mapping, other_mapping)
-            other_db_name = 'specified ontology'
+        other_mapping = get_name_url_mapping(json.loads(self.base_ontology), {})
+        other_mapping = simplify_uri(other_mapping)
+        diff = DeepDiff(self.current_mapping, other_mapping)
+        other_db_name = 'BASE ONTOLOGY'
         
         if len(diff) == 0:
             printInfo(f'No diffrences in the ontology detected between {self.db_name} and {other_db_name}.')
         else:
-            throwError(f'Ontologies do not match: ' + str(diff))
+            if is_rebase:
+                printInfo(f'{str(diff)} changed in ontology of {self.db_name}.')
+                throwError()
+            else:
+                throwError(f'Ontologies do not match: ' + str(diff))
 
         # Make sure all URI use the ontology db 
         matches = re.findall('http://automat.ai/(\w+)/', self.ontology)
-        uri_diff = set(matches) - set(['base', self.base_uri])
+        matches = [x.lower() for x in matches]
+        uri_diff = set(matches) - set(['base', self.base_uri.lower()])
         if len(uri_diff) > 0:
             throwError(f'Unexpected URI(s) [{uri_diff}] found in {self.db_name}.')
 
@@ -335,6 +383,8 @@ class Product_Database():
         # db_content['name'] = self.db_name
         nb_original_records = len(db_content['products'])
         for product in db_content['products']:
+            if 'labelingApproval' in product:
+                product['labelingApproval'] = 'Never Approved'
             if not 'labeling' in product:
                 continue
             for annotation in product['labeling']['annotations']:
@@ -369,7 +419,7 @@ class Product_Database():
         else:
             end_count = count_update_target
         if not len(self.db_content['products']) == self.nb_records:
-            printWarning(f'Actual number of products [{len(len(self.db_content["products"]))}] is different from expected [{self.nb_records}].')
+            throwError(f'Actual number of products [{len(self.db_content["products"])}] is different from expected [{self.nb_records}].')
 
         time_start = time.perf_counter()
         count_updated_products = 0
@@ -445,12 +495,15 @@ class Product_Database():
         # Add spaces before and after / for Rasa NLU
         description, nb_slashes = re.subn(r'(?<!\s)/(?!\s)', r' / ', description)
 
+        # Add spaces before and after / for Rasa NLU
+        description, nb_percent = re.subn(r'%(?!\s)', r'% ', description)
+
         # Add 2 spaces after . for Rasa NLU except at the end and for acronyms
         description, nb_periods = re.subn(r'(?<!\b[A-Z]\.)\.(?=\S)', r'.  ', description)
 
         product['labeling']['annotations']['description']['text'] = description
 
-        is_update = nb_slashes > 0 or nb_periods > 0        
+        is_update = nb_slashes > 0 or nb_periods > 0 or nb_percent > 0
 
         return is_update
 
@@ -491,6 +544,16 @@ class Product_Database():
         product_description = product['labeling']['annotations']['description']['text']
 
         cache_name = get_complex_name(product_name, product_description)
+
+        self.is_verbose = False
+        if product_name in self.debug_products:
+            self.is_verbose = True
+            pass
+
+        is_force_update = False
+        if llm_type == 'Explicit':
+            is_force_update = True
+
         if product['labelingApproval'] == 'Approved':
             # Do not overwrite existing tags
             if not cache_name in self.llm_tags_cache:
@@ -498,17 +561,20 @@ class Product_Database():
                     'name' : product['labeling']['annotations']['name'],
                     'description' : product['labeling']['annotations']['description']
                 }
-                json.dump(self.llm_tags_cache, open(self.cache_llm_file_name, 'w'))
-            else:
+            if not is_force_update:
                 self.nb_tagged_products += 1
                 return False
         
         is_new_product = False
-        if cache_name in self.llm_tags_cache:
+        if cache_name in self.llm_tags_cache and not is_force_update:
             tagging_results = {}
             tagging_results['title_tags'] = self.llm_tags_cache[cache_name]['name']['tags']
             tagging_results['description_tags'] = self.llm_tags_cache[cache_name]['description']['tags']
         else:
+            # In the FIX step, update tags to products which were already tagged by LLM
+            if self.db_step == Production_Step.FIX:
+                if not cache_name in self.llm_tags_cache:
+                    return False
             # Remove COLOUR and PRODUCT CATEGORY from ontology
             reduced_ontology = copy.deepcopy(self.ontology)
             reduced_ontology = json.loads(reduced_ontology)
@@ -546,21 +612,22 @@ class Product_Database():
                     del tag['location']
             except:
                 pass
-            try:
-                diff = DeepDiff(tagging_results[API_MAP[label_category]], product['labeling']['annotations'][label_category]['tags'], ignore_order=True)
-                if len(tagging_results[API_MAP[label_category]]) > 0 and len(diff) > 0:
-                    is_update = True
-                    for idx in diff.affected_root_keys.items:
-                            product['labeling']['annotations'][label_category]['tags'].append(tagging_results[API_MAP[label_category]][idx])
-            except:
-                pass
-
-            content = product['labeling']['annotations'][label_category]
-            is_duplicate, content['tags'] = remove_duplicate_tags(content['text'], content['tags'], is_verbose=False)
-            if is_duplicate:
+            diff = DeepDiff(tagging_results[API_MAP[label_category]], product['labeling']['annotations'][label_category]['tags'], ignore_order=True)
+            if len(tagging_results[API_MAP[label_category]]) > 0 and len(diff) > 0:
+                product['labeling']['annotations'][label_category]['tags'].extend(tagging_results[API_MAP[label_category]])
                 is_update = True
 
-        if is_new_product and not llm_type == 'Rasa':
+        # if 'Veronica Beard\'s Theron' in product_description:
+        #     print(product_description)
+        #     print(json.dumps(product['labeling']['annotations']['description']['tags'], indent=4))
+        #     self.is_verbose = True
+
+        is_update = is_update | self.correct_product_tags(product)
+
+        # if 'Veronica Beard\'s Theron' in product_description:
+        #     print(json.dumps(product['labeling']['annotations']['description']['tags'], indent=4))
+
+        if is_new_product and llm_type == 'GPT4':
             self.llm_tags_cache[cache_name] = {
                 'name' : product['labeling']['annotations']['name'],
                 'description' : product['labeling']['annotations']['description']
@@ -569,10 +636,12 @@ class Product_Database():
 
         return is_update
 
+    def get_cache_file_name(self):
+        return f'./prep/_cache_{self.db_name}.json'
+    
     def tag_products(self, tag_target=None, llm_type='GPT4'):
         current_db_name = self.db_name
-        self.set_db_name(Production_Step.FIX)
-        self.cache_llm_file_name = f'./prep/_cache_{self.db_name}.json'
+        self.cache_llm_file_name = self.get_cache_file_name()
         self.db_name = current_db_name
         # if the file does not exist, create an empty one
         if not os.path.isfile(self.cache_llm_file_name):
@@ -583,6 +652,8 @@ class Product_Database():
         time_start = time.perf_counter()
         self.nb_tagged_products = 0
         count_tagged = self.update_db_records('self.tag_product', [f'"{llm_type}"'], count_update_target=tag_target, is_show_progress=True, process_description=f'{llm_type} Tagging')
+        if count_tagged > 0 and self.db_step == Production_Step.LLM:
+            json.dump(self.llm_tags_cache, open(self.cache_llm_file_name, 'w'))
         printInfo(f'LLM tagging [{count_tagged} items tagged] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         return count_tagged
 
@@ -595,7 +666,7 @@ class Product_Database():
         count_tagged_products += 1
         if self.is_verbose:
             print('\n>> ' + product['labeling']['annotations']['name']['text'])
-        is_changed = False
+
         for field in ['name', 'description']:
             if self.is_verbose:
                 print('\n\t' + field.upper())
@@ -604,7 +675,9 @@ class Product_Database():
 
             is_boundry, content['tags']     = fix_boundries(content['text'], content['tags'], is_verbose=self.is_verbose)
 
-            is_product, content['tags']     = remove_uri_entity_mismatches(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
+            is_product, content['tags']     = remove_product_category(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
+
+            is_entity, content['tags']      = remove_uri_entity_mismatches(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
 
             is_wrong, content['tags']       = remove_wrong_tags(content['text'], content['tags'], self.wrong_tag_mapping, is_verbose=self.is_verbose)
 
@@ -614,7 +687,7 @@ class Product_Database():
 
             is_duplicate, content['tags']   = remove_duplicate_tags(content['text'], content['tags'], is_verbose=self.is_verbose)
 
-            is_changed = is_boundry | is_product | is_wrong | is_punctuation | is_embedded | is_duplicate | is_changed
+            is_changed = is_boundry | is_product | is_entity | is_wrong | is_punctuation | is_embedded | is_duplicate
 
             product['labeling']['annotations'][field] = content
 
@@ -622,7 +695,6 @@ class Product_Database():
 
     def correct_tags(self, is_fix = True):
         time_start = time.perf_counter()
-        self.wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
         count_corrected = self.update_db_records('self.correct_product_tags', count_update_target=None, is_show_progress=True, process_description='Correcting tags')
         printInfo(f'[{count_corrected} products corrected] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         return count_corrected
@@ -663,6 +735,8 @@ class Product_Database():
                     label = get_label_suffix(tag['label'])
                     if not label in self.representations:
                         self.representations[label] = set()
+                    if content[tag['start']:tag['end']].lower().startswith('double') and not label in ['doublebreasted', 'button', ]:
+                        pass
                     self.representations[label].add(content[tag['start']:tag['end']].lower())
 
     def set_tag_usage(self):
@@ -671,14 +745,18 @@ class Product_Database():
 
         with open(f'_stats_{self.category}_products.csv', 'w') as stats_file:
             self.description_tag_density = {}
-            for product in self.tagged_products:
-                nb_of_tokens = len(self.tagged_products[product]['description']['text'].split())
-                nb_of_tags   = len(self.tagged_products[product]['description']['tags'])
-                self.description_tag_density[product] = {
+            for cache_name in self.tagged_products:
+                nb_of_tokens = len(self.tagged_products[cache_name]['description']['text'].split())
+                nb_of_tags   = len(self.tagged_products[cache_name]['description']['tags'])
+                tag_density = 0
+                if nb_of_tokens > 0:
+                    tag_density = round(nb_of_tags/nb_of_tokens,2)
+                self.description_tag_density[cache_name] = {
                     'nb_tokens': nb_of_tokens, 
-                    'nb_tags': nb_of_tags
+                    'nb_tags': nb_of_tags,
+                    'tag_density': tag_density
                     }
-                stats_file.write(f'{product},{nb_of_tokens},{nb_of_tags}\n')
+                stats_file.write(f'{cache_name},{nb_of_tokens},{nb_of_tags},{tag_density}\n')
 
     def correct_uri(self, product):
         API_MAP = {'name': 'title_tags', 'description': 'description_tags'}    
@@ -748,6 +826,7 @@ class Product_Database():
     def check_product(self, product):
         visual_tags = {}
         nlu_tags    = {}
+        is_changed = False
         mapping_swap = {v: k for k, v in self.current_mapping.items()}
 
         nlu_fields = ['name', 'shortDescription', 'description']
@@ -769,14 +848,42 @@ class Product_Database():
         if len(diff) == 0:
             return False
 
-        for tag in visual_tags:
+        key_copy = tuple(visual_tags.keys())
+        for tag in key_copy:
             if tag in nlu_tags:
                 continue
             if visual_tags[tag].split('|')[0] in nlu_categories and not tag in nlu_tags:
-                printWarning(f'{product["name"]}: Visual tag [{tag.split("/")[-1]}] different from the one in the name or description.')
-                self.consistency_report.write(f'=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},{tag.split("/")[-1]}\n')
+                visual_prefix = '|'.join(visual_tags[tag].split('|')[0:-1])
+                visual_suffix = visual_tags[tag].split('|')[-1]
+                nlu_difference = ''
+                is_different = True
+                for __, nlu_value in nlu_tags.items():
+                    is_fixed = False
+                    # If only the end leaf different, it's close enough
+                    if nlu_value.startswith(visual_tags[tag]) and len(visual_tags[tag].split('|')) == (len(nlu_value.split('|')) - 1):
+                        is_different = False
+                        break
+                    elif nlu_value.startswith(visual_prefix) and not nlu_value.endswith(visual_suffix):
+                        nlu_difference = nlu_value.split('|')[-1]
+                        auto_correct_categories = ['rise', 'length', 'neckline']
+                        if visual_prefix in auto_correct_categories:
+                            # Update visual tags
+                            for annotation in product['labeling']['annotations']:
+                                if not annotation.startswith('vi_'):
+                                    continue
+                                if 'tags' in product['labeling']['annotations'][annotation]:
+                                    product_tags = product['labeling']['annotations'][annotation]['tags']
+                                    for idx, db_tag in enumerate(product_tags):
+                                        if db_tag['label'] == tag:
+                                            del product_tags[idx]
+                            is_changed = True
+                            is_fixed = True
+                            break                        
+                if is_different:
+                    printWarning(f'{product["name"]}: Visual tag [{tag.split("/")[-1]}] different from the one in the name or description.')
+                    self.consistency_report.write(f'=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},{tag.split("/")[-1]},{nlu_difference},{is_fixed}\n')
 
-        return False
+        return is_changed
     
     def check_for_contradictions(self):
         time_start = time.perf_counter()
@@ -784,8 +891,16 @@ class Product_Database():
 
         self.current_mapping = get_name_url_mapping(json.loads(self.ontology), {})
         self.consistency_report = open(f'./prep/consistency_report-{self.db_name}.csv', 'w')
-        self.consistency_report.write('Product Link,Product Name,Visual Value\n')
+        self.consistency_report.write('Product Link,Product Name,Visual Value,NLU Value,Auto-Fixed\n')
         count_corrected = self.update_db_records('self.check_product', process_description='Checking products')
         printInfo(f'[{count_corrected} product tags different] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         self.consistency_report.close()
         return count_corrected
+    
+    def upload_whole_db(self, json_db_file):
+        request_url = f'{self.dyson_url}/productDatabases/{self.db_name}/dump?overwrite=true'
+        db_content  = json.load(open(json_db_file, 'r'))
+        if self.db_step == Production_Step.ONTOLOGY:
+            self.helper_requests('post', request_url, json_post_data=db_content, process_description='Db Upload')
+        else:
+            self.helper_requests('post', request_url, json_post_data=db_content, expected_nb_records=len(db_content['products']), process_description='Db Upload')

@@ -1,4 +1,4 @@
-import json
+import shutil
 import subprocess
 
 from CLASS_Product_Database import *
@@ -23,6 +23,11 @@ class Production_Workflow():
     def clone_ontology_to_products_db(self):
         # From products db to llm db
         self.clone_helper(Production_Step.ONTOLOGY, Production_Step.PRODUCTS)
+        self.product_db.set_db_name(Production_Step.PRODUCTS)
+        # TODO: Workaround - the first time, the ontology is not copied properly (still the original ontology)
+        self.delete_db()        
+        self.clone_helper(Production_Step.ONTOLOGY, Production_Step.PRODUCTS)
+        self.product_db.set_db_name(Production_Step.PRODUCTS)
 
     def get_baseline_stats(self):
         self.product_db.set_db_name(Production_Step.PRODUCTS)
@@ -113,13 +118,14 @@ class Production_Workflow():
         self.clone_helper(Production_Step.PRODUCTS, Production_Step.LLM)
 
     def tag_llm(self):
+        LLM_TAG_PERCENTAGE = 0.05
         # Tag db using LLM
         self.product_db.set_db_name(Production_Step.LLM)
         nb_records = self.product_db.count_number_of_records()
         self.product_db.collect_existing_tags()
         # self.wait_for_product_count(nb_records_before)
 
-        tag_target = int(nb_records * 0.1)
+        tag_target = int(nb_records * LLM_TAG_PERCENTAGE)
         printInfo(f'Tagging {tag_target} products using an LLM.')
         try:
             self.product_db.tag_products(tag_target)                
@@ -129,20 +135,43 @@ class Production_Workflow():
 
     def clone_llm_to_fix_db(self):
         # From llm db to fix db
-        self.clone_helper(Production_Step.LLM, Production_Step.FIX)    
+        self.product_db.set_db_name(Production_Step.LLM)
+        llm_cache_file_name = self.product_db.get_cache_file_name()
+        self.product_db.set_db_name(Production_Step.FIX)
+        fix_cache_file_name = self.product_db.get_cache_file_name()
+        if os.path.isfile(llm_cache_file_name):
+            if not os.path.isfile(fix_cache_file_name):
+                shutil.copyfile(llm_cache_file_name, fix_cache_file_name)
+
+        self.clone_helper(Production_Step.LLM, Production_Step.FIX)
+
 
     def fix_tags(self, is_verbose=True):
         # Correct LLM tags
+        MAX_FIX_PASSES = 5
         nb_records_before = self.product_db.count_number_of_records()
         self.product_db.collect_existing_tags()
         self.wait_for_product_count(nb_records_before)
         self.product_db.is_verbose = is_verbose
 
-        for idx in range(0,3):
+        for idx in range(0, MAX_FIX_PASSES):
             printInfo(f'Fixing LLM tags: pass #{idx + 1}')
             nb_fixed_products = self.product_db.correct_tags()
             if nb_fixed_products == 0:
                 break
+
+    def tag_explicit(self):
+        # Add explicit tags
+        self.product_db.set_db_name(Production_Step.FIX)
+        self.product_db.collect_existing_tags()
+
+        printInfo(f'Add explicit tags to {self.product_db.db_name}.')
+        try:
+            self.product_db.tag_products(llm_type='Explicit')                
+        except:
+            throwError(f'Could not finish LLM tagging of {self.product_db.get_db_name()}')
+
+        printInfo(f'{self.product_db.nb_tagged_products} products tagged in {self.product_db.db_name}.')
 
     def fix_llm_tags(self):
         # Correct LLM tags
@@ -172,7 +201,7 @@ class Production_Workflow():
         self.product_db.set_db_name(Production_Step.RASA)
         self.product_db.validate_clu()
 
-    def delete_db(self, db_type):
+    def delete_db(self):
         self.product_db.destroy()
 
     def fix_uris(self):
@@ -200,6 +229,38 @@ class Production_Workflow():
         self.product_db.set_db_name(Production_Step.RASA)
         self.product_db.check_for_contradictions()
         
+    def change_all_ontologies(self):
+        self.prep_dbs()
+        self.update_ontology()
+
+        self.product_db.set_db_name(Production_Step.PRODUCTS)
+        self.product_db.get_ontology()
+
+        is_same = False
+        try:
+            self.product_db.compare_ontology(is_rebase=True)
+            is_same = True
+        except:
+            # If there is a difference, that's good.
+            pass
+
+        if is_same:
+            throwError(f'No difference between ontologies for {self.product_db.category} [ontology and products dbs].')
+
+        for step in Production_Step:
+            self.product_db.set_db_name(step)
+            if step == Production_Step.ONTOLOGY:
+                self.product_db.update_ontology(is_rebase=False)
+                continue
+            try:
+                self.product_db.update_ontology(is_rebase=True)
+            except Exception as exc:
+                if not str(exc).endswith('does not exist.'):
+                    throwError(str(exc))
+
+    def upload_db(self, db_choice, file_name):
+        self.product_db.set_db_name(Production_Step[db_choice])
+        self.product_db.upload_whole_db(file_name)
 
 # main driver function
 if __name__ == '__main__':

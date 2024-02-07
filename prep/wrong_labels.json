@@ -1,44 +1,129 @@
 {
     "*": [
-        "silhouette",
-        "sleeves",
-        "neck",
+        "closure",
+        "closures",
         "cut",
-        "short",
-        "legs",
-        "print",
-        "double-breasted",
-        "single-breasted",
+        "detail",
         "dress",
         "dresses",
+        "flap",
+        "hem",
+        "high",
+        "legs",
+        "neck",
+        "neckline",
+        "over",
+        "pants",
+        "print",
+        "short",
+        "side",
+        "silhouette",
+        "skirt",
         "sleeve",
-        "waist",
-        "neckline"
+        "sleeves",
+        "sweet dreams",
+        "trousers",
+        "waist"
+    ],
+    "aline": [
+        "alena ",
+        "ayra l",
+        "nala l",
+        "priya ",
+        "sherpa-lined",
+        "sofia ",
+        "taya l"
+    ],
+    "appliqud": [
+        "embellished gown"
     ],
     "animal": [
         "croc-embossed"
     ],
+    "asymmetrical": [
+        "pleated",
+        "pleats"
+    ],
+    "bell": [
+        "bella",
+        "embellish",
+        "embellished",
+        "embellishments",
+        "nabella",
+        "ruffle-embellished"
+    ],
     "belt": [
+        "belt loops",
         "waist"
     ],
+    "blazer": [
+        "brina",
+        "chelsea",
+        "denny",
+        "denny single-button",
+        "hirsh double-breasted dickey jacket",
+        "louisa",
+        "macey",
+        "milani",
+        "miller dickey",
+        "piece features",
+        "quinn linen",
+        "saige",
+        "signature miller dickey",
+        "single breast",
+        "single-breasted silhouette",
+        "yona"
+    ],
+    "blouse": [
+        "nikolette square-neck top",
+        "puff-sleeve top",
+        "silk-blend floral camisole"
+    ],
+    "bootcut": [
+        "crop"
+    ],
     "bow": [
+        "elbow-length",
+        "rainbow",
         "self-tie belt"
     ],
     "button": [
         "double-breasted blazer",
+        "fly",
         "single-breasted silhouette"
     ],
     "cableknit": [
+        "cable-knit dickey",
         "knit"
+    ],
+    "cap": [
+        "capriana",
+        "caprianan"
+    ],
+    "cardigan": [
+        "knit"
+    ],
+    "cargopockets": [
+        "side flap pockets",
+        "side flap utility pockets"
+    ],
+    "coat": [
+        "coated",
+        "coating"
+    ],
+    "coldwater": [
+        "cold"
     ],
     "collarless": [
         "round neck"
     ],
     "cotton": [
-        "lining",
-        "crafted",
         "cotton blend",
-        "cotton-blend"
+        "cotton-blend",
+        "crafted",
+        "denim",
+        "gauze",
+        "lining"
     ],
     "crocodile": [
         "embossing"
@@ -48,38 +133,60 @@
         "ankle-crop"
     ],
     "denim": [
+        "chambray",
         "jean",
         "jeans"
+    ],
+    "elastane": [
+        "stretch"
+    ],
+    "elastic": [
+        "pull on",
+        "pull-on"
     ],
     "embroidered": [
         "floral"
     ],
     "fauxfur": [
-        "fur",
-        "fur type",
-        "type",
-        "shearling",
         "faux",
-        "teddy coat"
+        "fur type",
+        "fur",
+        "shearling",
+        "teddy coat",
+        "type"
     ],
     "fauxleather": [
+        "faux",
         "leather jacket",
         "leather varsity",
-        "suede",
         "leather",
-        "faux"
+        "suede",
+        "vegan leather"
     ],
     "flare": [
         "jeans"
     ],
+    "floral": [
+        "showcasing"
+    ],
+    "frontzipper": [
+        "zip fly",
+        "zip-fly"
+    ],
     "fur": [
         "shearling"
+    ],
+    "gown": [
+        "a-line skirt"
     ],
     "graphic": [
         "logo"
     ],
     "handwash": [
         "dry clean"
+    ],
+    "halter": [
+        "neck; the"
     ],
     "high": [
         "mid-rise fit",
@@ -88,31 +195,80 @@
     "highrise": [
         "mid-rise"
     ],
-    "material": [
-        "wool",
-        "wool-cashmere",
-        "faux",
-        "nylon",
-        "faux shearling",
-        "rayon",
-        "shearling",
-        "cashmere",
-        "wool-cashmere",
-        "polyester"
+    "jumpsuit": [
+        "capri",
+        "capri pants"
+    ],
+    "kimono": [
+        "caftan",
+        "caftan sleeves"
+    ],
+    "lace": [
+        "eyelet",
+        "lace-up",
+        "placed",
+        "placet"
     ],
     "lapel": [
-        "collar"
+        "collar",
+        "lapelless"
+    ],
+    "leggings": [
+        "seamed"
+    ],
+    "light": [
+        "highlight",
+        "highlights",
+        "slight",
+        "slightly",
+        "spotlights",
+        "twilight"
     ],
     "lined": [
         "nylon",
         "polyester"
     ],
+    "linen": [
+        "linen-blend shorts",
+        "linen-blend"
+    ],
+    "long": [
+        "along"
+    ],
     "longsleeves": [
-        "sleeves",
         "long"
+    ],
+    "machinewash": [
+        "wash"
+    ],
+    "material": [
+        "cashmere",
+        "faux shearling",
+        "faux",
+        "nylon",
+        "polyester",
+        "rayon",
+        "shearling",
+        "sweet dreams",
+        "wool",
+        "wool-cashmere",
+        "wool-cashmere"
     ],
     "midsleeves": [
         "three-quarter-length sleeves"
+    ],
+    "mini": [
+        "length; about 15''",
+        "lia skirt",
+        "minimalist"
+    ],
+    "mock": [
+        "smocked",
+        "smocking"
+    ],
+    "natural": [
+        "cotton",
+        "denim"
     ],
     "nopockets": [
         "five-pocket style",
@@ -122,31 +278,70 @@
         "lined",
         "lining"
     ],
+    "oneshoulder": [
+        "aziza one-shoulder top",
+        "goldtone sho"
+    ],
+    "onesleeve": [
+        "one-shoulder",
+        "one shoulder"
+    ],
     "oversized": [
         "boyfriend"
     ],
+    "pajamatop": [
+        "short-sleeve top"
+    ],
+    "peak": [
+        "speak"
+    ],
+    "pocket": [
+        "chest flap pockets"
+    ],
     "pockets": [
+        "chest flap pockets",
         "kangaroo pocket"
     ],
     "polyester": [
         "lining"
     ],
+    "regularfit": [
+        "relax-fit",
+        "relaxed"
+    ],
+    "raw": [
+        "crawford",
+        "drawstring",
+        "drawstrings"
+    ],
     "relaxed": [
         "regularfit"
     ],
-    "regularfit": [
-        "relaxed",
-        "relax-fit"
+    "ribbed": [
+        "banded cuffs"
     ],
     "roundneck": [
-        "crewneck",
-        "crew neck"
+        "crew neck",
+        "crewneck"
+    ],
+    "short": [
+        "shortie",
+        "shorti"
     ],
     "skinny": [
+        "good legs",
         "jeans"
     ],
     "sleevelength": [
         "long sleeves"
+    ],
+    "sleeveless": [
+        "tank"
+    ],
+    "splithem": [
+        "slit",
+        "split",
+        "split ankle cuffs"
     ],
     "stand": [
         "collar"
@@ -154,17 +349,45 @@
     "straight": [
         "jeans"
     ],
+    "stripes": [
+        "pattern"
+    ],
     "sweater": [
+        "knit",
+        "relaxed turtleneck",
         "t-shirt"
     ],
+    "synthetic": [
+        "viscose"
+    ],
+    "tall": [
+        "metallic"
+    ],
     "text": [
-        "made in italy"
+        "imported",
+        "made in italy",
+        "made in usa",
+        "nic+zoe",
+        "nic+zoe's",
+        "textiles",
+        "textural",
+        "texture",
+        "textured",
+        "texturing"
     ],
-    "threequarter": [
-        "sleeves"
-    ],
+    "threequarter": [],
     "tied": [
         "belted"
+    ],
+    "tshirt": [
+        "abstract",
+        "crescent",
+        "dot shi",
+        "front s",
+        "ikat sh",
+        "out shi",
+        "print s",
+        "scout s"
     ],
     "tweed": [
         "bouclé",
@@ -173,13 +396,24 @@
     "viscose": [
         "lining"
     ],
+    "vneck": [
+        "v-neck; tie"
+    ],
     "wide": [
         "jeans",
         "leg"
     ],
     "wool": [
         "construction",
-        "wool-blend",
-        "wool blend"
+        "wool blend",
+        "wool-blend"
+    ],
+    "zipper": [
+        "back-zip closure",
+        "chest flap pockets",
+        "concealed back-zip closure",
+        "front-zip closure",
+        "zip front",
+        "zip-front closure"
     ]
 }

@@ -147,7 +147,7 @@ class Production_Workflow():
 
 
     def fix_tags(self, is_verbose=True):
-        # Correct LLM tags
+        # Correct tags
         MAX_FIX_PASSES = 5
         nb_records_before = self.product_db.count_number_of_records()
         self.product_db.collect_existing_tags()
@@ -155,7 +155,7 @@ class Production_Workflow():
         self.product_db.is_verbose = is_verbose
 
         for idx in range(0, MAX_FIX_PASSES):
-            printInfo(f'Fixing LLM tags: pass #{idx + 1}')
+            printInfo(f'Fixing tags: pass #{idx + 1}')
             nb_fixed_products = self.product_db.correct_tags()
             if nb_fixed_products == 0:
                 break
@@ -229,6 +229,18 @@ class Production_Workflow():
         self.product_db.set_db_name(Production_Step.RASA)
         self.product_db.check_for_contradictions()
         
+    def partially_approve_products(self):
+        # Tag db using LLM
+        self.product_db.set_db_name(Production_Step.RASA)
+        self.product_db.count_number_of_records()
+        self.product_db.collect_existing_tags()
+
+        self.product_db.partially_approve_tagged_products()
+
+    def publish_products(self):
+        self.product_db.set_db_name(Production_Step.RASA)
+        self.product_db.publish_products()
+
     def change_all_ontologies(self):
         self.prep_dbs()
         self.update_ontology()

@@ -20,7 +20,7 @@ def check_for_duplicates(representations):
                         print(f'Duplicate attribute value [{outer_value}]: {outer_label} and {inner_label}')
 
 class Nlu_Workflow():
-    def __init__(self, product_categories) -> None:
+    def __init__(self, product_categories, entity_limit=None) -> None:
         self.product_dbs = {}
         self.product_categories = product_categories
         for category in self.product_categories:
@@ -29,7 +29,8 @@ class Nlu_Workflow():
             self.product_dbs[category].connect_db()
             self.product_dbs[category].get_ontology()
             self.product_dbs[category].count_number_of_records()
-
+        self.entity_limit = entity_limit
+        
     def check_tag_quality(self):
         pp = pprint.PrettyPrinter(indent=4)
         
@@ -60,7 +61,7 @@ class Nlu_Workflow():
     def generate_nlu(self):
         for category in self.product_categories:
             self.product_dbs[category].collect_existing_tags()
-        nlu = Rasa_Nlu(self.product_dbs)
+        nlu = Rasa_Nlu(self.product_dbs, self.entity_limit)
         nlu.create_nlu()
 
     def search_dbs(self, search_text):

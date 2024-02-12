@@ -26,8 +26,12 @@
         "waist"
     ],
     "aline": [
+        "achin",
         "alena ",
+        "ance",
         "ayra l",
+        "line",
+        "line style",
         "nala l",
         "priya ",
         "sherpa-lined",
@@ -35,7 +39,9 @@
         "taya l"
     ],
     "appliqud": [
-        "embellished gown"
+        "embellished gown",
+        "patch",
+        "patches"
     ],
     "animal": [
         "croc-embossed"
@@ -43,6 +49,14 @@
     "asymmetrical": [
         "pleated",
         "pleats"
+    ],
+    "backzipper": [
+        "zip",
+        "zip closure"
+    ],
+    "beaded": [
+        "embellished",
+        "embellished dress"
     ],
     "bell": [
         "bella",
@@ -54,7 +68,14 @@
     ],
     "belt": [
         "belt loops",
-        "waist"
+        "buckle",
+        "buckled",
+        "buckled accent",
+        "waist",
+        "waist-defining"
+    ],
+    "beltloops": [
+        "loops and a"
     ],
     "blazer": [
         "brina",
@@ -80,6 +101,7 @@
         "silk-blend floral camisole"
     ],
     "bootcut": [
+        "boot",
         "crop"
     ],
     "bow": [
@@ -88,9 +110,31 @@
         "self-tie belt"
     ],
     "button": [
+        "button",
+        "button accent at cuffs",
+        "button cuffs",
+        "button detail",
+        "button fly",
+        "button fly closure",
+        "button fly front",
+        "button with zip",
+        "button-accent",
+        "button fly front",
+        "buttoned cuffs",
+        "buttoned fly",
+        "buttoned look",
+        "buttons",
+        "buttons at nape",
+        "concealed button fly",
         "double-breasted blazer",
+        "double-breasted faux buttons",
+        "exposed button fly",
         "fly",
-        "single-breasted silhouette"
+        "single-breasted silhouette",
+        "zip fly with button"
+    ],
+    "buttoned": [
+        "buttoned"
     ],
     "cableknit": [
         "cable-knit dickey",
@@ -101,7 +145,8 @@
         "caprianan"
     ],
     "cardigan": [
-        "knit"
+        "knit",
+        "peplum"
     ],
     "cargopockets": [
         "side flap pockets",
@@ -123,34 +168,70 @@
         "crafted",
         "denim",
         "gauze",
-        "lining"
+        "lining",
+        "self"
     ],
     "crocodile": [
         "embossing"
     ],
     "cropped": [
         "ankle-crop silhouette",
-        "ankle-crop"
+        "ankle-crop",
+        "length"
     ],
     "denim": [
         "chambray",
         "jean",
-        "jeans"
+        "jeans",
+        "rigid"
+    ],
+    "detachable": [
+        "detachable"
+    ],
+    "dolman": [
+        "paneled"
+    ],
+    "dot": [
+        "textured"
+    ],
+    "drycleanonly": [
+        "spot clean"
     ],
     "elastane": [
-        "stretch"
+        "stretch",
+        "spandex"
     ],
     "elastic": [
+        "elastic",
+        "elasticated cuffs",
+        "elasticized",
+        "elasticized back straps",
+        "elasticized bodice",
+        "elasticized cuff",
+        "elasticized cuffs",
+        "elasticized cut-out",
+        "elasticized front",
+        "inset elasticized panels",
         "pull on",
-        "pull-on"
+        "pull-on",
+        "pull-on style",
+        "smocked",
+        "smocked banded waist",
+        "smocked waist",
+        "with elasticized cuffs"
     ],
     "embroidered": [
+        "eyelet",
         "floral"
+    ],
+    "empire": [
+        "banded waist"
     ],
     "fauxfur": [
         "faux",
         "fur type",
         "fur",
+        "leather and",
         "shearling",
         "teddy coat",
         "type"
@@ -163,11 +244,30 @@
         "suede",
         "vegan leather"
     ],
+    "fitandflare": [
+        "a-line skirt",
+        "fit-and",
+        "flare",
+        "flared"
+    ],
     "flare": [
+        "flare",
+        "flared",
+        "flares",
         "jeans"
     ],
     "floral": [
+        "cover",
+        "printed",
+        "prints",
         "showcasing"
+    ],
+    "frontslit": [
+        "high-slit",
+        "slit",
+        "thigh high slit",
+        "thigh slit",
+        "thigh-high slit"
     ],
     "frontzipper": [
         "zip fly",
@@ -176,11 +276,17 @@
     "fur": [
         "shearling"
     ],
+    "geometric": [
+        "printed"
+    ],
     "gown": [
-        "a-line skirt"
+        "a-line skirt",
+        "ball",
+        "tiered"
     ],
     "graphic": [
-        "logo"
+        "logo",
+        "printed"
     ],
     "handwash": [
         "dry clean"
@@ -193,7 +299,18 @@
         "mid-rise"
     ],
     "highrise": [
-        "mid-rise"
+        "good waist",
+        "mid-rise",
+        "le high",
+        "mid-rise silhouette",
+        "rise pants",
+        "ultra"
+    ],
+    "jacquard": [
+        "detailing at the front"
+    ],
+    "jersey": [
+        "knit"
     ],
     "jumpsuit": [
         "capri",
@@ -239,6 +356,7 @@
         "long"
     ],
     "machinewash": [
+        "machine",
         "wash"
     ],
     "material": [
@@ -254,17 +372,24 @@
         "wool-cashmere",
         "wool-cashmere"
     ],
+    "medium": [
+        "medium"
+    ],
     "midsleeves": [
         "three-quarter-length sleeves"
     ],
     "mini": [
         "length; about 15''",
         "lia skirt",
-        "minimalist"
+        "minimalist",
+        "shoulder to hem"
     ],
     "mock": [
         "smocked",
         "smocking"
+    ],
+    "multi": [
+        "multi"
     ],
     "natural": [
         "cotton",
@@ -278,9 +403,16 @@
         "lined",
         "lining"
     ],
+    "offtheshoulder": [
+        "fitted strapless",
+        "neckline defines",
+        "strapless"
+    ],
     "oneshoulder": [
         "aziza one-shoulder top",
-        "goldtone sho"
+        "contrast-trim asymmetric",
+        "goldtone sho",
+        "miranda one-shoulder sash midi-dress"
     ],
     "onesleeve": [
         "one-shoulder",
@@ -292,18 +424,36 @@
     "pajamatop": [
         "short-sleeve top"
     ],
+    "patchpockets": [
+        "chest snap flap pockets",
+        "hip flap pockets",
+        "waist flap pockets"
+    ],
     "peak": [
         "speak"
     ],
+    "plaid": [
+        "complete",
+        "look"
+    ],
+    "pleatedfront": [
+        "pleating"
+    ],
+    "plussize": [
+        "plus"
+    ],
     "pocket": [
-        "chest flap pockets"
+        "chest flap pockets",
+        "multiple",
+        "sides"
     ],
     "pockets": [
         "chest flap pockets",
         "kangaroo pocket"
     ],
     "polyester": [
-        "lining"
+        "lining",
+        "shell"
     ],
     "regularfit": [
         "relax-fit",
@@ -322,11 +472,24 @@
     ],
     "roundneck": [
         "crew neck",
-        "crewneck"
+        "crewneck",
+        "round"
+    ],
+    "ruched": [
+        "gathering"
     ],
     "short": [
+        "dani shorts",
         "shortie",
-        "shorti"
+        "shorti",
+        "shorts",
+        "upf 50+ shorts",
+        "wesley drawstring shorts"
+    ],
+    "sideslit": [
+        "slit",
+        "thigh-high skirt slit",
+        "thigh-high slit"
     ],
     "skinny": [
         "good legs",
@@ -337,6 +500,9 @@
     ],
     "sleeveless": [
         "tank"
+    ],
+    "slim": [
+        "runs small"
     ],
     "splithem": [
         "slit",
@@ -353,6 +519,8 @@
         "pattern"
     ],
     "sweater": [
+        "crafted cables",
+        "easy",
         "knit",
         "relaxed turtleneck",
         "t-shirt"
@@ -401,7 +569,8 @@
     ],
     "wide": [
         "jeans",
-        "leg"
+        "leg",
+        "pant"
     ],
     "wool": [
         "construction",
@@ -409,9 +578,13 @@
         "wool-blend"
     ],
     "zipper": [
+        "back zip",
+        "back-zip",
+        "back zip closure",
         "back-zip closure",
         "chest flap pockets",
         "concealed back-zip closure",
+        "fly",
         "front-zip closure",
         "zip front",
         "zip-front closure"

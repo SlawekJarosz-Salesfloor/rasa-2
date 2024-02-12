@@ -1,0 +1,52 @@
+{
+    "1": [
+        "sf_apparel_care_instructions",
+        "sf_apparel_closure",
+        "sf_apparel_collar"
+    ],
+    "2": [
+        "sf_apparel_cuff",
+        "sf_apparel_distressing",
+        "sf_apparel_embellishments",
+        "sf_apparel_fit"
+    ],
+    "3": [
+        "sf_apparel_hem",
+        "sf_apparel_hood_type",
+        "sf_apparel_length",
+        "sf_apparel_lining"
+    ],
+    "4": [
+        "sf_apparel_material"
+    ],
+    "5": [
+        "sf_apparel_material_composition",
+        "sf_apparel_material_weight",
+        "sf_apparel_neckline"
+    ],
+    "6": [
+        "sf_apparel_pattern",
+        "sf_apparel_size_category"
+    ],
+    "7": [
+        "sf_apparel_pocket_type",
+        "sf_apparel_rise",
+        "sf_apparel_stretch_type"
+    ],
+    "8": [
+        "sf_apparel_product_type"
+    ],
+    "9": [
+        "sf_apparel_sleeve_length",
+        "sf_apparel_sleeve_style",
+        "sf_apparel_slit",
+        "sf_apparel_straps"
+    ],
+    "10": [
+        "sf_apparel_size_category",
+        "sf_apparel_sustainability",
+        "sf_apparel_waist",
+        "sf_apparel_wash",
+        "sf_apparel_weather_protection"
+    ]
+}

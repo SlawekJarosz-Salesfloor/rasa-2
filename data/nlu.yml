@@ -1,37 +1,133 @@
 version: "3.1"
-# SUPERSET w/ top 10 [SweatshirtsHoodies] @ 2024-01-18 12:47:32.578681
+# SUPERSET w/ top 20 [SweatshirtsHoodies] @ 2024-02-12 09:46:06.044043
 
 nlu:
 # ====================
 # === NLU ENTITIES ===
 # ====================
-- lookup: sf_apparel_product_type__sweatshirt
+- lookup: sf_apparel_care_instructions__dry_clean_only
   examples: |
-    - sweatshirt
+    - dry clean only
 
-- lookup: sf_apparel_product_type__hoodie
+- lookup: sf_apparel_care_instructions__hand_wash
   examples: |
-    - hoodie
+    - hand wash
 
-- lookup: sf_apparel_length__cropped
+- lookup: sf_apparel_care_instructions__machine_wash
   examples: |
-    - cropped
+    - machine wash
+
+- lookup: sf_apparel_closure__zipper
+  examples: |
+    - zipper
+
+- synonym: sf_apparel_closure__zipper
+  examples: |
+    - zip-up
+
+- lookup: sf_apparel_closure__zipper__full_zipper
+  examples: |
+    - full zipper
+
+- lookup: sf_apparel_closure__zipper__quarter_zipper
+  examples: |
+    - quarter zipper
+
+- lookup: sf_apparel_cuff__rolled
+  examples: |
+    - rolled
+
+- lookup: sf_apparel_embellishments__embroidered
+  examples: |
+    - embroidered
 
 - lookup: sf_apparel_fit__oversized
   examples: |
     - oversized
 
-- lookup: sf_apparel_pattern__stripes
+- lookup: sf_apparel_fit__slim
   examples: |
-    - stripes
+    - slim
 
-- lookup: sf_apparel_pattern__graphic
+- lookup: sf_apparel_hem__raw
   examples: |
-    - graphic
+    - raw
 
-- lookup: sf_apparel_pattern__graphic__logo
+- lookup: sf_apparel_hem__ribbed
   examples: |
-    - logo
+    - ribbed
+
+- lookup: sf_apparel_length__cropped
+  examples: |
+    - cropped
+
+- lookup: sf_apparel_length__long
+  examples: |
+    - long
+
+- lookup: sf_apparel_material__cashmere
+  examples: |
+    - cashmere
+
+- lookup: sf_apparel_material__cotton
+  examples: |
+    - cotton
+
+- lookup: sf_apparel_material__elastane
+  examples: |
+    - elastane
+
+- lookup: sf_apparel_material__fleece
+  examples: |
+    - fleece
+
+- lookup: sf_apparel_material__polyester
+  examples: |
+    - polyester
+
+- lookup: sf_apparel_material__wool
+  examples: |
+    - wool
+
+- lookup: sf_apparel_material_weight__heavyweight
+  examples: |
+    - heavyweight
+
+- lookup: sf_apparel_material_weight__lightweight
+  examples: |
+    - lightweight
+
+- lookup: sf_apparel_material_weight__midweight
+  examples: |
+    - midweight
+
+- lookup: sf_apparel_neckline__collared
+  examples: |
+    - collared
+
+- lookup: sf_apparel_neckline__high_neck__mock
+  examples: |
+    - mock
+
+- lookup: sf_apparel_neckline__high_neck__turtleneck
+  examples: |
+    - turtleneck
+
+- lookup: sf_apparel_neckline__roundneck
+  examples: |
+    - roundneck
+
+- lookup: sf_apparel_neckline__roundneck__crewneck
+  examples: |
+    - crewneck
+
+- lookup: sf_apparel_neckline__roundneck__scoop_neck
+  examples: |
+    - scoop neck
+
+- lookup: sf_apparel_neckline__v_neck
+  examples: |
+    - v neck
 
 - lookup: sf_apparel_pattern__abstract
   examples: |
@@ -45,57 +141,25 @@ nlu:
   examples: |
     - camo
 
-- lookup: sf_apparel_closure__zipper
+- lookup: sf_apparel_pattern__graphic
   examples: |
-    - zipper
+    - graphic
 
-- synonym: sf_apparel_closure__zipper
+- lookup: sf_apparel_pattern__graphic__logo
   examples: |
-    - zip-up
+    - logo
 
-- lookup: sf_apparel_care_instructions__machine_wash
+- lookup: sf_apparel_pattern__graphic__text
   examples: |
-    - machine wash
+    - text
 
-- lookup: sf_apparel_care_instructions__hand_wash
+- lookup: sf_apparel_pattern__solid
   examples: |
-    - hand wash
+    - solid
 
-- lookup: sf_apparel_care_instructions__dry_clean_only
+- lookup: sf_apparel_pattern__stripes
   examples: |
-    - dry clean only
-
-- lookup: sf_apparel_neckline__v_neck
-  examples: |
-    - v neck
-
-- lookup: sf_apparel_neckline__roundneck
-  examples: |
-    - roundneck
-
-- lookup: sf_apparel_neckline__roundneck__scoop_neck
-  examples: |
-    - scoop neck
-
-- lookup: sf_apparel_neckline__roundneck__crewneck
-  examples: |
-    - crewneck
-
-- lookup: sf_apparel_sleeve_length__long_sleeves
-  examples: |
-    - long sleeves
-
-- lookup: sf_apparel_sleeve_length__short_sleeves
-  examples: |
-    - short sleeves
-
-- lookup: sf_apparel_embellishments__embroidered
-  examples: |
-    - embroidered
-
-- lookup: sf_apparel_pocket_type__pocket
-  examples: |
-    - pocket
+    - stripes
 
 - lookup: sf_apparel_pocket_type__kangaroo
   examples: |
@@ -105,49 +169,41 @@ nlu:
   examples: |
     - kangaroo pockets
 
-- lookup: sf_apparel_material__cotton
+- lookup: sf_apparel_pocket_type__pocket
   examples: |
-    - cotton
+    - pocket
 
-- lookup: sf_apparel_material__fleece
+- lookup: sf_apparel_product_type__hoodie
   examples: |
-    - fleece
+    - hoodie
 
-- lookup: sf_apparel_material__polyester
+- lookup: sf_apparel_product_type__sweatshirt
   examples: |
-    - polyester
+    - sweatshirt
 
-- lookup: sf_apparel_material__elastane
+- lookup: sf_apparel_sleeve_length__long_sleeves
   examples: |
-    - elastane
+    - long sleeves
 
-- lookup: sf_apparel_material_composition__synthetic
+- lookup: sf_apparel_sleeve_length__short_sleeves
   examples: |
-    - synthetic
-
-- lookup: sf_apparel_material_composition__blend
-  examples: |
-    - blend
-
-- lookup: sf_apparel_material_weight__midweight
-  examples: |
-    - midweight
-
-- lookup: sf_apparel_material_weight__heavyweight
-  examples: |
-    - heavyweight
+    - short sleeves
 
 - lookup: sf_apparel_stretch_type__stretch
   examples: |
     - stretch
 
-- lookup: sf_apparel_hem__raw
+- lookup: sf_apparel_sustainability__organic
   examples: |
-    - raw
+    - organic
 
-- lookup: sf_apparel_hem__ribbed
+- lookup: sf_apparel_wash__faded
   examples: |
-    - ribbed
+    - faded
+
+- lookup: sf_apparel_wash__vintage
+  examples: |
+    - vintage
 
 - lookup: sf_apparel_product_category
   examples: |
@@ -176,97 +232,158 @@ nlu:
 # ==================
 # === NLU TOPICS ===
 # ==================
+
 - intent: sf_apparel__title_tags
   examples: |
-    - Boucle Knit [Pullover]{"entity": "sf_apparel_product_type__sweatshirt"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Terry [Cropped]{"entity": "sf_apparel_length__cropped"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Winter Heather [Slouchy]{"entity": "sf_apparel_fit__oversized"} [Long Sleeve]{"entity": "sf_apparel_sleeve_length__long_sleeves"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Heathered Cotton [Blend]{"entity": "sf_apparel_material_composition__blend"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - [Heavyweight]{"entity": "sf_apparel_material_weight__heavyweight"} [Fleece]{"entity": "sf_apparel_material__fleece"} Pullover
-    - Floral [Embroidered]{"entity": "sf_apparel_embellishments__embroidered"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Eden Rock [Cropped]{"entity": "sf_apparel_length__cropped"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Core [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} [Cotton]{"entity": "sf_apparel_material__cotton"} [Crop]{"entity": "sf_apparel_length__cropped"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
     - Drop Square [Tie Dye]{"entity": "sf_apparel_pattern__abstract"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - The Jolie [Striped]{"entity": "sf_apparel_pattern__stripes"} [Cotton]{"entity": "sf_apparel_material__cotton"} [Crop]{"entity": "sf_apparel_length__cropped"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Simone Boyfriend [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Shanara [Fleece]{"entity": "sf_apparel_material__fleece"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Brushed [Cotton]{"entity": "sf_apparel_material__cotton"} Terry [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Harvey [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - [Zip Up Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} Corduroy [Hooded]{"entity": "sf_apparel_product_type__hoodie"} T Shirt
-    - Harvey [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} Retro Tiger [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Beaumont [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Jaci [Oversized]{"entity": "sf_apparel_fit__oversized"} University [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Core Stretch [Cotton]{"entity": "sf_apparel_material__cotton"} [Crop]{"entity": "sf_apparel_length__cropped"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - LaCoste x Bandier [Cotton Blend]{"entity": "sf_apparel_material_composition__blend"} Pullover [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Mon Amour Brandy [Embellished]{"entity": "sf_apparel_embellishments__embroidered"} [Cotton]{"entity": "sf_apparel_material__cotton"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Brandy [Graphic]{"entity": "sf_apparel_pattern__graphic"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Jaci [Cotton]{"entity": "sf_apparel_material__cotton"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - [Cotton Blend]{"entity": "sf_apparel_material_composition__blend"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Essential Glitter [Crew Neck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Ramona [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - The Boost [Cotton Fleece]{"entity": "sf_apparel_material__cotton"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Lucy [Cotton]{"entity": "sf_apparel_material__cotton"} [Fleece]{"entity": "sf_apparel_material__fleece"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Cruz Cashmere [V Neck]{"entity": "sf_apparel_neckline__v_neck"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Brandy Crackle Rhinestone [Cotton]{"entity": "sf_apparel_material__cotton"} Pullover [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Terry [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Ash [Cotton]{"entity": "sf_apparel_material__cotton"} Terry [Short Sleeve]{"entity": "sf_apparel_sleeve_length__short_sleeves"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Harvey [Oversized]{"entity": "sf_apparel_fit__oversized"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
     - Bi Color [Cotton]{"entity": "sf_apparel_material__cotton"} Glitter Puff [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Tyler [Oversized]{"entity": "sf_apparel_fit__oversized"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - The Champ [Printed]{"entity": "sf_apparel_pattern__graphic"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Pullover]{"entity": "sf_apparel_product_type__sweatshirt"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Terry [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Double Face Piqué Raglan [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Mon Amour Brandy [Embellished]{"entity": "sf_apparel_embellishments__embroidered"} [Cotton]{"entity": "sf_apparel_material__cotton"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Cruz [Cashmere]{"entity": "sf_apparel_material__cashmere"} [V Neck]{"entity": "sf_apparel_neckline__v_neck"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Tie Dye [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Harvey [Oversized]{"entity": "sf_apparel_fit__oversized"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Terry [Cropped]{"entity": "sf_apparel_length__cropped"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Brushed [Cotton]{"entity": "sf_apparel_material__cotton"} Terry [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Cotton]{"entity": "sf_apparel_material__cotton"} [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Jaci [Oversized]{"entity": "sf_apparel_fit__oversized"} University [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Fisherman [Wool]{"entity": "sf_apparel_material__wool"} [Cashmere]{"entity": "sf_apparel_material__cashmere"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Super Soft French Terry [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - The Jolie [Striped]{"entity": "sf_apparel_pattern__stripes"} [Cotton]{"entity": "sf_apparel_material__cotton"} [Crop]{"entity": "sf_apparel_length__cropped"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Harvey [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} Retro Tiger [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Serape Bolt Stitch [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - [Heavyweight]{"entity": "sf_apparel_material_weight__heavyweight"} [Fleece]{"entity": "sf_apparel_material__fleece"} Pullover
+    - [Mock]{"entity": "sf_apparel_neckline__high_neck__mock"} [Turtleneck]{"entity": "sf_apparel_neckline__high_neck__turtleneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Lisle Rib Knit [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Classic Koko [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - [Oversized]{"entity": "sf_apparel_fit__oversized"} Half Zip [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Eden Rock [Cropped]{"entity": "sf_apparel_length__cropped"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Essential Glitter [Crew Neck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Essential Terry Puff [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - The Drop Square [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Harvey [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - [Cropped]{"entity": "sf_apparel_length__cropped"} Double [Fleece]{"entity": "sf_apparel_material__fleece"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Block Letter [Cotton]{"entity": "sf_apparel_material__cotton"} Blend [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Floral [Embroidered]{"entity": "sf_apparel_embellishments__embroidered"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Elin Shaker Stitch Sweater [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Ash [Cotton]{"entity": "sf_apparel_material__cotton"} Terry [Short Sleeve]{"entity": "sf_apparel_sleeve_length__short_sleeves"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Zip Up [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - [Cotton]{"entity": "sf_apparel_material__cotton"} Blend [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Lucy [Cotton]{"entity": "sf_apparel_material__cotton"} [Fleece]{"entity": "sf_apparel_material__fleece"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Collegiate [Oversized]{"entity": "sf_apparel_fit__oversized"} [Cotton]{"entity": "sf_apparel_material__cotton"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Glittery [Cotton]{"entity": "sf_apparel_material__cotton"} Blend [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Easy [Cotton]{"entity": "sf_apparel_material__cotton"} Crop [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
     - Banana Print Terry [Zip]{"entity": "sf_apparel_closure__zipper"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Vintage Tiger [Cropped]{"entity": "sf_apparel_length__cropped"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
-    - Tyler [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Glittery Cotton [Blend]{"entity": "sf_apparel_material_composition__blend"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Ugg x Telfar [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
     - Jaci Paris [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Oversized]{"entity": "sf_apparel_fit__oversized"} [Cotton]{"entity": "sf_apparel_material__cotton"} Blend [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - [Oversized]{"entity": "sf_apparel_fit__oversized"} [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Dip Dye [Cropped]{"entity": "sf_apparel_length__cropped"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Halley Colorblocked [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} Quarter Zip [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Nash [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} Half Zip [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Stacked [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Fleece]{"entity": "sf_apparel_material__fleece"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Vintage]{"entity": "sf_apparel_wash__vintage"} Tiger [Cropped]{"entity": "sf_apparel_length__cropped"} [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} Corduroy [Hooded]{"entity": "sf_apparel_product_type__hoodie"} T Shirt
+    - Heathered [Cotton]{"entity": "sf_apparel_material__cotton"} Blend [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - The Champ Printed [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Pullover]{"entity": "sf_apparel_product_type__sweatshirt"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Cotton]{"entity": "sf_apparel_material__cotton"} Shirttail [Cropped]{"entity": "sf_apparel_length__cropped"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Tyler [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Shanara [Fleece]{"entity": "sf_apparel_material__fleece"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
     - Theo [Camouflage]{"entity": "sf_apparel_pattern__camouflage"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
-    - Essential Terry Puff Logo [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Brandy [Graphic]{"entity": "sf_apparel_pattern__graphic"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Wool]{"entity": "sf_apparel_material__wool"} & [Cashmere]{"entity": "sf_apparel_material__cashmere"} Blend Knit [Hoodie]{"entity": "sf_apparel_product_type__hoodie"}
+    - Jaci [Cotton]{"entity": "sf_apparel_material__cotton"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Tyler [Oversized]{"entity": "sf_apparel_fit__oversized"} [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Cotton]{"entity": "sf_apparel_material__cotton"} Short Sleeve [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Brandy Crackle Rhinestone [Cotton]{"entity": "sf_apparel_material__cotton"} Pullover [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - The Boost [Cotton]{"entity": "sf_apparel_material__cotton"} [Fleece]{"entity": "sf_apparel_material__fleece"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Golden Rose [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - [Oversized]{"entity": "sf_apparel_fit__oversized"} Brushstroke Pullover [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Ramona [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Winter Heather [Slouchy]{"entity": "sf_apparel_fit__oversized"} [Long Sleeve]{"entity": "sf_apparel_sleeve_length__long_sleeves"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
+    - Beaumont [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}
 
 - intent: sf_apparel__description_tags
   examples: |
-    - Cinq à Sept's Brandy sweatshirt is crafted of cotton. This style showcases a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and crackled rhinestone embellished shoulders for a touch of sparkle. Crewneck. Long sleeves. Pulls over. 100% [Cotton]{"entity": "sf_apparel_material__cotton"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
-    - Cut in an [oversized]{"entity": "sf_apparel_fit__oversized"} silhouette; ANINE BING's hooded Harvey sweatshirt is elevated by a large terry logo patch at the front. Attached hood. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. [Banded ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; ANINE BING's oversized Tyler sweatshirt showcases dropped shoulders and a classic rib knit trim. This piece features an arch logo at the chest. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Rib knit trim]{"entity": "sf_apparel_hem__ribbed"}. Pulls over. 100% organic cotton. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Cut in a [cropped silhouette]{"entity": "sf_apparel_length__cropped"}; rag & bone's terry [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} sweatshirt offers a relaxed fit and [banded ribbed trim]{"entity": "sf_apparel_hem__ribbed"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Banded ribbed trim]{"entity": "sf_apparel_hem__ribbed"}. Pullover style. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - A varsity style logo adorns the front of Veronica Beard’s Beaumont Logo Sweatshirt; designed with a shrunken fit. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long raglan sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. Ribbed collar; cuffs and hem. [Cotton]{"entity": "sf_apparel_material__cotton"} / [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Cut from [heavyweight]{"entity": "sf_apparel_material_weight__heavyweight"} [fleece]{"entity": "sf_apparel_material__fleece"}; NIC+ZOE’s pullover has a relaxed fit with a half zip placket for a sporty look. Stand collar. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Half zip placket. [Front kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. [Polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Amiri's hoodie is crafted of soft [cotton]{"entity": "sf_apparel_material__cotton"} and cut in a relaxed [cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Dropped shoulders and a logo tiger graphic define the look. Hooded. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 100% cotton. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in USA.
-    - Jason Wu's sweatshirt is crafted of cotton terry and features a [relaxed cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Delicate [floral embroidery]{"entity": "sf_apparel_embellishments__embroidered"} decorates this pull on style. Crew neck. Long sleeves. Dropped shoulders. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. Self lined. Dry clean. Imported.
-    - Cut with an [oversized fit]{"entity": "sf_apparel_fit__oversized"}; AGOLDE's Ash sweatshirt is styled with a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} and [short sleeves]{"entity": "sf_apparel_sleeve_length__short_sleeves"}. Crewneck. Short sleeves. Pulls over. 97% [cotton]{"entity": "sf_apparel_material__cotton"} / 3% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - Hand dyed [hoodie]{"entity": "sf_apparel_product_type__hoodie"} with an eye catching tie dye print throughout. Attached hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Raw cut hem]{"entity": "sf_apparel_hem__raw"}. [Cotton]{"entity": "sf_apparel_material__cotton"} / [polyester]{"entity": "sf_apparel_material__polyester"} / rayon. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - This [pullover sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} by alexanderwang.t is made of heavyweight brushed [cotton]{"entity": "sf_apparel_material__cotton"} terry. This relaxed style features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and a stacked [logo print on the]{"entity": "sf_apparel_pattern__graphic__logo"} chest. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. Long sleeves. Pullover style. 79% [cotton]{"entity": "sf_apparel_material__cotton"} / 21%[polyester]{"entity": "sf_apparel_material__polyester"}. Combo: 98% [cotton]{"entity": "sf_apparel_material__cotton"} / 2% [elastane]{"entity": "sf_apparel_material__elastane"}. Machine wash. Imported.
-    - Crafted of [cotton blend]{"entity": "sf_apparel_material_composition__blend"} [fleece]{"entity": "sf_apparel_material__fleece"}; the [oversized]{"entity": "sf_apparel_fit__oversized"} hoodie from alexanderwang.t offers a lustrous glittery outer and a complementary [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the chest. Attached hood; adjustable drawstrings. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded trim. Pulls over. 68% [cotton]{"entity": "sf_apparel_material__cotton"} / 31% [polyester]{"entity": "sf_apparel_material__polyester"} / 1% [viscose]{"entity": "sf_apparel_material_composition__synthetic"}. Combination: 94% [cotton]{"entity": "sf_apparel_material__cotton"} / 4% [viscose]{"entity": "sf_apparel_material_composition__synthetic"} / 2% [elastane]{"entity": "sf_apparel_material__elastane"}. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
-    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; the Jolie [striped]{"entity": "sf_apparel_pattern__stripes"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} from Solid & Striped features long sleeves; a lace up front; and a [cropped hem]{"entity": "sf_apparel_length__cropped"}. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Lace up front. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Plush in design; this hoodie is crafted with a classic terry cloth finish. Attached hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Zip front closure]{"entity": "sf_apparel_closure__zipper"}. [Ribbed trim]{"entity": "sf_apparel_hem__ribbed"}. Modal / [spandex]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - The Lucy [hoodie]{"entity": "sf_apparel_product_type__hoodie"} from Anine Bing is crafted of [midweight]{"entity": "sf_apparel_material_weight__midweight"} [cotton]{"entity": "sf_apparel_material__cotton"} [fleece]{"entity": "sf_apparel_material__fleece"} and features a arched screen printed logo at the corner chest. This [oversized]{"entity": "sf_apparel_fit__oversized"} style is finished with an interior drawstring hem for an adjustable fit. Hood. Drop shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% cotton. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - This rag & bone [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} sweater features a relaxed silhouette crafted of the brand's ultra soft vintage terry. [Rib knit trim]{"entity": "sf_apparel_hem__ribbed"} and dropped shoulder sleeves complete the look. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 79% [cotton]{"entity": "sf_apparel_material__cotton"} / 22% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Moschino's Core [crop]{"entity": "sf_apparel_length__cropped"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of stretch [cotton]{"entity": "sf_apparel_material__cotton"}. This relaxed style features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and the label's classic [logo]{"entity": "sf_apparel_pattern__graphic__logo"} trim. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 92% [cotton]{"entity": "sf_apparel_material__cotton"} / 8% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Amiri's hoodie is crafted in Italy of soft [cotton]{"entity": "sf_apparel_material__cotton"} and cut in a relaxed [cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Dropped shoulders and a scenic motif define the look. [Hooded]{"entity": "sf_apparel_product_type__hoodie"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 100% cotton. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Italy.
-    - This Lacoste [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of a two ply cotton piqué blend in a relaxed fit. Tonal rib knit trim and the brand's signature embroidered crocodile logo finish this classic style. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. [Kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. 93% [cotton]{"entity": "sf_apparel_material__cotton"} / 7% [elastane]{"entity": "sf_apparel_material__elastane"}. Combo: 52% [cotton]{"entity": "sf_apparel_material__cotton"} / 41% [polyester]{"entity": "sf_apparel_material__polyester"} / 7% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine]{"entity": "sf_apparel_care_instructions__machine_wash"} [wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in Italy.
-    - With a whimsical banana motif; this classic [zip]{"entity": "sf_apparel_closure__zipper"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of soft Italian terry. This style features a drawstring hood and banana charm at zip pull. Drawstring hood. Long sleeves. Front zip closure. 80% [cotton]{"entity": "sf_apparel_material__cotton"} / 20% [polyester]{"entity": "sf_apparel_material__polyester"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Italy.
-    - Finished in a muted [tie dye]{"entity": "sf_apparel_pattern__abstract"}; Mother's Drop Square sweatshirt features a charming graphic front. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - The Drop sweatshirt from Mother flaunts a David Bowie [graphic print]{"entity": "sf_apparel_pattern__graphic"} and dropped shoulders. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - Traditional zip [hoodie with bold]{"entity": "sf_apparel_product_type__hoodie"} serape stripe and embroidered bolt at chest; crafted of single stitch needlework for a one of a kind piece. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded cuffs. Front zip closure. [Split kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. 50% [cotton]{"entity": "sf_apparel_material__cotton"} / 37% [polyester]{"entity": "sf_apparel_material__polyester"} / 13% rayon. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Moschino's Core [crop]{"entity": "sf_apparel_length__cropped"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of [stretch]{"entity": "sf_apparel_stretch_type__stretch"} [cotton]{"entity": "sf_apparel_material__cotton"}. This relaxed style features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and the label's classic [logo]{"entity": "sf_apparel_pattern__graphic__logo"} trim. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 92% [cotton]{"entity": "sf_apparel_material__cotton"} / 8% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Traditional zip [hoodie]{"entity": "sf_apparel_product_type__hoodie"} with bold serape stripe and [embroidered]{"entity": "sf_apparel_embellishments__embroidered"} bolt at chest; crafted of single stitch needlework for a one of a kind piece. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded cuffs. Front zip closure. Split [kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket. 50% [cotton]{"entity": "sf_apparel_material__cotton"} / 37% [polyester]{"entity": "sf_apparel_material__polyester"} / 13% rayon. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"} blend [fleece]{"entity": "sf_apparel_material__fleece"}; the [oversized]{"entity": "sf_apparel_fit__oversized"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} from alexanderwang.t offers a lustrous glittery outer and a complementary [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the chest. Attached hood; adjustable drawstrings. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded trim. Pulls over. 68% [cotton]{"entity": "sf_apparel_material__cotton"} / 31% [polyester]{"entity": "sf_apparel_material__polyester"} / 1% viscose. Combination: 94% [cotton]{"entity": "sf_apparel_material__cotton"} / 4% viscose / 2% [elastane]{"entity": "sf_apparel_material__elastane"}. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
+    - Eberjey's cozy [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of boucle knit; featuring a drawstring neck and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Cut in a [cropped]{"entity": "sf_apparel_length__cropped"} silhouette; rag & bone's terry [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} offers a relaxed fit and banded [ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded [ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Pullover style. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - The Harvey [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from Anine Bing is crafted of pure [cotton]{"entity": "sf_apparel_material__cotton"} in a super relaxed fit. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - A varsity style [logo]{"entity": "sf_apparel_pattern__graphic__logo"} adorns the front of Veronica Beard’s Beaumont [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}; designed with a shrunken fit. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long raglan sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} [collar]{"entity": "sf_apparel_neckline__collared"}; cuffs and hem. [Cotton]{"entity": "sf_apparel_material__cotton"} / [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - A cozy pullover [hoodie]{"entity": "sf_apparel_product_type__hoodie"} featuring a soft plush faux shearling fabrication. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Pouch pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. Knit trim. Pullover style. [Polyester]{"entity": "sf_apparel_material__polyester"}. Fur type: Faux. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Splendid's Highland speckled terry [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a drawstring hood and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 49% modal / 48% [polyester]{"entity": "sf_apparel_material__polyester"} 3% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Mother’s The Champ Pullover is crafted of two tone [cotton]{"entity": "sf_apparel_material__cotton"} with a printed [graphic]{"entity": "sf_apparel_pattern__graphic"} across the front. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long drop sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"} with elasticized cuffs. [Pullover style]{"entity": "sf_apparel_product_type__sweatshirt"}. [Cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Cut in a [cropped]{"entity": "sf_apparel_length__cropped"} silhouette; Lacoste's double [fleece]{"entity": "sf_apparel_material__fleece"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is complete with an [embroidered]{"entity": "sf_apparel_embellishments__embroidered"} tonal [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the chest. Attached hood with drawstrings. Drop shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded trim. Pullover style. Lining: 100% [polyester]{"entity": "sf_apparel_material__polyester"}. 77% [cotton]{"entity": "sf_apparel_material__cotton"} / 18% [polyester]{"entity": "sf_apparel_material__polyester"} / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - The Drop [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from Mother flaunts a David Bowie [graphic]{"entity": "sf_apparel_pattern__graphic"} print and dropped shoulders. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Eberjey's cozy heathered [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of a [cotton]{"entity": "sf_apparel_material__cotton"} blend; featuring a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 95% [cotton]{"entity": "sf_apparel_material__cotton"} / 5% [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - A contrast cuff accents this Greyson [hoodie]{"entity": "sf_apparel_product_type__hoodie"} crafted of [wool]{"entity": "sf_apparel_material__wool"} and [cashmere]{"entity": "sf_apparel_material__cashmere"}. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; rib knit cuffs. Pulls over. 70% [wool]{"entity": "sf_apparel_material__wool"} / 30% [cashmere]{"entity": "sf_apparel_material__cashmere"}. Knit. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} crafted of [fleece]{"entity": "sf_apparel_material__fleece"} with flowy puff sleeves. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Drop shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Elasticized hem. Pullover style. 95% [polyester]{"entity": "sf_apparel_material__polyester"} / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Frame's [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of soft [cotton]{"entity": "sf_apparel_material__cotton"} and cut in a [cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Dropped shoulders and a dip dyed print complete this relaxed style. Crew neck. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded trim. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in Portugal.
+    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; Frame's [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} boasts a boxy [cropped]{"entity": "sf_apparel_length__cropped"} silhouette and split side detailing. Round neck. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; banded cuffs. Pulls on. 100% [organic]{"entity": "sf_apparel_sustainability__organic"} [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Alexander Wang's bi color [crop]{"entity": "sf_apparel_length__cropped"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of [cotton]{"entity": "sf_apparel_material__cotton"} knit. This pullover style flaunts [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; a spacious [kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket; and a glittered puff [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the front. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} front pocket. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. Trim: 99% [cotton]{"entity": "sf_apparel_material__cotton"}; 1% [elastane]{"entity": "sf_apparel_material__elastane"}. [Dry clean only]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Portugal.
+    - Cut in a boxy silhouette; Mother's Boost [cotton]{"entity": "sf_apparel_material__cotton"} [fleece]{"entity": "sf_apparel_material__fleece"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is complete with a large painterly beach print at the front. Banded [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long raglan sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; banded cuffs. [Raw]{"entity": "sf_apparel_hem__raw"} hem. Pulls over. 98% [cotton]{"entity": "sf_apparel_material__cotton"} / 2% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - The Jaci [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from Anine Bing is crafted of French terry [cotton]{"entity": "sf_apparel_material__cotton"} and features a mirrored Paris printed at the chest. The label's store address across the back adds a personal touch to this [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} style. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Drop shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - The Essential [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from alexanderwang.t is crafted of a glittery [cotton]{"entity": "sf_apparel_material__cotton"} blend and features the label's signature stacked [logo]{"entity": "sf_apparel_pattern__graphic__logo"} detail at the chest. [Crew neck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 68% [cotton]{"entity": "sf_apparel_material__cotton"} / 31% [polyester]{"entity": "sf_apparel_material__polyester"} / 1% viscose. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - This pullover [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} by alexanderwang.t is made of [heavyweight]{"entity": "sf_apparel_material_weight__heavyweight"} brushed [cotton]{"entity": "sf_apparel_material__cotton"} terry. This relaxed style features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and a stacked [logo]{"entity": "sf_apparel_pattern__graphic__logo"} print on the chest. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 79% [cotton]{"entity": "sf_apparel_material__cotton"} / 21%[polyester]{"entity": "sf_apparel_material__polyester"}. Combo: 98% [cotton]{"entity": "sf_apparel_material__cotton"} / 2% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Cut to an [oversized]{"entity": "sf_apparel_fit__oversized"} [vintage]{"entity": "sf_apparel_wash__vintage"} style silhouette; Re / done’s [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features soft [cotton]{"entity": "sf_apparel_material__cotton"} construction. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long]{"entity": "sf_apparel_length__long"} drop sleeves. Pullover style. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. [Cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in Portugal.
+    - Frame's Easy crop [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of [cotton]{"entity": "sf_apparel_material__cotton"}. This relaxed style features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; dropped shoulders; and voluminous bishop sleeves. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. Bishop sleeves. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Amiri's [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted in Italy of soft [cotton]{"entity": "sf_apparel_material__cotton"} and cut in a relaxed [cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Dropped shoulders and a scenic motif define the look. [Hooded]{"entity": "sf_apparel_product_type__hoodie"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Italy.
+    - This Lacoste [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of a two ply [cotton]{"entity": "sf_apparel_material__cotton"} piqué blend in a relaxed fit. Tonal rib knit trim and the brand's signature [embroidered]{"entity": "sf_apparel_embellishments__embroidered"} crocodile [logo]{"entity": "sf_apparel_pattern__graphic__logo"} finish this classic style. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. [Kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket. 93% [cotton]{"entity": "sf_apparel_material__cotton"} / 7% [elastane]{"entity": "sf_apparel_material__elastane"}. Combo: 52% [cotton]{"entity": "sf_apparel_material__cotton"} / 41% [polyester]{"entity": "sf_apparel_material__polyester"} / 7% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in Italy.
+    - A [vintage]{"entity": "sf_apparel_wash__vintage"} style [graphic]{"entity": "sf_apparel_pattern__graphic"} adorns the front of Mother’s The Drop Square [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}; crafted of [cotton]{"entity": "sf_apparel_material__cotton"} and washed for a lived in feel. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long]{"entity": "sf_apparel_length__long"} drop sleeves. Pullover style. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. [Cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Soft [cotton]{"entity": "sf_apparel_material__cotton"} blend [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} in a monochrome [camouflage]{"entity": "sf_apparel_pattern__camouflage"} print. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pull on style. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. 74% [cotton]{"entity": "sf_apparel_material__cotton"} / 26% rayon. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
+    - In collaboration with Netflix; Lacoste features its iconic motif in a style reminiscent of some of the streaming network's popular series. This Sex Education themed [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} boasts a large chest [graphic]{"entity": "sf_apparel_pattern__graphic"} with the brand's signature crocodile riding a bike. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded [ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Crafted of super soft plush Dreamcloth fabric; this comfortable lounge shirt features a [half zip placket]{"entity": "sf_apparel_closure__zipper__quarter_zipper"}. Stand [collar]{"entity": "sf_apparel_neckline__collared"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Zip front]{"entity": "sf_apparel_closure__zipper__full_zipper"}. Seamed details. Rayon / acrylic / [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Amiri's [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of soft [cotton]{"entity": "sf_apparel_material__cotton"} and cut in a relaxed [cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Dropped shoulders and a [logo]{"entity": "sf_apparel_pattern__graphic__logo"} tiger [graphic]{"entity": "sf_apparel_pattern__graphic"} define the look. Hooded. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in USA.
+    - Heathered [zip front hoodie]{"entity": "sf_apparel_closure__zipper"} that is an elevated staple. Attached hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Zip front closure]{"entity": "sf_apparel_closure__zipper"}. Modal / [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Decorated with a brushstroke print; Alexander McQueen's [oversized]{"entity": "sf_apparel_fit__oversized"} knit [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; dropped shoulders; and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 100% viscose knit. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Italy.
+    - Cinq à Sept's Brandy [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of [cotton]{"entity": "sf_apparel_material__cotton"}. This style showcases a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and crackled rhinestone embellished shoulders for a touch of sparkle. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [Cotton]{"entity": "sf_apparel_material__cotton"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Crafted with a touch of [cashmere]{"entity": "sf_apparel_material__cashmere"}; Splendid's Elin sweater [hoodie]{"entity": "sf_apparel_product_type__hoodie"} features a shaker stitch design and relaxed dropped shoulders. Drawstring hood. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 33% acrylic / 23% nylon / 20% [wool]{"entity": "sf_apparel_material__wool"} / 20% [cotton]{"entity": "sf_apparel_material__cotton"} / 4% [cashmere]{"entity": "sf_apparel_material__cashmere"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; the Jolie [striped]{"entity": "sf_apparel_pattern__stripes"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} from [Solid]{"entity": "sf_apparel_pattern__solid"} & [Striped]{"entity": "sf_apparel_pattern__stripes"} features [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; a lace up front; and a [cropped]{"entity": "sf_apparel_length__cropped"} hem. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Lace up front. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - This [hoodie]{"entity": "sf_apparel_product_type__hoodie"} by ANNE BING showcases a contrast [logo]{"entity": "sf_apparel_pattern__graphic__logo"} and 'Sport' lettering across the front. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Frame's [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of [cotton]{"entity": "sf_apparel_material__cotton"} and features an easy tuckable length. Short [rolled]{"entity": "sf_apparel_cuff__rolled"} sleeves complete this slouchy style. Crew neck. [Short sleeves]{"entity": "sf_apparel_sleeve_length__short_sleeves"}; [rolled]{"entity": "sf_apparel_cuff__rolled"} cuffs. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in Portugal.
+    - The California lifestyle brand; UGG; teams up with the inclusive; unisex label Telfar for the second collaboration of winter bags; outerwear and accessories. This cozy sherpa lined [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a textural [logo]{"entity": "sf_apparel_pattern__graphic__logo"} across the front and playful pom poms at the drawstring hood. Attached drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. [Kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. Exposed sherpa seaming. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} cuffs and hem. Lined. [Cotton]{"entity": "sf_apparel_material__cotton"} / [elastane]{"entity": "sf_apparel_material__elastane"}. Lining: [Polyester]{"entity": "sf_apparel_material__polyester"}. Fur type: Faux shearling. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
+    - Finished in a muted [tie dye]{"entity": "sf_apparel_pattern__abstract"}; Mother's Drop Square [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a charming [graphic]{"entity": "sf_apparel_pattern__graphic"} front. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Splendid's Nori [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of a [cotton]{"entity": "sf_apparel_material__cotton"} blend and features elegant scallop trim for subtle detail. Crew neck. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 55% [cotton]{"entity": "sf_apparel_material__cotton"} / 45% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - ANINE BING's [cotton]{"entity": "sf_apparel_material__cotton"} Jaci [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features varsity style [logo]{"entity": "sf_apparel_pattern__graphic__logo"} lettering at the front. Trimmed with rib knit; this relaxed style is designed with a [faded]{"entity": "sf_apparel_wash__faded"}; worn in look. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; rib knit cuffs. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Greyson's Halley quarter zip pullover [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is cut from quick drying and pill resistant [stretch]{"entity": "sf_apparel_stretch_type__stretch"} fabric. This colorblocked style features a funnel neck and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Funnel neck. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Quarter zip front closure. 86% nylon / 14% [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Plush in design; this [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted with a classic terry cloth finish. Attached hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Zip front closure]{"entity": "sf_apparel_closure__zipper"}. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Modal / [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Crafted of a soft [cotton]{"entity": "sf_apparel_material__cotton"} blend; Frame’s Block Letter [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is defined by a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} and a rib knit trim. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Rib knit trim. Pulls over. 85% [cotton]{"entity": "sf_apparel_material__cotton"} / 15% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - With a whimsical banana motif; this classic [zip]{"entity": "sf_apparel_closure__zipper"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of soft Italian terry. This style features a drawstring hood and banana charm at zip pull. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Front zip closure. 80% [cotton]{"entity": "sf_apparel_material__cotton"} / 20% [polyester]{"entity": "sf_apparel_material__polyester"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Italy.
+    - The Lucy [hoodie]{"entity": "sf_apparel_product_type__hoodie"} from Anine Bing is crafted of [midweight]{"entity": "sf_apparel_material_weight__midweight"} [cotton]{"entity": "sf_apparel_material__cotton"} [fleece]{"entity": "sf_apparel_material__fleece"} and features a arched screen printed [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the corner chest. This [oversized]{"entity": "sf_apparel_fit__oversized"} style is finished with an interior drawstring hem for an adjustable fit. Hood. Drop shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Khaite's Cruz [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is crafted of exceptionally soft [cashmere]{"entity": "sf_apparel_material__cashmere"}. Designed in New York; this elevated basic is styled with a [V neck]{"entity": "sf_apparel_neckline__v_neck"}; dropped shoulders; and a large front pocket. [V neck]{"entity": "sf_apparel_neckline__v_neck"}. Hooded. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Front pocket]{"entity": "sf_apparel_pocket_type__pocket"}. [Ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Pulls on. 100% [cashmere]{"entity": "sf_apparel_material__cashmere"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - This [heavy weight]{"entity": "sf_apparel_material_weight__heavyweight"} brushed back terry [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from alexanderwang.t features a rib knit [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [collar]{"entity": "sf_apparel_neckline__collared"}; cuffs; and hem. A puff print stacked [logo]{"entity": "sf_apparel_pattern__graphic__logo"} finishes this relaxed style. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 78% [cotton]{"entity": "sf_apparel_material__cotton"} / 22%[polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - This Theory [hoodie]{"entity": "sf_apparel_product_type__hoodie"} features a [slim]{"entity": "sf_apparel_fit__slim"} silhouette crafted of a soft [wool]{"entity": "sf_apparel_material__wool"} [cashmere]{"entity": "sf_apparel_material__cashmere"} blend. Rib knit trim and a classic [kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket complete the look. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pockets. Pulls over. 70% [wool]{"entity": "sf_apparel_material__wool"} / 30% [cashmere]{"entity": "sf_apparel_material__cashmere"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Crafted of a [cotton]{"entity": "sf_apparel_material__cotton"} blend; the Tyler [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} highlights a signature Anine Bing [logo]{"entity": "sf_apparel_pattern__graphic__logo"} on the chest. The style is finished with rib knit trim for added structure. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Rib knit trim. Pulls over. 85% [cotton]{"entity": "sf_apparel_material__cotton"}/ 15% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Jason Wu's [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of [cotton]{"entity": "sf_apparel_material__cotton"} terry and features a relaxed [cropped]{"entity": "sf_apparel_length__cropped"} silhouette. Delicate [floral embroidery]{"entity": "sf_apparel_embellishments__embroidered"} decorates this pull on style. Crew neck. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Dropped shoulders. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. Self lined. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Finished with an intarsia [logo]{"entity": "sf_apparel_pattern__graphic__logo"} hem; Moschino's [cotton]{"entity": "sf_apparel_material__cotton"} blend [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 95% [cotton]{"entity": "sf_apparel_material__cotton"} / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Crafted of soft [cotton]{"entity": "sf_apparel_material__cotton"}; Frame's [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} boasts three quarter length sleeves and a [mock]{"entity": "sf_apparel_neckline__high_neck__mock"} [turtleneck]{"entity": "sf_apparel_neckline__high_neck__turtleneck"}. [Mock]{"entity": "sf_apparel_neckline__high_neck__mock"} [turtleneck]{"entity": "sf_apparel_neckline__high_neck__turtleneck"}. Dropped shoulders. Three quarter length sleeves. Pulls on. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Crafted of a [lightweight]{"entity": "sf_apparel_material_weight__lightweight"} [cotton]{"entity": "sf_apparel_material__cotton"} blend; Lacoste's half zip [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a stand [collar]{"entity": "sf_apparel_neckline__collared"}; dropped shoulders; and a rib knit trim. Embossed with a signature crocodile [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the chest; this piece flaunts a roomy fit. Stand [collar]{"entity": "sf_apparel_neckline__collared"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; banded cuffs. Rib knit trim. Half zip closure. 60% [polyester]{"entity": "sf_apparel_material__polyester"} / 40% [organic]{"entity": "sf_apparel_sustainability__organic"} [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Crafted of soft [cotton]{"entity": "sf_apparel_material__cotton"}; the Brandy [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from Cinq à Sept is adorned with 'Paris New York' [text]{"entity": "sf_apparel_pattern__graphic__text"} across the chest. [Round neck]{"entity": "sf_apparel_neckline__roundneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in USA.
+    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; ANINE BING's [oversized]{"entity": "sf_apparel_fit__oversized"} Tyler [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} showcases dropped shoulders and a classic rib knit trim. This piece features an arch [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the chest. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Rib knit trim]{"entity": "sf_apparel_hem__ribbed"}. Pulls over. 100% [organic]{"entity": "sf_apparel_sustainability__organic"} [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - This [oversized]{"entity": "sf_apparel_fit__oversized"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} takes on a minimalist approach. Attached drawstring hood. [Long]{"entity": "sf_apparel_length__long"} drop shoulder sleeves. Rib knit cuffs and hem. Pullover style. Front [kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pouch. [Cotton]{"entity": "sf_apparel_material__cotton"} / modal / [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Lacoste's overshirt fit crew [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} flaunts a soft [cotton]{"entity": "sf_apparel_material__cotton"} design with an unbrushed [fleece]{"entity": "sf_apparel_material__fleece"} interior. An [oversized]{"entity": "sf_apparel_fit__oversized"} stacked [logo]{"entity": "sf_apparel_pattern__graphic__logo"} sits at the chest. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Rib knit trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Cut from [heavyweight]{"entity": "sf_apparel_material_weight__heavyweight"} [fleece]{"entity": "sf_apparel_material__fleece"}; NIC+ZOE’s pullover has a relaxed fit with a half zip placket for a sporty look. Stand [collar]{"entity": "sf_apparel_neckline__collared"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Half zip placket. Front [kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket. [Polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - A draped detail at the sleeves amp up Ulla Johnson's Philo [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 59% [cotton]{"entity": "sf_apparel_material__cotton"} / 41% viscose. Combo: 56% [cotton]{"entity": "sf_apparel_material__cotton"} / 39% viscose / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} corduroy cap sleeve [hoodie]{"entity": "sf_apparel_product_type__hoodie"} with [logo]{"entity": "sf_apparel_pattern__graphic__logo"} elastic. Attached hood. Short cap sleeves. Pullover style. [Logo]{"entity": "sf_apparel_pattern__graphic__logo"} band. [Cotton]{"entity": "sf_apparel_material__cotton"} / [polyester]{"entity": "sf_apparel_material__polyester"} / [elastane]{"entity": "sf_apparel_material__elastane"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Detailed with zipped sleeves; NAADAM's Fisherman [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is rib knit of ultra soft [wool]{"entity": "sf_apparel_material__wool"} and [cashmere]{"entity": "sf_apparel_material__cashmere"}. Attached hood with drawstring. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"} with zippers. Pullover style. 70% [wool]{"entity": "sf_apparel_material__wool"} / 30% [cashmere]{"entity": "sf_apparel_material__cashmere"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Greyson's Nash half zip [hoodie]{"entity": "sf_apparel_product_type__hoodie"} is cut from quick drying; [stretch]{"entity": "sf_apparel_stretch_type__stretch"} fabric. This [lightweight]{"entity": "sf_apparel_material_weight__lightweight"} style features a [kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}; [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; and tonal topstitching. Hooded. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Zip front closure. 90% [polyester]{"entity": "sf_apparel_material__polyester"} / 10% [elastane]{"entity": "sf_apparel_material__elastane"}. Machine cold. Imported.
+    - From the Lacoste x Bandier Collection. In collaboration with activewear label Bandier; Lacoste's [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is crafted of a piqué knit [cotton]{"entity": "sf_apparel_material__cotton"} blend and cut in a relaxed silhouette. This crew neck style is complete with [long]{"entity": "sf_apparel_length__long"} raglan sleeves and the label's [logo]{"entity": "sf_apparel_pattern__graphic__logo"} patch at the chest. Crew neck. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls on. 52% [cotton]{"entity": "sf_apparel_material__cotton"} / 41% [polyester]{"entity": "sf_apparel_material__polyester"} / 7% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; the Mon Amour Brandy [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from Cinq à Sept is [embellished]{"entity": "sf_apparel_embellishments__embroidered"} with crystals and features an [embroidered]{"entity": "sf_apparel_embellishments__embroidered"} [text]{"entity": "sf_apparel_pattern__graphic__text"} motif. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Rib knit trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
+    - Cut in an [oversized]{"entity": "sf_apparel_fit__oversized"} silhouette; Favorite Daughter's collegiate [cotton]{"entity": "sf_apparel_material__cotton"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is finished with a large contrast [logo]{"entity": "sf_apparel_pattern__graphic__logo"} at the front. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Banded [ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. Lining: 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
     - A draped detail at the sleeves amp up Ulla Johnson's Pilar [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 59% [cotton]{"entity": "sf_apparel_material__cotton"} / 41% viscose. Combo: 56% [cotton]{"entity": "sf_apparel_material__cotton"} / 39% viscose / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - ANINE BING's Jaci sweatshirt features an [oversized]{"entity": "sf_apparel_fit__oversized"} silhouette in a gradient faded wash. Relaxed dropped shoulders and logo lettering complete the look. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; the Mon Amour Brandy sweatshirt from Cinq à Sept is [embellished]{"entity": "sf_apparel_embellishments__embroidered"} with crystals and [features an embroidered]{"entity": "sf_apparel_embellishments__embroidered"} text motif. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Long sleeves. Rib knit trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. Dry clean. Imported.
-    - Mother’s The Champ Pullover is crafted of two tone [cotton]{"entity": "sf_apparel_material__cotton"} with a [printed]{"entity": "sf_apparel_pattern__graphic"} [graphic]{"entity": "sf_apparel_pattern__graphic"} across the front. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long drop sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"} with elasticized cuffs. [Pullover style]{"entity": "sf_apparel_product_type__sweatshirt"}. [Cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - Soft cotton [blend]{"entity": "sf_apparel_material_composition__blend"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} in a monochrome [camouflage]{"entity": "sf_apparel_pattern__camouflage"} print. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pull on style. Ribbed trim. 74% [cotton]{"entity": "sf_apparel_material__cotton"} / 26% rayon. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
-    - This hoodie by ANNE BING showcases a contrast [logo]{"entity": "sf_apparel_pattern__graphic__logo"} and 'Sport' lettering across the front. Hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Finished with an intarsia [logo]{"entity": "sf_apparel_pattern__graphic__logo"} hem; Moschino's cotton blend sweatshirt features a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} and [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Crewneck. Long sleeves. Pullover style. 95% [cotton]{"entity": "sf_apparel_material__cotton"} / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Heathered [zip front hoodie]{"entity": "sf_apparel_closure__zipper"} that is an elevated staple. Attached hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Zip front closure]{"entity": "sf_apparel_closure__zipper"}. Modal / spandex. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
-    - Alexander Wang's bi color [crop]{"entity": "sf_apparel_length__cropped"} hoodie is crafted of cotton knit. This pullover style flaunts [long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; a spacious [kangaroo pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}; and a glittered puff logo at the front. Hood. Long sleeves. Kangaroo front pocket. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. Trim: 99% cotton; 1% [elastane]{"entity": "sf_apparel_material__elastane"}. [Dry clean only]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in Portugal.
-    - A draped detail at the sleeves amp up Ulla Johnson's Philo sweatshirt. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 59% [cotton]{"entity": "sf_apparel_material__cotton"} / 41% viscose. Combo: 56% [cotton]{"entity": "sf_apparel_material__cotton"} / 39% viscose / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Crafted of soft [cotton]{"entity": "sf_apparel_material__cotton"}; the Brandy sweatshirt from Cinq à Sept is adorned with 'Paris New York' text across the chest. [Round neck]{"entity": "sf_apparel_neckline__roundneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% cotton. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Made in USA.
-    - Khaite's Cruz hoodie is crafted of exceptionally soft cashmere. Designed in New York; this elevated basic is styled with a [V neck]{"entity": "sf_apparel_neckline__v_neck"}; dropped shoulders; and a large front pocket. V neck. Hooded. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Front pocket]{"entity": "sf_apparel_pocket_type__pocket"}. [Ribbed trim]{"entity": "sf_apparel_hem__ribbed"}. Pulls on. 100% cashmere. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
-    - [Sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} crafted of [fleece]{"entity": "sf_apparel_material__fleece"} with flowy puff sleeves. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Drop shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Elasticized hem. Pullover style. 95% polyester / 5% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - Crafted of a [cotton blend]{"entity": "sf_apparel_material_composition__blend"}; the Tyler [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} sweatshirt highlights a signature Anine Bing logo on the chest. The style is finished with rib knit trim for added structure. Crewneck. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Rib knit trim. Pulls over. 85% [cotton]{"entity": "sf_apparel_material__cotton"}/ 15% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - [Slouchy]{"entity": "sf_apparel_fit__oversized"} sweatshirt with a generous neckline [Scoopneck]{"entity": "sf_apparel_neckline__roundneck__scoop_neck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Modal / spandex. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
-    - This [heavy weight]{"entity": "sf_apparel_material_weight__heavyweight"} brushed back terry [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} from alexanderwang.t features a rib knit [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} collar; cuffs; and hem. A puff print stacked logo finishes this relaxed style. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pullover style. 78% [cotton]{"entity": "sf_apparel_material__cotton"} / 22%[polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - A [cozy pullover hoodie]{"entity": "sf_apparel_product_type__hoodie"} featuring a soft plush faux shearling fabrication. Drawstring hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Pouch pocket]{"entity": "sf_apparel_pocket_type__kangaroo"}. Knit trim. Pullover style. [Polyester]{"entity": "sf_apparel_material__polyester"}. Fur type: Faux. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - This [oversized]{"entity": "sf_apparel_fit__oversized"} [hoodie]{"entity": "sf_apparel_product_type__hoodie"} takes on a minimalist approach. Attached drawstring hood. [Long drop shoulder sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Rib knit cuffs and hem. Pullover style. [Front kangaroo pouch]{"entity": "sf_apparel_pocket_type__kangaroo"}. [Cotton]{"entity": "sf_apparel_material__cotton"} / modal / [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
-    - [Stretch]{"entity": "sf_apparel_stretch_type__stretch"} corduroy cap sleeve [hoodie]{"entity": "sf_apparel_product_type__hoodie"} with logo elastic. Attached hood. Short cap sleeves. Pullover style. Logo band. [Cotton]{"entity": "sf_apparel_material__cotton"} / [polyester]{"entity": "sf_apparel_material__polyester"} / [elastane]{"entity": "sf_apparel_material__elastane"}. [Dry clean]{"entity": "sf_apparel_care_instructions__dry_clean_only"}. Imported.
-    - Cut in a boxy silhouette; Mother's Boost [cotton fleece]{"entity": "sf_apparel_material__cotton"} sweatshirt is complete with a large painterly beach print at the front. [Banded crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long raglan sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}; [banded cuffs]{"entity": "sf_apparel_hem__ribbed"}. [Raw hem]{"entity": "sf_apparel_hem__raw"}. Pulls over. 98% [cotton]{"entity": "sf_apparel_material__cotton"} / 2% [elastane]{"entity": "sf_apparel_material__elastane"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Cut with an [oversized]{"entity": "sf_apparel_fit__oversized"} fit; AGOLDE's Ash [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is styled with a [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} and [short sleeves]{"entity": "sf_apparel_sleeve_length__short_sleeves"}. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Short sleeves]{"entity": "sf_apparel_sleeve_length__short_sleeves"}. Pulls over. 97% [cotton]{"entity": "sf_apparel_material__cotton"} / 3% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - Crafted of [cotton]{"entity": "sf_apparel_material__cotton"}; Frame's [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features relaxed dropped shoulders; balloon sleeves; and banded trim. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. Dropped shoulders. [Long]{"entity": "sf_apparel_length__long"} balloon sleeves. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - This rag & bone [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} sweater features a relaxed silhouette crafted of the brand's ultra soft [vintage]{"entity": "sf_apparel_wash__vintage"} terry. [Rib knit trim]{"entity": "sf_apparel_hem__ribbed"} and dropped shoulder sleeves complete the look. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 79% [cotton]{"entity": "sf_apparel_material__cotton"} / 22% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Cut in an [oversized]{"entity": "sf_apparel_fit__oversized"} silhouette; rag & bone's [cotton]{"entity": "sf_apparel_material__cotton"} blend [hoodie]{"entity": "sf_apparel_product_type__hoodie"} features a banded [ribbed]{"entity": "sf_apparel_hem__ribbed"} trim and dimensional seaming at the back. Attached hood; adjustable drawstrings. Dropped shoulders. [Long]{"entity": "sf_apparel_length__long"} balloon sleeves. Front [kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket. Banded trim. Pulls over. 78% [cotton]{"entity": "sf_apparel_material__cotton"} / 22% [polyester]{"entity": "sf_apparel_material__polyester"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - ANINE BING's Jaci [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features an [oversized]{"entity": "sf_apparel_fit__oversized"} silhouette in a gradient [faded]{"entity": "sf_apparel_wash__faded"} wash. Relaxed dropped shoulders and [logo]{"entity": "sf_apparel_pattern__graphic__logo"} lettering complete the look. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Johnny Was' Golden Rose [crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} features a relaxed silhouette in a bold floral print. [Long]{"entity": "sf_apparel_length__long"} raglan sleeves complete the look. [Crewneck]{"entity": "sf_apparel_neckline__roundneck__crewneck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Pulls over. 96% [cotton]{"entity": "sf_apparel_material__cotton"} / 4% [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Cut in an [oversized]{"entity": "sf_apparel_fit__oversized"} silhouette; ANINE BING's hooded Harvey [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} is elevated by a large terry [logo]{"entity": "sf_apparel_pattern__graphic__logo"} patch at the front. Attached hood. Dropped shoulders. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Kangaroo]{"entity": "sf_apparel_pocket_type__kangaroo"} pocket. Banded [ribbed]{"entity": "sf_apparel_hem__ribbed"} trim. Pulls over. 100% [cotton]{"entity": "sf_apparel_material__cotton"}. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Imported.
+    - Hand dyed [hoodie]{"entity": "sf_apparel_product_type__hoodie"} with an eye catching tie dye print throughout. Attached hood. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. [Raw]{"entity": "sf_apparel_hem__raw"} cut hem. [Cotton]{"entity": "sf_apparel_material__cotton"} / [polyester]{"entity": "sf_apparel_material__polyester"} / rayon. [Machine wash]{"entity": "sf_apparel_care_instructions__machine_wash"}. Made in USA.
+    - LoveShackFancy's Lisle [hoodie]{"entity": "sf_apparel_product_type__hoodie"} flaunts a comfortable raglan sleeve style and rib knit finish. Crafted of [stretch]{"entity": "sf_apparel_stretch_type__stretch"} [cotton]{"entity": "sf_apparel_material__cotton"}; this piece features a drawstring hood and banded cuffs. Drawstring hood. [Long]{"entity": "sf_apparel_length__long"} raglan sleeves; banded cuffs. Side slits. Pulls over. 98% [cotton]{"entity": "sf_apparel_material__cotton"} / 2% [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
+    - [Slouchy]{"entity": "sf_apparel_fit__oversized"} [sweatshirt]{"entity": "sf_apparel_product_type__sweatshirt"} with a generous neckline [Scoopneck]{"entity": "sf_apparel_neckline__roundneck__scoop_neck"}. [Long sleeves]{"entity": "sf_apparel_sleeve_length__long_sleeves"}. Modal / [spandex]{"entity": "sf_apparel_stretch_type__stretch"}. [Hand wash]{"entity": "sf_apparel_care_instructions__hand_wash"}. Imported.
     - we have a variety of elegant styles and [sleeve]{"entity": "sf_apparel_NO_MATCH__sleeves"} lengths that would be perfect for your occasion.
     - do you any dresses?. sporty i guess with [sleeves]{"entity": "sf_apparel_NO_MATCH__sleeves"}
     - For a classy date night look, I recommend a chic and elegant A Line dress in a sophisticated and timeless color like black or navy. Consider a midi or knee-length dress for a refined and polished appearance. Opt for a dress with a flattering neckline such as a sweetheart or V-neck to add a touch of allure. Look for subtle embellishments like lace or a tasteful slit for a touch of sophistication. Lastly, choose a dress with a slim or fit and flare silhouette for a graceful and refined ensemble.

@@ -141,7 +141,9 @@ class Product_Database():
 
         self.is_verbose = True
 
-        self.wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
+        self.wrong_tag_mapping = {}
+        if os.path.isfile('./prep/wrong_labels.json'):
+            self.wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
         self.debug_products = []
         if os.path.isfile('./prep/_debug_product_names.json'):
             self.debug_products = json.load(open('./prep/_debug_product_names.json', 'r'))
@@ -663,6 +665,11 @@ class Product_Database():
             return False
         if not 'count_tagged_products' in locals():
             count_tagged_products = 0
+
+        if product['name'] in self.debug_products:
+            self.is_verbose = True
+            pass
+
         count_tagged_products += 1
         if self.is_verbose:
             print('\n>> ' + product['labeling']['annotations']['name']['text'])
@@ -672,6 +679,9 @@ class Product_Database():
                 print('\n\t' + field.upper())
 
             content = product['labeling']['annotations'][field]
+            content['tags'] =  sorted(content['tags'], key=lambda x: x['start'])
+
+            is_mapping, content['tags']     = remove_wrong_mapping(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
 
             is_boundry, content['tags']     = fix_boundries(content['text'], content['tags'], is_verbose=self.is_verbose)
 
@@ -687,7 +697,7 @@ class Product_Database():
 
             is_duplicate, content['tags']   = remove_duplicate_tags(content['text'], content['tags'], is_verbose=self.is_verbose)
 
-            is_changed = is_boundry | is_product | is_entity | is_wrong | is_punctuation | is_embedded | is_duplicate
+            is_changed = is_mapping | is_boundry | is_product | is_entity | is_wrong | is_punctuation | is_embedded | is_duplicate
 
             product['labeling']['annotations'][field] = content
 
@@ -805,15 +815,15 @@ class Product_Database():
         printInfo(f'[{len(self.found_products)} products found] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         return self.found_products
 
-    def approve_product(self, product):
+    def approve_product(self, product, approval='Approved'):
         product_name = product['labeling']['annotations']['name']['text']
         product_description = product['labeling']['annotations']['description']['text']
 
         cache_name = get_complex_name(product_name, product_description)
         # Approved tagged products which have never been approved
         if cache_name in self.tagged_products:
-            if not product['labelingApproval'] == 'Approved':
-                product['labelingApproval'] = 'Approved'
+            if product['labelingApproval'] == 'Not Approved':
+                product['labelingApproval'] = approval
                 return True
         return False
 
@@ -822,7 +832,25 @@ class Product_Database():
         count_corrected = self.update_db_records('self.approve_product', process_description='Approving products')
         printInfo(f'[{count_corrected} products approved] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         return count_corrected
+    
+    def partially_approve_tagged_products(self):
+        time_start = time.perf_counter()
+        count_corrected = self.update_db_records('self.approve_product', ['"Partially Approved"'], process_description='Partially approving products')
+        printInfo(f'[{count_corrected} products approved] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
+        return count_corrected
+    
+    def publish_product(self, product):
+        if not product['publishState'] == 'New Product':
+            print(product)
+        product['publishState'] = 'Published'
+        return True
 
+    def publish_products(self):
+        time_start = time.perf_counter()
+        count_corrected = self.update_db_records('self.publish_product', process_description='Publishing products')
+        printInfo(f'[{count_corrected} products published] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
+        return count_corrected
+    
     def check_product(self, product):
         visual_tags = {}
         nlu_tags    = {}
@@ -835,13 +863,13 @@ class Product_Database():
         for annotation in product['labeling']['annotations']:
             if 'tags' in product['labeling']['annotations'][annotation]:
                 tags = product['labeling']['annotations'][annotation]['tags']
-                for tag in tags:
-                    if '|' in mapping_swap[tag['label']] and  mapping_swap[tag['label']].split('|')[0] in self.categories_to_check:
+                for label_uri in tags:
+                    if '|' in mapping_swap[label_uri['label']] and mapping_swap[label_uri['label']].split('|')[0] in self.categories_to_check:
                         if annotation.startswith('vi_'):
-                            visual_tags[tag['label']] = mapping_swap[tag['label']]
+                            visual_tags[label_uri['label']] = mapping_swap[label_uri['label']]
                         elif annotation in nlu_fields:
-                            nlu_tags[tag['label']] = mapping_swap[tag['label']]
-                            nlu_categories.add(mapping_swap[tag['label']].split('|')[0])
+                            nlu_tags[label_uri['label']] = mapping_swap[label_uri['label']]
+                            nlu_categories.add(mapping_swap[label_uri['label']].split('|')[0])
 
         # Quick check if there are differences
         diff = DeepDiff(visual_tags, nlu_tags, ignore_order=True)
@@ -849,45 +877,49 @@ class Product_Database():
             return False
 
         key_copy = tuple(visual_tags.keys())
-        for tag in key_copy:
-            if tag in nlu_tags:
+        for label_uri in key_copy:
+            if label_uri in nlu_tags:
                 continue
-            if visual_tags[tag].split('|')[0] in nlu_categories and not tag in nlu_tags:
-                visual_prefix = '|'.join(visual_tags[tag].split('|')[0:-1])
-                visual_suffix = visual_tags[tag].split('|')[-1]
+            visual_prefix = visual_tags[label_uri].split('|')[0]
+            if visual_tags[label_uri].split('|')[0] in nlu_categories:
                 nlu_difference = ''
                 is_different = True
                 for __, nlu_value in nlu_tags.items():
-                    is_fixed = False
                     # If only the end leaf different, it's close enough
-                    if nlu_value.startswith(visual_tags[tag]) and len(visual_tags[tag].split('|')) == (len(nlu_value.split('|')) - 1):
+                    if nlu_value.startswith(visual_tags[label_uri]) or visual_tags[label_uri].startswith(nlu_value):
                         is_different = False
                         break
-                    elif nlu_value.startswith(visual_prefix) and not nlu_value.endswith(visual_suffix):
-                        nlu_difference = nlu_value.split('|')[-1]
-                        auto_correct_categories = ['rise', 'length', 'neckline']
-                        if visual_prefix in auto_correct_categories:
-                            # Update visual tags
-                            for annotation in product['labeling']['annotations']:
-                                if not annotation.startswith('vi_'):
-                                    continue
-                                if 'tags' in product['labeling']['annotations'][annotation]:
-                                    product_tags = product['labeling']['annotations'][annotation]['tags']
-                                    for idx, db_tag in enumerate(product_tags):
-                                        if db_tag['label'] == tag:
-                                            del product_tags[idx]
-                            is_changed = True
-                            is_fixed = True
-                            break                        
-                if is_different:
-                    printWarning(f'{product["name"]}: Visual tag [{tag.split("/")[-1]}] different from the one in the name or description.')
-                    self.consistency_report.write(f'=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},{tag.split("/")[-1]},{nlu_difference},{is_fixed}\n')
+                    # Both are children of the same parent
+                    elif '|'.join(nlu_value.split('|')[:-1]) == '|'.join(visual_tags[label_uri].split('|')[:-1]):
+                        is_different = False
+                        break
+                if not is_different:
+                    continue
+
+                is_fixed = False
+                if visual_prefix in self.categories_to_auto_correct:
+                    for annotation in product['labeling']['annotations']:
+                        if not annotation.startswith('vi_'):
+                            continue
+                        if 'tags' in product['labeling']['annotations'][annotation]:
+                            product_tags = product['labeling']['annotations'][annotation]['tags']
+                            for idx, db_tag in enumerate(product_tags):
+                                if db_tag['label'] == label_uri:
+                                    del product_tags[idx]
+                                    is_fixed = True
+                                    is_changed = True
+                if is_fixed:
+                    printWarning(f'{product["name"]}: Visual tag [{label_uri.split("/")[-1]}] was different from the text so was removed.')
+                else:
+                    printWarning(f'{product["name"]}: Visual tag [{label_uri.split("/")[-1]}] is different from the one in the name or description.')
+                    self.consistency_report.write(f'=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},{label_uri.split("/")[-1]},{nlu_difference},{is_fixed}\n')
 
         return is_changed
     
     def check_for_contradictions(self):
         time_start = time.perf_counter()
-        self.categories_to_check = json.load(open('./prep/consistent_categories.json', 'r'))
+        self.categories_to_check        = json.load(open('./prep/consistent_categories.json', 'r'))
+        self.categories_to_auto_correct = json.load(open('./prep/consistent_categories_AUTO_CORRECT.json', 'r'))
 
         self.current_mapping = get_name_url_mapping(json.loads(self.ontology), {})
         self.consistency_report = open(f'./prep/consistency_report-{self.db_name}.csv', 'w')

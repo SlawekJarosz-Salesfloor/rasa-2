@@ -181,7 +181,7 @@ def run_nlu_workflow():
     if len(product_categories) == 0:
         messagebox.showwarning(title='No Category', message='Have to select at least 1 category.')
         return
-    nlu_workflow = Nlu_Workflow(product_categories) # pyright: ignore[reportUnusedVariable] 
+    nlu_workflow = Nlu_Workflow(product_categories, search_word.get()) # pyright: ignore[reportUnusedVariable] 
     for step in nlu_step_states:
         if nlu_step_states[step].get() == 1:
             print()
@@ -285,7 +285,7 @@ window.title("Tagging and NLU creation")
 Pmw.initialise(window)
 # Add content to the left frame
 current_row = 0
-main_frame = DoubleScrolledFrame(window, width=930, height=720)    
+main_frame = DoubleScrolledFrame(window, width=950, height=720)    
 main_frame.grid(row=0, column=0, sticky=NSEW, padx=5, pady=5)
 
 product_title_label = ttk.Label(main_frame, width=20, text='PRODUCT CATEGORIES', font='Helvetica 18 bold')
@@ -340,13 +340,14 @@ tagging_steps = {
     'Clone LLM to Fix Db'            : 'clone_llm_to_fix_db', 
     'Add Explicit Tags'              : 'tag_explicit', 
     'Fix LLM Tags'                   : 'fix_llm_tags', 
-    'Approve Tagged Products'        : 'approve_products', 
+    'Approve LLM Tagged Products'    : 'approve_products', 
     '--- AFTER NLU CREATED ---'      : '',
     'Clone Fix to Rasa Db'           : 'clone_fix_to_rasa_db', 
     'Tag Using Rasa'                 : 'tag_rasa',
     'Fix Rasa Tags'                  : 'fix_rasa_tags', 
-    'Validate CLU'                   : 'validate_clu',
+    # 'Validate CLU'                   : 'validate_clu',
     'Check consistency'              : 'check_consistency',
+    'Publish All'                    : 'publish_products', 
 
     #  "TEST ONLY": 'TEST_FUNCTION'
     # 'Fix URIs'                       : 'fix_uris',

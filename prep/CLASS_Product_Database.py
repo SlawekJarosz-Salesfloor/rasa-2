@@ -24,19 +24,6 @@ from ontology_tools import get_name_url_mapping
 
 LIMIT_DOCS_PER_QUERY = 50
 
-# Red
-def throwError(message):
-    print(f"\033[31m[ERROR]\033[0m " + message)
-    raise Exception(message)
-
-# Yellow
-def printWarning(message):
-    print(f"\033[33m[WARNING]\033[0m " + message)
-
-#Green
-def printInfo(message):
-    print(f"\033[32m[INFO]\033[0m " + message)
-
 # From: https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
 # Print iterations progress
 from datetime import timedelta
@@ -116,8 +103,9 @@ STEP_SUFFIX_MAPPING = {
     Production_Step.FINAL: 'FINAL'
 }
 
-RECONNECTION_SLEEP = 10 # in seconds
-NB_RETRY_ATTEMPTS      = 10
+POST_DELAY         =  5 # in seconds
+RECONNECTION_SLEEP = 30 # in seconds
+NB_RETRY_ATTEMPTS  = 10
 
 MONITOR_SLEEP    = 30 # in seconds
 MONITOR_ATTEMPT  = 60
@@ -144,6 +132,9 @@ class Product_Database():
         self.wrong_tag_mapping = {}
         if os.path.isfile('./prep/wrong_labels.json'):
             self.wrong_tag_mapping = json.load(open('./prep/wrong_labels.json', 'r'))
+        self.wrong_tag_pattern = {}
+        if os.path.isfile('./prep/wrong_text_regex.json'):
+            self.wrong_tag_pattern = json.load(open('./prep/wrong_text_regex.json', 'r'))
         self.debug_products = []
         if os.path.isfile('./prep/_debug_product_names.json'):
             self.debug_products = json.load(open('./prep/_debug_product_names.json', 'r'))
@@ -161,6 +152,7 @@ class Product_Database():
                     return
                 else:
                     printWarning(f'Unable to delete {self.db_name}. Trying again [attempt #{count_delete}].')
+                    time.sleep(RECONNECTION_SLEEP)
             except Exception:
                 printWarning(f'Unable to delete {self.db_name}. Trying again [attempt #{count_delete}].')
         throwError(f'Unable to delete {self.db_name}.')
@@ -176,7 +168,7 @@ class Product_Database():
                 break
             except:
                 printWarning(f'Cannot connect to {self.db_name}.  Retrying in 10 seconds [attempt #{idx + 1}]...')
-                time.sleep(10)
+                time.sleep(RECONNECTION_SLEEP)
         
         if not is_connect:
             throwError(f'Cannot connect to {self.db_name}')
@@ -234,22 +226,37 @@ class Product_Database():
                 else:
                     response = requests.post(request_url, json=json_post_data)
                     if response.status_code == 200:
+                        time.sleep(POST_DELAY)
                         process_response = self.monitor_process(response, process_description)
-                        response_content = json.loads(process_response.content)
+                        if process_response.reason == 'Not Found':
+                            response_content = {}
+                            response_content['completed'] = True
+                        else:
+                            response_content = json.loads(process_response.content)
                         if response_content['completed']:
-                            actual_nb_records = self.count_number_of_records()
-                            if expected_nb_records == None:
-                                return response
-                            if actual_nb_records == expected_nb_records:
-                                return response
-                            else:
-                                printWarning(f'Expected {expected_nb_records} in db but found {actual_nb_records}.  Retrying.')
+                            count_update_attempt = 0
+                            while True:
+                                actual_nb_records = self.count_number_of_records()
+                                if expected_nb_records == None:
+                                    return response
+                                if actual_nb_records == expected_nb_records:
+                                    return response
+                                else:
+                                    count_update_attempt += 1
+                                    printInfo(f'Expected {expected_nb_records} in db but found {actual_nb_records}.  Waiting [attempt #{count_update_attempt}]...')
+                                    time.sleep(RECONNECTION_SLEEP)
+                                    if count_update_attempt == NB_RETRY_ATTEMPTS:
+                                        throwError(f'Expected {expected_nb_records} in {self.db_name} but found {actual_nb_records}.')
+
+                    elif response.status_code == 400:
+                        throwError(response.text)
                     elif response.status_code == 404:
                         if response.reason == 'Not Found':
                             is_db_exist = False
                             break
 
             except:
+                traceback.print_exc()
                 printWarning(f'Process failed.  Trying again in {RECONNECTION_SLEEP} seconds [attempt #{count_negative_response}]...')
 
             count_negative_response += 1
@@ -276,7 +283,7 @@ class Product_Database():
 
             count_negative_response += 1
 
-            if count_negative_response == 2:
+            if count_negative_response == NB_RETRY_ATTEMPTS:
                 throwError(f'Cannot get number of records for {self.db_name}.')
 
             time.sleep(RECONNECTION_SLEEP)
@@ -494,6 +501,9 @@ class Product_Database():
         # # Add spaces before and after - for Rasa NLU
         # description, nb_dashes = re.subn(r'(?<!\s)-(?!\s)', r' - ', description)
 
+        # Replace tabs with 1 space
+        description, nb_tabs    = re.subn(r'\t', r' ', description)
+
         # Add spaces before and after / for Rasa NLU
         description, nb_slashes = re.subn(r'(?<!\s)/(?!\s)', r' / ', description)
 
@@ -505,7 +515,7 @@ class Product_Database():
 
         product['labeling']['annotations']['description']['text'] = description
 
-        is_update = nb_slashes > 0 or nb_periods > 0 or nb_percent > 0
+        is_update = nb_slashes > 0 or nb_periods > 0 or nb_percent > 0 or nb_tabs > 0
 
         return is_update
 
@@ -619,15 +629,7 @@ class Product_Database():
                 product['labeling']['annotations'][label_category]['tags'].extend(tagging_results[API_MAP[label_category]])
                 is_update = True
 
-        # if 'Veronica Beard\'s Theron' in product_description:
-        #     print(product_description)
-        #     print(json.dumps(product['labeling']['annotations']['description']['tags'], indent=4))
-        #     self.is_verbose = True
-
         is_update = is_update | self.correct_product_tags(product)
-
-        # if 'Veronica Beard\'s Theron' in product_description:
-        #     print(json.dumps(product['labeling']['annotations']['description']['tags'], indent=4))
 
         if is_new_product and llm_type == 'GPT4':
             self.llm_tags_cache[cache_name] = {
@@ -639,7 +641,7 @@ class Product_Database():
         return is_update
 
     def get_cache_file_name(self):
-        return f'./prep/_cache_{self.db_name}.json'
+        return f'./prep/cache/_cache_{self.db_name}.json'
     
     def tag_products(self, tag_target=None, llm_type='GPT4'):
         current_db_name = self.db_name
@@ -679,25 +681,11 @@ class Product_Database():
                 print('\n\t' + field.upper())
 
             content = product['labeling']['annotations'][field]
-            content['tags'] =  sorted(content['tags'], key=lambda x: x['start'])
 
-            is_mapping, content['tags']     = remove_wrong_mapping(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
-
-            is_boundry, content['tags']     = fix_boundries(content['text'], content['tags'], is_verbose=self.is_verbose)
-
-            is_product, content['tags']     = remove_product_category(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
-
-            is_entity, content['tags']      = remove_uri_entity_mismatches(content['text'], content['tags'], self.current_mapping, is_verbose=self.is_verbose)
-
-            is_wrong, content['tags']       = remove_wrong_tags(content['text'], content['tags'], self.wrong_tag_mapping, is_verbose=self.is_verbose)
-
-            is_punctuation, content['tags'] = fix_punctuation(content['text'], content['tags'], is_verbose=self.is_verbose)
-
-            is_embedded, content['tags']    = fix_embedded_tags(content['text'], content['tags'], is_verbose=self.is_verbose)                    
-
-            is_duplicate, content['tags']   = remove_duplicate_tags(content['text'], content['tags'], is_verbose=self.is_verbose)
-
-            is_changed = is_mapping | is_boundry | is_product | is_entity | is_wrong | is_punctuation | is_embedded | is_duplicate
+            is_changed, text_content, tags = helper_correct_tags(content['text'], content['tags'], self.current_mapping, self.wrong_tag_mapping, self.wrong_tag_pattern)
+            if is_changed:
+                product['labeling']['annotations'][field]['text'] = text_content
+                product['labeling']['annotations'][field]['tags'] = tags
 
             product['labeling']['annotations'][field] = content
 
@@ -715,6 +703,12 @@ class Product_Database():
         is_in_progress = True
         while is_in_progress:
             response = requests.get(f'{self.dyson_url}/productDatabaseProcesses/{process_id}')
+            try:
+                # if the the process is "Not Found" it means it completed
+                if response.reason == 'Not Found':
+                    return response
+            except:
+                pass
             is_in_progress = json.loads(response.content)['completed'] == False
             if not is_in_progress:
                 return response
@@ -745,15 +739,13 @@ class Product_Database():
                     label = get_label_suffix(tag['label'])
                     if not label in self.representations:
                         self.representations[label] = set()
-                    if content[tag['start']:tag['end']].lower().startswith('double') and not label in ['doublebreasted', 'button', ]:
-                        pass
                     self.representations[label].add(content[tag['start']:tag['end']].lower())
 
     def set_tag_usage(self):
         self.collect_existing_tags()
         self.collect_representations()
 
-        with open(f'_stats_{self.category}_products.csv', 'w') as stats_file:
+        with open(f'./prep/reports/_stats_{self.category}_products.csv', 'w') as stats_file:
             self.description_tag_density = {}
             for cache_name in self.tagged_products:
                 nb_of_tokens = len(self.tagged_products[cache_name]['description']['text'].split())
@@ -851,25 +843,93 @@ class Product_Database():
         printInfo(f'[{count_corrected} products published] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         return count_corrected
     
+    def add_product_colours(self, product):
+        is_changed = False
+        for section in product['labeling']['annotations']:
+            if 'color' in section:
+                colour_text = product['labeling']['annotations'][section]['text'].lower().strip()
+                if section == 'color_id' and 'navy' in colour_text:
+                    # Some strange colours include the word "navy"
+                    if not colour_text.split(':')[1].strip() == 'navy':
+                        continue
+                if len(product['labeling']['annotations'][section]['tags']) == 1:
+                    continue
+                if len(product['labeling']['annotations'][section]['tags']) > 0:
+                    product['labeling']['annotations'][section]['tags'] = []
+                    is_changed = True
+                    continue
+                for mapping in self.current_mapping:
+                    if mapping.startswith('color') and mapping.count('|') > 0:
+                        if self.current_mapping[mapping].lower() in colour_text.split():
+                            start_position = colour_text.index(self.current_mapping[mapping].lower())
+                            end_position   = start_position + len(self.current_mapping[mapping].lower())
+                            is_changed = True
+                            colour_tag = '{'
+                            colour_tag += f'\"entity": "Mapping: {mapping}", "start": {start_position}, "end": {end_position}, "label": "http://automat.ai/{self.base_uri}/{self.current_mapping[mapping]}"'
+                            colour_tag += ', "confidence": 1, "color" : {"color" : "GREEN"}}'
+                            product['labeling']['annotations'][section]['tags'].append(json.loads(colour_tag))                            
+                if len(product['labeling']['annotations'][section]['tags']) > 0:
+                    product['labeling']['annotations'][section]['tags'] = []
+                    is_changed = True
+        return is_changed
+    
+    def add_colours(self):
+        time_start = time.perf_counter()
+        count_corrected = self.update_db_records('self.add_product_colours', process_description='Adding missing colours')
+        printInfo(f'[{count_corrected} products updated] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
+        return count_corrected
+    
     def check_product(self, product):
         visual_tags = {}
         nlu_tags    = {}
         is_changed = False
         mapping_swap = {v: k for k, v in self.current_mapping.items()}
 
+        if product['name'] in self.debug_products:
+            pass
+
         nlu_fields = ['name', 'shortDescription', 'description']
         nlu_categories = set()
 
+        is_product_found = False
         for annotation in product['labeling']['annotations']:
             if 'tags' in product['labeling']['annotations'][annotation]:
                 tags = product['labeling']['annotations'][annotation]['tags']
                 for label_uri in tags:
+                    if mapping_swap[label_uri['label']].startswith('product type'):
+                        is_product_found = True
                     if '|' in mapping_swap[label_uri['label']] and mapping_swap[label_uri['label']].split('|')[0] in self.categories_to_check:
                         if annotation.startswith('vi_'):
                             visual_tags[label_uri['label']] = mapping_swap[label_uri['label']]
                         elif annotation in nlu_fields:
                             nlu_tags[label_uri['label']] = mapping_swap[label_uri['label']]
                             nlu_categories.add(mapping_swap[label_uri['label']].split('|')[0])
+
+        if not is_product_found:
+            printWarning(f'{product["name"]}: Missing product type.')
+            self.consistency_report.write(f'NLU,=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},,NO PRODUCT TYPE\n')
+
+        identified_nlu_contradictions = []
+        for i, nlu_tag_i in enumerate(nlu_tags):
+            for j, nlu_tag_j in enumerate(nlu_tags):
+                if nlu_tag_i == nlu_tag_j:
+                    continue
+                if i in identified_nlu_contradictions:
+                    continue
+                nlu_path_i = nlu_tags[nlu_tag_i]
+                nlu_path_j = nlu_tags[nlu_tag_j]
+                # Check if top level attriutes 
+                if nlu_path_i.count('|') == 1 and nlu_path_j.count('|') == 1:
+                    nlu_tag_i_parts = nlu_path_i.split('|')
+                    nlu_tag_j_parts = nlu_path_j.split('|')
+                    if not nlu_tag_i_parts[0] == nlu_tag_j_parts[0]:
+                        continue
+
+                    if not '|'.join(nlu_tag_i_parts[1:]) == '|'.join(nlu_tag_j_parts[1:]):
+                        identified_nlu_contradictions.append(j)
+                        nlu_difference = f'[{" > ".join(nlu_tag_i_parts).title()} / {" > ".join(nlu_tag_j_parts).title()}]'
+                        printWarning(f'{product["name"]}: Two NLU tags are contradictory [{nlu_difference}].')
+                        self.consistency_report.write(f'NLU,=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},,{nlu_difference}\n')
 
         # Quick check if there are differences
         diff = DeepDiff(visual_tags, nlu_tags, ignore_order=True)
@@ -890,14 +950,17 @@ class Product_Database():
                         is_different = False
                         break
                     # Both are children of the same parent
-                    elif '|'.join(nlu_value.split('|')[:-1]) == '|'.join(visual_tags[label_uri].split('|')[:-1]):
+                    elif '|'.join(nlu_value.split('|')[:-1]) == '|'.join(visual_tags[label_uri].split('|')[:-1]) and nlu_value.count('|') > 1 and visual_tags[label_uri].count('|') > 1:
                         is_different = False
                         break
+
+                    if nlu_value.startswith(visual_prefix):
+                        nlu_difference = ' > '.join(nlu_value.split('|')).title()
                 if not is_different:
                     continue
 
                 is_fixed = False
-                if visual_prefix in self.categories_to_auto_correct:
+                if visual_prefix in self.categories_to_auto_correct and not visual_tags[label_uri] in self.exceptions_to_auto_correct:
                     for annotation in product['labeling']['annotations']:
                         if not annotation.startswith('vi_'):
                             continue
@@ -908,11 +971,13 @@ class Product_Database():
                                     del product_tags[idx]
                                     is_fixed = True
                                     is_changed = True
+                
+                visual_difference = ' > '.join(visual_tags[label_uri].split('|')).title()
                 if is_fixed:
-                    printWarning(f'{product["name"]}: Visual tag [{label_uri.split("/")[-1]}] was different from the text so was removed.')
+                    printWarning(f'{product["name"]}: Visual tag [{visual_difference}] was different from the text so was removed.')
                 else:
-                    printWarning(f'{product["name"]}: Visual tag [{label_uri.split("/")[-1]}] is different from the one in the name or description.')
-                    self.consistency_report.write(f'=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},{label_uri.split("/")[-1]},{nlu_difference},{is_fixed}\n')
+                    printInfo(f'{product["name"]}: Visual tag [{visual_difference}] is different from the one in the name or description [{nlu_difference}].')
+                    self.consistency_report.write(f'Visual,=HYPERLINK("https://pim-maestro-v2-dev.app-play.salesfloor.net/product-inventory-management/{self.db_name}/{product["id"]["productId"]}";"{product["id"]["productId"]}"),{product["name"]},{visual_difference},{nlu_difference}\n')
 
         return is_changed
     
@@ -920,10 +985,11 @@ class Product_Database():
         time_start = time.perf_counter()
         self.categories_to_check        = json.load(open('./prep/consistent_categories.json', 'r'))
         self.categories_to_auto_correct = json.load(open('./prep/consistent_categories_AUTO_CORRECT.json', 'r'))
+        self.exceptions_to_auto_correct = json.load(open('./prep/consistent_categories_exceptions.json', 'r'))
 
         self.current_mapping = get_name_url_mapping(json.loads(self.ontology), {})
-        self.consistency_report = open(f'./prep/consistency_report-{self.db_name}.csv', 'w')
-        self.consistency_report.write('Product Link,Product Name,Visual Value,NLU Value,Auto-Fixed\n')
+        self.consistency_report = open(f'./prep/reports/consistency_report-{self.db_name}.csv', 'w')
+        self.consistency_report.write('Type,Product Link,Product Name,Visual Value,NLU Value\n')
         count_corrected = self.update_db_records('self.check_product', process_description='Checking products')
         printInfo(f'[{count_corrected} product tags different] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
         self.consistency_report.close()
@@ -936,3 +1002,44 @@ class Product_Database():
             self.helper_requests('post', request_url, json_post_data=db_content, process_description='Db Upload')
         else:
             self.helper_requests('post', request_url, json_post_data=db_content, expected_nb_records=len(db_content['products']), process_description='Db Upload')
+
+
+    def correct_coat_jacket_type(self, product):
+        is_changed = False
+
+        unique_coat_types = ['blazer', 'raincoat', 'tracksuit', 'trench', 'windbreaker']
+        coat_type = None
+        for section in product['labeling']['annotations']:
+            for tag in product['labeling']['annotations'][section]['tags']:
+                if get_label_suffix(tag['label']) in unique_coat_types:
+                    coat_type = get_label_suffix(tag['label'])
+                    break
+            if not coat_type == None:
+                break
+
+        if coat_type == None:
+            return is_changed
+        
+        for section in product['labeling']['annotations']:
+            count = 0
+            for tag in product['labeling']['annotations'][section]['tags']:
+                if tag['label'].endswith('Coat') or tag['label'].endswith('Jacket'):
+                    if not coat_type == 'trench':
+                        print(f'Delete {get_label_suffix(tag["label"])} from {product["name"]}.')
+                        del product['labeling']['annotations'][section]['tags'][count]
+                        count -= 1
+                        is_changed = True
+                    elif tag['label'].endswith('Jacket'):
+                        print(f'Delete {get_label_suffix(tag["label"])} from {product["name"]}.')
+                        del product['labeling']['annotations'][section]['tags'][count]
+                        count -= 1
+                        is_changed = True
+                count += 1
+
+        return is_changed
+
+    def correct_coats_jackets_types(self):
+        time_start = time.perf_counter()
+        count_corrected = self.update_db_records('self.correct_coat_jacket_type', process_description='Correct Coats & Jacket types')
+        printInfo(f'[{count_corrected} products updated] latency: {round(time.perf_counter() - time_start, 3)} seconds.')
+        return count_corrected

@@ -25,11 +25,14 @@ class Nlu_Workflow():
         self.product_categories = product_categories
         for category in self.product_categories:
             self.product_dbs[category] = Product_Database(category)
-            self.product_dbs[category].set_db_name(Production_Step.FIX)
+        self.entity_limit = entity_limit
+
+    def prep_db(self, production_step):
+        for category in self.product_categories:
+            self.product_dbs[category].set_db_name(production_step)
             self.product_dbs[category].connect_db()
             self.product_dbs[category].get_ontology()
             self.product_dbs[category].count_number_of_records()
-        self.entity_limit = entity_limit
         
     def check_tag_quality(self):
         pp = pprint.PrettyPrinter(indent=4)
@@ -48,10 +51,16 @@ class Nlu_Workflow():
                 else:
                     entity_representations['TOTAL'][attribute] = self.product_dbs[category].representations[attribute]
 
-
-
-        print('\n\n\n === FINAL REPRESENTATIONS ===')
-        pp.pprint(entity_representations)
+        print('\n\n\n=== FINAL REPRESENTATIONS ===')
+        for category in self.product_categories:
+            print(f'>> {category.upper()} <<')
+            for attribute in sorted(entity_representations[category]):
+                print(attribute + ':\n\t', end='')
+                print(json.dumps(list(entity_representations[category][attribute]), indent=8)[1:-1].strip())
+        print('\n\n>>>> COMBINED <<<<')
+        for attribute in sorted(entity_representations['TOTAL']):
+            print(attribute + ':\n\t', end='')
+            print(json.dumps(list(entity_representations[category][attribute]), indent=8)[1:-1].strip())
 
         for category in self.product_categories:
             print('\n\nEntity mapping for ' + category)

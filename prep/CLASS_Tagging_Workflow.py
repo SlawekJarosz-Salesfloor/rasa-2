@@ -241,6 +241,14 @@ class Production_Workflow():
         self.product_db.set_db_name(Production_Step.RASA)
         self.product_db.publish_products()
 
+    def add_colours(self):
+        self.product_db.set_db_name(Production_Step.RASA)
+        self.product_db.add_colours()
+
+    def correct_coats_jackets(self):
+        self.product_db.set_db_name(Production_Step.RASA)
+        self.product_db.correct_coats_jackets_types()
+
     def change_all_ontologies(self):
         self.prep_dbs()
         self.update_ontology()

@@ -1,0 +1,12 @@
+[
+    {
+        "leather": [
+            "\\btrim:\\s+(?:\\w+(\\d+%?)?\\s+){0,2}leather\\b",
+            "trimmed with leather",
+            "leather(\\s\\-)+trim"
+        ],
+        "long": [
+            "\\blong\\b\\s+(?:[\\w-]+[;:]*\\s+){0,2}sleeves\\b"
+        ]
+    }
+]

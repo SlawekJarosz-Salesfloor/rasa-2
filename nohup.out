@@ -1,0 +1,55 @@
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/rasa/core/tracker_store.py:1048: MovedIn20Warning: Deprecated API features detected! These feature(s) are not compatible with SQLAlchemy 2.0. To prevent incompatible upgrades prior to updating applications, ensure requirements files are pinned to "sqlalchemy<2.0". Set environment variable SQLALCHEMY_WARN_20=1 to show all deprecation warnings.  Set environment variable SQLALCHEMY_SILENCE_UBER_WARNING=1 to silence this message. (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  Base: DeclarativeMeta = declarative_base()
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/pkg_resources/__init__.py:121: DeprecationWarning: pkg_resources is deprecated as an API
+  warnings.warn("pkg_resources is deprecated as an API", DeprecationWarning)
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/pkg_resources/__init__.py:2870: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/pkg_resources/__init__.py:2870: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/pkg_resources/__init__.py:2870: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('ruamel')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/pkg_resources/__init__.py:2870: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('ruamel.yaml')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/sanic_cors/extension.py:39: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  SANIC_VERSION = LooseVersion(sanic_version)
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/tensor_shape_pb2.py:18: DeprecationWarning: Call to deprecated create function FileDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  DESCRIPTOR = _descriptor.FileDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/tensor_shape_pb2.py:36: DeprecationWarning: Call to deprecated create function FieldDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _descriptor.FieldDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/tensor_shape_pb2.py:29: DeprecationWarning: Call to deprecated create function Descriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _TENSORSHAPEPROTO_DIM = _descriptor.Descriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/types_pb2.py:19: DeprecationWarning: Call to deprecated create function FileDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  DESCRIPTOR = _descriptor.FileDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/types_pb2.py:33: DeprecationWarning: Call to deprecated create function EnumValueDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _descriptor.EnumValueDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/types_pb2.py:27: DeprecationWarning: Call to deprecated create function EnumDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _DATATYPE = _descriptor.EnumDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/types_pb2.py:287: DeprecationWarning: Call to deprecated create function FieldDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _descriptor.FieldDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/types_pb2.py:280: DeprecationWarning: Call to deprecated create function Descriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _SERIALIZEDDTYPE = _descriptor.Descriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/resource_handle_pb2.py:20: DeprecationWarning: Call to deprecated create function FileDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  DESCRIPTOR = _descriptor.FileDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/resource_handle_pb2.py:39: DeprecationWarning: Call to deprecated create function FieldDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _descriptor.FieldDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/resource_handle_pb2.py:32: DeprecationWarning: Call to deprecated create function Descriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _RESOURCEHANDLEPROTO_DTYPEANDSHAPE = _descriptor.Descriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/tensor_pb2.py:21: DeprecationWarning: Call to deprecated create function FileDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  DESCRIPTOR = _descriptor.FileDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/tensor_pb2.py:40: DeprecationWarning: Call to deprecated create function FieldDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _descriptor.FieldDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/tensor_pb2.py:33: DeprecationWarning: Call to deprecated create function Descriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _TENSORPROTO = _descriptor.Descriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/attr_value_pb2.py:21: DeprecationWarning: Call to deprecated create function FileDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  DESCRIPTOR = _descriptor.FileDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/core/framework/attr_value_pb2.py:40: DeprecationWarning: Call to deprecated create function FieldDescriptor(). Note: Create unlinked descriptors is going to go away. Please use get/find descriptors from generated code or query the descriptor_pool.
+  _descriptor.FieldDescriptor(
+/Users/slawek_jarosz/miniconda3/envs/rasa/lib/python3.10/site-packages/tensorflow/python/framework/dtypes.py:246: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  np.bool8: (False, True),
+2024-02-22 08:27:36 INFO     root  - Starting Rasa server on http://0.0.0.0:5006
+2024-02-22 08:27:37 INFO     rasa.core.processor  - Loading model ./models/salesfloor-rasa/models/nlu_1st_level/nlu-20240221-142849-noisy-depot.tar.gz...
+2024-02-22 08:27:56 INFO     root  - Rasa server is up and running.

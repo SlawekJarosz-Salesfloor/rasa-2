@@ -280,6 +280,33 @@ class Rasa_Nlu():
         converter.convert_entities()
         converter.convert_titles()
         converter.convert_descriptions()
+
+        nlu_file_out = open('./prep/domain_2_levels.yml', 'w')
+        nlu_file_out.write('''        
+version: "3.1"
+
+intents:
+  - sf_apparel__description_tags
+  - sf_apparel__NO_MATCH
+
+entities:
+''')
+        converter.write_all_entities(extra_entities, nlu_file_out)
+        nlu_file_out.write('''
+# Manually added
+  - sf_apparel_NO_MATCH__sleeves
+
+responses:
+  utter_sf_prompt_customer_service:
+  - text: "How can I help you?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+''')
+        nlu_file_out.close()
+
+
         nlu_file_out = open('./data/nlu_1st_level.yml', 'w')
         nlu_file_out.write('version: "3.1"\n')
         nlu_file_out.write(f'# 1st Level NLU w/ top {self.entity_limit} [' + ','.join(self.product_dbs.keys())[:50] + f'] @ {datetime.now()}\n\n')
@@ -293,9 +320,16 @@ class Rasa_Nlu():
         # skipped_nlu_count = self.write_text_section('sf_apparel__title_tags', converter.top_down_entities, converter.title_texts, nlu_file_out)
         skipped_nlu_count += self.write_text_section('sf_apparel__description_tags', converter.top_down_entities, converter.title_texts + converter.description_texts, nlu_file_out)
 
+        nlu_file_out.write('''
+\n- intent: sf_apparel__NO_MATCH
+  examples: |
+    - Shall we focus on a specific silhouette or detail that interests you?
+    - Complete the ensemble with a pair of strappy sandals and delicate accessories to complement the cheerful and celebratory atmosphere of the wedding.
+    - Enjoy your new dress at the party!
+''')
         nlu_file_out.close()
 
-        entity_groups = json.load(open('./prep/entity_groups.json', 'r'))
+        entity_groups = json.load(open('./prep/_entity_groups.json', 'r'))
         # Validate the groups in the entity file
         for group_nb in entity_groups:
             is_found = False
@@ -334,7 +368,13 @@ class Rasa_Nlu():
 
             # converter.write_text_section('sf_apparel__title_tags', entity_group, superset_name_texts, nlu_file_out)
             converter.write_text_section('sf_apparel__description_tags', entity_group, list(superset_name_texts) + list(superset_descriptions), nlu_file_out)
-
+            nlu_file_out.write('''
+\n- intent: sf_apparel__NO_MATCH
+  examples: |
+    - Shall we focus on a specific silhouette or detail that interests you?
+    - Complete the ensemble with a pair of strappy sandals and delicate accessories to complement the cheerful and celebratory atmosphere of the wedding.
+    - Enjoy your new dress at the party!
+''')
             nlu_file_out.close()
 
 # main driver function

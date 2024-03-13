@@ -1,6 +1,18 @@
-import itertools
 import re
 import unicodedata
+
+# Red
+def throwError(message):
+    print(f"\033[31m[ERROR]\033[0m " + message)
+    raise Exception(message)
+
+# Yellow
+def printWarning(message):
+    print(f"\033[33m[WARNING]\033[0m " + message)
+
+#Green
+def printInfo(message):
+    print(f"\033[32m[INFO]\033[0m " + message)
 
 def strip_accents(input_string):
    return ''.join(c for c in unicodedata.normalize('NFD', input_string)
@@ -328,30 +340,63 @@ def fix_boundries(content, tags, is_verbose = True):
     is_changed = False
     
     tokens_with_positions = get_tokens_positions(content)
-
-    # Display the result
-    for idx, token_tuple in enumerate(tokens_with_positions):
-        token, __, ___ = token_tuple
-        # print(f"Token: '{token}', Start: {start}, End: {end}")
-        # Remove unwanted tokens
-        if token.isnumeric():
-            del tokens_with_positions[idx]
-        elif len(token) < 3:
-            del tokens_with_positions[idx]
+    token_starts = []
+    token_ends   = []
+    for token, start, end in tokens_with_positions:
+        token_starts.append(start)
+        token_ends.append(end)
 
     for idx, tag in enumerate(tags):
-        for token, start, end in tokens_with_positions:
-            if tag['start'] >= start and tag['end'] < end:
-                tag_text = content[tags[idx]['start']:tags[idx]['end']].lower()
-                if is_verbose:
-                    print(f'{tag_text} -> {token}\n\t\t--> UPDATED (token boundries)')
-                tag['end'] = end
-                is_changed = True
+        if tag['start'] in token_starts and tag['end'] in token_ends:
+            continue
+
+        if not tag['start'] in token_starts:
+            for idx, __ in enumerate(token_starts[1:]):
+                if tag['start'] >= token_ends[idx - 1] and tag['start'] < token_starts[idx]:
+                    prev_tag_text = content[tag['start']:tag['end']].lower()
+                    tag['start'] = token_starts[idx]
+                    new_tag_text = content[tag['start']:tag['end']].lower()
+                    if is_verbose:
+                        print(f'{prev_tag_text} -> {new_tag_text}\n\t\t--> UPDATED (token boundries [start])')
+                    is_changed = True
+                    break
+
+        if not tag['end'] in token_ends:
+            for idx, __ in enumerate(token_ends[:-1]):
+                if tag['end'] < token_starts[idx + 1] and tag['end'] < token_ends[idx]:
+                        prev_tag_text = content[tag['start']:tag['end']].lower()
+                        tag['end'] = token_ends[idx]
+                        new_tag_text = content[tag['start']:tag['end']].lower()
+                        if is_verbose:
+                            print(f'{prev_tag_text} -> {new_tag_text}\n\t\t--> UPDATED (token boundries [end])')
+                        is_changed = True
+                        break
 
     return is_changed, tags
 
-def helper_correct_tags(content, tags, name_url_map, wrong_tag_mapping):
+def remove_overtagging(content, tags, wrong_text_patterns, is_verbose = True):
+    is_changed = False
+
+    for pattern_group in wrong_text_patterns:
+        for label in pattern_group:
+            for regex_remove in pattern_group[label]:
+                matches = re.finditer(regex_remove, content, flags=re.IGNORECASE)
+                for match in matches:
+                    for positions in match.regs:
+                        for idx, tag in enumerate(tags):
+                            uri_suffix = tag['label'].split('/')[-1].lower()
+                            if tag['start'] >= positions[0] and tag['end'] <= positions[1] and label == uri_suffix:
+                                del tags[idx]
+                                is_changed = True
+                                if is_verbose:
+                                    print(label + f'\n\t\t--> REMOVED (overtagging)')
+        
+    return is_changed, tags
+
+def helper_correct_tags(content, tags, name_url_map, wrong_tag_mapping, wrong_text_pattern):
     tags =  sorted(tags, key=lambda x: x['start'])
+
+    print()
     
     is_mapping, tags     = remove_wrong_mapping(content, tags, name_url_map)
 
@@ -369,7 +414,11 @@ def helper_correct_tags(content, tags, name_url_map, wrong_tag_mapping):
 
     is_duplicate, tags   = remove_duplicate_tags(content, tags)
 
-    return is_boundry | is_product | is_entity | is_wrong | is_punctuation | is_embedded | is_duplicate | is_mapping
+    is_over_tag, tags    = remove_overtagging(content, tags, wrong_text_pattern)
+
+    print()
+
+    return (is_boundry | is_product | is_entity | is_wrong | is_punctuation | is_embedded | is_duplicate | is_mapping | is_over_tag), content, tags
 
 # main driver function
 if __name__ == '__main__':

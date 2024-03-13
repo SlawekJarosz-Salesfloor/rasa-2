@@ -195,7 +195,8 @@
         "textured"
     ],
     "drycleanonly": [
-        "spot clean"
+        "spot clean",
+        "dry"
     ],
     "elastane": [
         "stretch",
@@ -228,6 +229,7 @@
         "banded waist"
     ],
     "fauxfur": [
+        "dyed",
         "faux",
         "fur type",
         "fur",
@@ -241,6 +243,7 @@
         "leather jacket",
         "leather varsity",
         "leather",
+        "smooth",
         "suede",
         "vegan leather"
     ],
@@ -289,7 +292,8 @@
         "printed"
     ],
     "handwash": [
-        "dry clean"
+        "dry clean",
+        "hand"
     ],
     "halter": [
         "neck; the"
@@ -412,7 +416,8 @@
         "aziza one-shoulder top",
         "contrast-trim asymmetric",
         "goldtone sho",
-        "miranda one-shoulder sash midi-dress"
+        "miranda one-shoulder sash midi-dress",
+        "one"
     ],
     "onesleeve": [
         "one-shoulder",

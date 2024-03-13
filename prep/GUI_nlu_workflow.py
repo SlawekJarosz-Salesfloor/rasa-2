@@ -1,5 +1,8 @@
 import Pmw
 import traceback
+import threading
+
+
 
 from tkinter import *
 import tkinter as tk
@@ -7,6 +10,15 @@ from tkinter import ttk, messagebox
 
 from CLASS_Tagging_Workflow import *
 from CLASS_Nlu_Workflow import *
+
+# From https://stackoverflow.com/questions/2697039/python-equivalent-of-setinterval
+def set_interval(func, sec):
+    def func_wrapper():
+        set_interval(func, sec)
+        func()
+    t = threading.Timer(sec, func_wrapper)
+    t.start()
+    return t
 
 # from optimized_nlu_server import getRegExMatch, get_mapping_and_prefix
 class DoubleScrolledFrame:
@@ -88,10 +100,18 @@ class DoubleScrolledFrame:
 
 FLASHING_PERIOD = 500 # ms
 
+def update_db_state():
+    ready_state = json.load(open('./prep/_ready_state.json'))
+    for category in product_categories:
+        if category in ready_state:
+            label_db_names[category].config(background=ready_state[category], foreground="white")
+        window.update()
+    window.after(10000, update_db_state)
+
 class FlashingLabel(tk.Label):
     
     def __init__(self, parent, *args, **kwargs):
-        Label.__init__(self, parent, *args, **kwargs)   # <-- pass parent parameter
+        Label.__init__(self, parent, *args, **kwargs)
         self.is_running = False
         self.original_background = self.cget("background")
         self.original_foreground = self.cget("foreground")
@@ -189,6 +209,10 @@ def run_nlu_workflow():
             nlu_step_labels[step].flash()
             window.update()
             window.update()
+            if 'FIX' in step:
+                nlu_workflow.prep_db(Production_Step.FIX)
+            else:
+                nlu_workflow.prep_db(Production_Step.RASA)
             try:
                 eval(f'nlu_workflow.{nlu_steps[step]}()')
             except Exception as exc:
@@ -285,7 +309,7 @@ window.title("Tagging and NLU creation")
 Pmw.initialise(window)
 # Add content to the left frame
 current_row = 0
-main_frame = DoubleScrolledFrame(window, width=950, height=720)    
+main_frame = DoubleScrolledFrame(window, width=950, height=770)    
 main_frame.grid(row=0, column=0, sticky=NSEW, padx=5, pady=5)
 
 product_title_label = ttk.Label(main_frame, width=20, text='PRODUCT CATEGORIES', font='Helvetica 18 bold')
@@ -345,9 +369,10 @@ tagging_steps = {
     'Clone Fix to Rasa Db'           : 'clone_fix_to_rasa_db', 
     'Tag Using Rasa'                 : 'tag_rasa',
     'Fix Rasa Tags'                  : 'fix_rasa_tags', 
-    # 'Validate CLU'                   : 'validate_clu',
-    'Check consistency'              : 'check_consistency',
+    'Check Consistency'              : 'check_consistency',
     'Publish All'                    : 'publish_products', 
+    'Add Product Colours'            : 'add_colours',
+    # 'Correct Coats & Jackets'        : 'correct_coats_jackets',
 
     #  "TEST ONLY": 'TEST_FUNCTION'
     # 'Fix URIs'                       : 'fix_uris',
@@ -416,10 +441,11 @@ current_row += 1
 current_row += 1
 
 nlu_steps = {
-            'Check Tag Quality'  : 'check_tag_quality', 
-            'Create NLU Training': 'generate_nlu', 
+            'Check Tag Quality (on FIX db)'         : 'check_tag_quality', 
+            'Create NLU Training (based on FIX db)' : 'generate_nlu', 
+            'Check Tag Quality (on RASA db)'        : 'check_tag_quality', 
             }
-ttk.Label(main_frame, text="NLU - ACROSS ALL PRODUCT CATEGORIES", font='Helvetica 18 bold').grid(column=0, row=current_row, columnspan=2)
+ttk.Label(main_frame, text="NLU - FOR ALL PRODUCT CATEGORIES", font='Helvetica 18 bold').grid(column=0, row=current_row, columnspan=2)
 
 current_row += 1
 
@@ -450,5 +476,9 @@ search_button.grid(column=0, row=1, padx=5, pady=5)
 
 window.grid_columnconfigure(0,weight=1) # the text and entry frames column
 window.grid_rowconfigure(0, weight=1) # all frames row
+
+# set_interval(update_db_state, 10)
+
+window.after(10000, update_db_state)
 
 window.mainloop()
